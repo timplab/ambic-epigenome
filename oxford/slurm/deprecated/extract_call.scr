@@ -1,0 +1,60 @@
+#!/bin/bash -l
+
+#SBATCH
+#SBATCH --job-name=extract
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=1
+#SBATCH --output=extract-%a.log
+#SBATCH --error=extract-%a.log
+#SBATCH --mail-type=end
+#SBATCH --mail-user=ilee29@jhu.edu
+
+#### execute code and write output file to OUT-24log.
+# time mpiexec ./code-mvapich.x > OUT-24log
+while :
+do 
+  case "$1" in
+    -s | --src)
+      srcpath=$2
+      shift 2
+      ;;
+    -w | --wdir)
+      wdir=$2
+      shift 2
+      ;;
+    -b | --barcoding)
+      xarg=-b
+      shift 1
+      ;;
+    -a | --arrayval) #str with array values to take
+      arrayval=($2)
+      shift 2
+      ;;
+    --marcc) # some extra commands for marcc
+      slurm=marcc
+      module load python/3.6.0
+      shift 1
+      ;;
+    *) break
+      ;;
+  esac
+done
+callroot=${wdir}/called
+
+idx=${arrayval[$(($SLURM_ARRAY_TASK_ID-1))]%/}
+ext=${wdir}/ext
+extpath=${ext}/${idx}
+callpath=${callroot}/${idx}
+
+echo "array: $SLURM_ARRAY_TASK_ID"
+echo "index: $idx"
+echo "slurm source: $slurm"
+
+echo "extracting ${callpath} to ${extpath}"
+echo "${srcdir}/fq_extract.py -i ${callpath} -o ${extpath} -t $xarg"
+${srcpath}/fq_extract.py -i ${callpath} -o ${extpath} -t $xarg
+
+echo "Finished with job $SLURM_JOBID"
+
+#### mpiexec by default launches number of tasks requested

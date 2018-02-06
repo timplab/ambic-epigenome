@@ -1,0 +1,47 @@
+#!/usr/bin/Rscript
+
+library(tidyverse)
+library(reshape2)
+
+
+## data path
+fin="/dilithium/Data/Nanopore/oxford/171004_choNIHhost/171001_choNIHhost1.tout.csv.gz"
+wdir=dirname(fin)
+fname=basename(fin)
+base=strsplit(fname,"[.]")[[1]][1]
+
+## read in data and get length
+cnames=c("rname", "rlength", "avgqual", "start.time", "end.time", "duration", "chnum", "mux", "bc")
+ncols=count_fields(fin,tokenizer_csv(),n_max=1)
+stats=read_csv(fin,col_names=cnames[1:ncols]) %>%
+    mutate(rlength=as.numeric(rlength))
+
+## N50
+stats.sum=stats %>%
+    arrange(rlength) %>%
+    mutate(cum=cumsum(rlength)) %>%
+    summarize(N50=rlength[which.min(abs(cum-max(cum)/2))],
+              Mean=mean(rlength),
+              Median=median(rlength),
+              NGS=300,
+              max=max(rlength),
+              count=n())
+## plot sv len distro
+sum.plt=as.data.frame(t(stats.sum))
+sum.plt$name=rownames(sum.plt)
+sum.plt=sum.plt[1:4,]
+
+
+glen=ggplot(data=stats,mapping=aes(x=rlength))+theme_bw()+
+    geom_density()+
+    geom_vline(data=sum.plt,mapping=aes(xintercept=V1,color=name))+
+    scale_x_log10()+
+    labs(title="Distribution of read lengths",
+         x="Length of Read")+
+    theme(legend.position=c(0.9,0.85),
+          legend.title=element_blank())
+
+outname=file.path(wdir,paste0(base,"_lendistro.pdf"))
+pdf(outname,width=6,height=4)
+print(glen)
+dev.off()

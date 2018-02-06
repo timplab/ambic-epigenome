@@ -1,0 +1,64 @@
+library(tidyverse)
+library(reshape2)
+plotdir="/home/isac/Dropbox/Data/ambic/integrative-analysis/plots"
+
+## methylation data
+mdir="/dilithium/Data/Nanopore/Analysis/171025_cho/meth"
+methsuffix=".methfreq.tsv"
+methpaths=system(paste0("ls ",mdir,"/*",methsuffix),intern=T)
+labs=sapply(strsplit(sapply(strsplit(methpaths,"/"),"[[",8),"[.]"),"[[",1)
+meths=lapply(methpaths,read_tsv)
+names(meths)=labs
+
+## atac-seq data
+require(Rsamtools)
+bamdir="/dilithium/Data/NGS/Aligned/171025_choatac/bam"
+bamsuffix=".nodup.bam"
+bampaths=system(paste0("ls ",bamdir,"/*",bamsuffix),intern=T)
+labs=sapply(strsplit(sapply(strsplit(methpaths,"/"),"[[",8),"[.]"),"[[",1)
+bams=lapply(bampaths,scanBam)
+
+## insertions
+plasmid="4_0cdhfr_vrc01wtg1m3_dgv"
+idir="/dilithium/Data/Nanopore/Analysis/171025_cho/insertion/bed"
+isuffix=".insertion.bed"
+ipaths=sapply(labs,function(x) paste0(idir,"/",x,isuffix))
+cnames=c("chr","start","end","readname","score","strand")
+inlist=lapply(ipaths,read_tsv,col_names=cnames)
+
+bin=1000
+win=1000
+insertions=do.call(rbind,inlist)%>%filter(chr!=plasmid)
+ins.bins=transmute(insertions,
+                   chr=chr,
+                   start=round(start/bin)*bin-win,
+                   end=round(end/bin)*bin+win) %>%
+    distinct(chr,start,end,.keep_all=T)
+
+
+## bin methylation data
+makeBin=function(x,bin=10000){
+    mutate(x,
+             start=round(start/bin)*bin,
+             end=round(end/bin)*bin) %>%
+        group_by(chromosome,start)%>%
+        summarize(calls=sum(called_sites),
+                  methylated=sum(called_sites_methylated))%>%
+        mutate(freq=methylated/calls)
+}
+addLabCols=function(l){
+    lapply(seq_along(l),function(i){
+        l[[i]]%>%mutate(lab=names(l)[i])})}
+
+#x = makeBin(meths[[1]])
+b=100
+bins=lapply(meths,function(x) makeBin(x,b))
+bins=addLabCols(bins)
+
+##find overlaps
+binovl=Reduce(function(df1,df2)inner_join(df1,df2,by=c("chromosome","start")),bins)
+cnames=colnames(binovl)
+indfreq=grep("freq",cnames)
+
+freqmat=binovl[,c(1,2,indfreq)]
+colnames(freqmat)=c("chr","pos",labs)

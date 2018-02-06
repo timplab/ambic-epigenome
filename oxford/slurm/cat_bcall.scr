@@ -1,0 +1,65 @@
+#!/bin/bash -l
+
+#SBATCH
+#SBATCH --job-name=cat_files
+#SBATCH --nodes=1
+# number of tasks (processes) per node
+#SBATCH --ntasks-per-node=1
+# number of cpus (threads) per task (process)
+#SBATCH --cpus-per-task=1
+#SBATCH --oversubscribe
+#SBATCH --mail-type=end
+#SBATCH --mail-user=ilee29@jhmi.edu
+#SBATCH --time=1:0:0
+
+#### load and unload modules you may need
+while :
+do 
+  case "$1" in
+    -p | --prefix)
+      prefix=$2
+      shift 2
+      ;;
+    -i| --indir)
+      indir=`readlink -f $2`
+      shift 2
+      ;;
+    -b | --barcoding)
+      barcoding=1
+      shift 1
+      ;;
+    *) break
+      ;;
+  esac
+done
+
+if [ -z $indir ]; then
+  echo "must supply the input directory"
+  exit
+fi
+
+if [ -z $prefix ]; then
+  echo "did not supply name, using foo"
+  prefix=foo
+  exit
+fi
+
+if [ -z $barcoding ];then
+  echo "concatenating fastq files in ${indir} to ${prefix}.fq.gz"
+  find -L $indir -name "*fastq" -exec cat {} \; | \
+    gzip > ${prefix}.fq.gz
+else
+  echo "barcoded"
+  # need to figure this out for albacore v2
+#  for i in $(seq 100);do
+#    echo "concatentating $i.fq.gz files to ${outdir}/${prefix}.${i}.fq.gz"
+#    cat ${path}/*.${i}.fq.gz > ${outdir}/${prefix}.${i}.fq.gz
+#  done
+fi
+echo "concatentating sequencing_summary.txt files to ${prefix}.summary.csv.gz"
+# get rid of the header and change delimiter to csv
+find -L $indir -name "sequencing_summary.txt" | \
+  xargs -n 1 tail -n +2 | \
+  awk '{ $1=$1;OFS="," }{ print }' | \
+  gzip > ${prefix}.summary.csv.gz
+echo "Finished with job $SLURM_JOBID"

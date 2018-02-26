@@ -45,7 +45,7 @@ class atacExperiment:
         self.groupbase=[" ".join(x) for x in [[self.base[i] for i in range(0,len(self.base)) if x in self.group[i]]for x in self.groups]]
     def readKey(self):
         with open(self.keypath,'r') as fh:
-            fh.readline()
+#            fh.readline()
             data = [s.split(",") for s in [l.strip() for l in fh.readlines()]]
         return data
     def parseKey(self):

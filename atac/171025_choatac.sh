@@ -1,9 +1,14 @@
 #!/bin/bash
 
-script=/home/isac/Code/ilee/atac/atacseqPipeline.py
+script=./script/atacseqPipeline.py
 wdir=/dilithium/Data/NGS/Aligned/171025_choatac/
-btidx=/mithril/Data/NGS/Reference/cho/picr_IgG2/picr_IgG2
-#kdir=${wdir}/choatac_metatdata.csv
-kdir=${wdir}/choatac.tmp.csv
+btidx=/mithril/Data/NGS/Reference/cho/chok1/genome/Cricetulus_griseus_chok1gshd
+kdir=${wdir}/choatac.metadata.csv
+kdir=${wdir}/one.csv
 
-$script -k $kdir -o $wdir -x $btidx -g mm -m bamprocess
+if [ "$1" == "trim" ];then
+  $script -k $kdir -o $wdir -x $btidx -g mm -m trim
+fi
+if [ "$1" == "align" ];then
+  $script -k $kdir -o $wdir -x $btidx -g mm -m align
+fi

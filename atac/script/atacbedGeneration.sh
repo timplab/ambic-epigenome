@@ -54,5 +54,5 @@ if [ -e $pool ];then
   rm $pool
 fi
 zcat ${outdir}/*${group}*.bed.gz |\
-  sort -k1,1 -2,2n |\
+  sort -k1,1 -k2,2n |\
   gzip > ${outdir}/${group}_pool.bed.gz

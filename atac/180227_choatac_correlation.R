@@ -41,7 +41,7 @@ comp.lm <- lapply(cov.comp,function(x){
     lm(covnorm.x~covnorm.y,x)})
 glist=lapply(cov.comp,function(x){
     ggplot(x,aes(x=covnorm.x,y=covnorm.y))+
-        geom_point(size=0.5)+theme_bw()+
+        geom_bin2d(bins=100)+theme_bw()+
         labs(x="Omni-ATAC",y="ATAC-seq",title="Coverage Scatterplot")
 })
 

@@ -1,9 +1,27 @@
 #!/bin/bash
 
-script=/home/isac/Code/ilee/atac/atacseqPipeline.py
-wdir=/dilithium/Data/NGS/Aligned/171025_choatac/
-btidx=/mithril/Data/NGS/Reference/cho/picr_IgG2/picr_IgG2
-#kdir=${wdir}/choatac_metatdata.csv
-kdir=${wdir}/choatac.tmp.csv
+script=./script/atacseqPipeline.py
+wdir=/dilithium/Data/NGS/Aligned/171025_choatac
+beddir=$wdir/bed
+tssdir=$beddir/tss
+btidx=/mithril/Data/NGS/Reference/cho/chok1/genome/Cricetulus_griseus_chok1gshd
+kdir=${wdir}/choatac.metadata.csv
+plotdir=~/Dropbox/Data/Atac-seq/171025_choatac/plot
 
-$script -k $kdir -o $wdir -x $btidx -g mm -m bamprocess
+if [ "$1" == "trim" ];then
+  $script -k $kdir -o $wdir -x $btidx -g mm -m trim
+fi
+if [ "$1" == "align" ];then
+  $script -k $kdir -o $wdir -x $btidx -g mm -m align
+fi
+if [ "$1" == "process" ];then
+  $script -k $kdir -o $wdir -x $btidx -g mm -m bamprocess
+fi
+
+if [ "$1" == "getdist" ] || [ "$1" == "plotdist" ];then
+  echo "$1"
+  ./script/atacCovByDistance.sh $1 -i $beddir -a /mithril/Data/NGS/Reference/cho/chok1/annotation/Cricetulus_griseus_chok1gshd.TSS.bed -t tss
+fi
+if [ "$1" == "plotmove" ];then
+  cp $tssdir/*pdf $plotdir
+fi

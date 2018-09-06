@@ -31,12 +31,12 @@ class ONTSummary :
         self.mean_qscores = []
         self.read_num=0
     def update(self,fields) :
-        rlen=int(fields[12])
+        rlen=int(fields[8])
         if rlen < self.thr :
             return
         self.read_num+=1
         self.read_lengths.append(rlen)
-        self.mean_qscores.append(float(fields[13]))
+        self.mean_qscores.append(float(fields[9]))
     def getnumbers(self) :
         mean_length=int(np.mean(self.read_lengths))
         total=sum(self.read_lengths)

@@ -26,8 +26,8 @@ readqc <- function(fpath){
     dat
 }
 
-outpre="/home/isac/Dropbox/Data/ambic/aging_study/qc/chosigmaD0"
-datpaths="/home/isac/Dropbox/Data/ambic/aging_study/qc/ontqc.txt"
+outpre="/home/isac/Dropbox/Data/ambic/qc/QClambda.pdf"
+datpath="/home/isac/Dropbox/Data/ambic/qc/ontqc.txt"
 ontQC <- function(datpath,outpre){
     dat=readqc(datpath)
     print(dat)

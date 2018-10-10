@@ -35,6 +35,8 @@ ontDistro <- function(datpath,out){
     # plot
     g = ggplot(dat,aes(x=rlen))+
         theme_bw()+
+        geom_vline(xintercept=80000)+
+        geom_vline(xintercept=32000)+
         scale_y_log10()+
         expand_limits(x=0)
     g.hist = g + geom_histogram()

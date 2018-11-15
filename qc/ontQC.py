@@ -1,5 +1,4 @@
 #! /usr/bin/env python
-
 import math
 import sys
 import csv
@@ -12,7 +11,7 @@ def parseArgs() :
     parser.add_argument('input', nargs='?',type=argparse.FileType('r'),
             default=sys.stdin,help="input basecall summary file")
     parser.add_argument('-l','--length',metavar='N',type=int,required=False,
-            default=500,help='filter reads that are shorter than N')
+            default=200,help='filter reads that are shorter than N')
     args = parser.parse_args()
     return args
 
@@ -30,13 +29,11 @@ class ONTSummary :
         self.read_lengths = []
         self.mean_qscores = []
         self.read_num=0
-    def update(self,fields) :
-        rlen=int(fields[8])
+    def update(self,rlen) :
         if rlen < self.thr :
             return
         self.read_num+=1
         self.read_lengths.append(rlen)
-        self.mean_qscores.append(float(fields[9]))
     def getnumbers(self) :
         mean_length=int(np.mean(self.read_lengths))
         total=sum(self.read_lengths)
@@ -50,12 +47,12 @@ class ONTSummary :
 
 def ontQC(in_fh,cutoff_length=200) : 
     summary=ONTSummary(cutoff_length)
-    for line in in_fh :
-        fields = line.strip().split('\t')
+    csv_reader = csv.DictReader(in_fh,delimiter="\t")
+    for record in csv_reader:
         # remove header
-        if fields[0] == "filename" :
+        if record['filename'] == "filename" :
             continue
-        summary.update(fields)
+        summary.update(int(record['sequence_length_template']))
     qcnumbers=summary.getnumbers()
     print('\t'.join([str(x) for x in qcnumbers]))
 

@@ -3,13 +3,12 @@ import pandas as pd
 from snakemake.utils import validate 
 
 workdir: config['workdir']
-threads: config['threads']
-maxthreads = 36
+maxthreads = 72 
 samples = pd.read_table(config['samples']).set_index("samples",drop=False)
 
 rule all:
     input: 
-        expand("bam/{sample}.nodup.sorted.bam",sample=samples.index)
+        "peaks/"+config['base']+"_peaks_counts.txt"
         
 rule trim:
     input:
@@ -36,7 +35,7 @@ rule align:
                 -x {params.btidx} -U {input} 2> {log} |\
                 samtools view -Sb - > {output}"
 
-rule filter_multimap:
+rule filter_reads_with_multiple_alignments:
     input:
         "bam/{sample}.bam"
     params:
@@ -69,5 +68,56 @@ rule remove_duplicates:
                 ASSUME_SORTED=true REMOVE_DUPLICATES=false \
                 &> {log} &&\
                 samtools view -F 1804 -b bam/{wildcards.sample}.dupmark.bam > {output} &&\
-                samtools index {output}"
+                samtools index {output} && \
+                rm bam/{wildcards.sample}.dupmark.bam"
+rule bam_to_bed:
+    input:
+        "bam/{sample}.nodup.sorted.bam"
+    params:
+        codedir=config['codedir']
+    output:
+        "bed/{sample}.bed.gz"
+    shell:
+        "{params.codedir}/script/atacseq_bam_to_bed.sh -i {input} -o {output}"
 
+rule merge_bed:
+    input:
+        expand("bed/{sample}.bed.gz",sample=samples.index)
+    threads: maxthreads
+    output:
+        "bed/"+config['base']+".merged.bed.gz"
+    shell:
+        "export LC_ALL=C;\
+                gunzip -c {threads} {input} |\
+                sort -k1,1 -k2,2n |\
+                gzip > {output}"
+
+rule find_peaks_from_pool:
+    input:
+        "bed/"+config['base']+".merged.bed.gz"
+    params:
+        base=config['base'],
+        codedir=config['codedir']
+    output:
+        "peaks/"+config['base']+"_peaks.saf"
+    log:
+        "log/"+config['base']+".peaks.log"
+    shell:
+        "macs2 callpeak -t {input} -f BED -n peaks/{params.base} "
+        "-g mm -p 0.01 --shift -75 --extsize 150 "
+        "--nomodel -B --SPMR --keep-dup all --call-summits &> {log} && "
+        "{params.codedir}/script/atacseq_bed_to_saf.sh "
+        "peaks/{params.base}_peaks.narrowPeak > {output}"
+
+rule get_feature_counts:
+    input:
+        reads=expand("bam/{sample}.nodup.sorted.bam",sample=samples.index),
+        peaks="peaks/"+config['base']+"_peaks.saf"
+    threads: 64
+    output:
+        "peaks/"+config['base']+"_peaks_counts.txt"
+    log:
+        "log/"+config['base']+".featurecounts.log"
+    shell:
+        "featureCounts --verbose -a {input.peaks}"
+        "-o {output} -F SAF -T {threads} {input.reads} &> {log}"

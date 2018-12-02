@@ -32,7 +32,7 @@ if [ "$1" == "align" ];then
   [ -e $bamdir ]||mkdir $bamdir
   logdir=$logroot/align
   [ -e $logdir ]||mkdir -p $logdir
-  fqs=$(find $fqroot -type f -name "*fastq*" ! -name "*index*")
+  fqs=$(find $fqroot -type f -name "*Stable*fastq*" ! -name "*index*")
   for fq in $fqs; do
     base=$(basename "$fq")
     base=${base%%.*}
@@ -43,24 +43,30 @@ if [ "$1" == "align" ];then
     com="/shared/bin/minimap2 -ax map-ont -t 36 -L $mmi $fq > $outsam"
     log=$logdir/$base.align.log
     j=align
-    if [ -e $sortbam ];then
+    if [ -e $logdir/$base.sort.log ];then
       com="/shared/bin/samtools index $sortbam"
       log=$logdir/$base.index.log
       j=index
+      continue
     elif [ -e $outbam ];then
-      com="/shared/bin/samtools sort -T $pre.sorting -o $sortbam $outbam"
+      com="/shared/bin/samtools sort -@ 36 -T $pre.sorting -o $sortbam $outbam &&\
+        /shared/bin/samtools index $sortbam"
       log=$logdir/$base.sort.log
       j=sort
+      fin=$(awk 'END{ print $1 }' $logdir/$base.bam.log)
+      if [ "$fin" != "Finished" ];then
+        continue
+      fi
     elif [ -e $outsam ];then
       com="/shared/bin/samtools view -q 20 -b $outsam > $outbam"
       log=$logdir/$base.bam.log
       j=bam
-      tail -n1 $logdir/$base.align.log
+      fin=$(awk 'END{ print $1 }' $logdir/$base.align.log)
+      if [ "$fin" != "Finished" ];then
+        echo $base
+        continue
+      fi
     fi
-    com="/shared/bin/minimap2 -ax map-ont -t 36 -L $mmi $fq |\
-      /shared/bin/samtools view -@ 35 -q 20 -b - |\
-      /shared/bin/samtools sort -T $pre.sorting -o $sortbam &&\
-      /shared/bin/samtools index $sortbam"
     echo $com
     sbatch -t 24:0:0 -c 36 -e $log -o $log -J $j $batch "$com"
   done

@@ -1,17 +1,20 @@
 # ambic epigenome
+
 Analysis code repo for AMBIC epigenomic project
-## Nanopore
 
-## Insertions
-First step: blast the fq files to plasmid and extract out the insertion reads
+## Getting Started
 
-`blastWrapper.sh`
+We have recently implemented snakemake to perform preprocessing of data and part of the analysis.
 
-2) align to the genome
 
-`hitAlignWrapper.sh`
+Go to snakemake/ to access the pipelines.
 
-3) analysis of alignment
+### Prerequisites
 
-`170608_nanoporeBlastAnalysis.R`
+For ATAC-seq analysis, following software packages are necessary :
+
+```
+bowtie2
+bedtools
+```
 

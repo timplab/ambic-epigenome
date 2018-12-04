@@ -1,0 +1,632 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 72
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	31	get_methylation_frequency
+	32
+
+[Mon Dec  3 02:11:16 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaHostD0rep1.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaHostD0rep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaHostD0rep1.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 26
+    wildcards: sample=choSigmaHostD0rep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:16 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaStableD0NoGlutrep3.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaStableD0NoGlutrep3.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD0NoGlutrep3.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 8
+    wildcards: sample=choSigmaStableD0NoGlutrep3.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:16 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaStableD60Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaStableD60Glutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD60Glutrep1.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 25
+    wildcards: sample=choSigmaStableD60Glutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:16 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaUnstableD60NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaUnstableD60NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD60NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 11
+    wildcards: sample=choSigmaUnstableD60NoGlutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:16 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaUnstableD60Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaUnstableD60Glutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD60Glutrep1.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 13
+    wildcards: sample=choSigmaUnstableD60Glutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:16 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaUnstableD0NoGlutrep3.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaUnstableD0NoGlutrep3.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD0NoGlutrep3.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 2
+    wildcards: sample=choSigmaUnstableD0NoGlutrep3.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:16 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaUnstableD0NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaUnstableD0NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD0NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 19
+    wildcards: sample=choSigmaUnstableD0NoGlutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:16 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaUnstableD0Glutrep3.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaUnstableD0Glutrep3.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD0Glutrep3.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 24
+    wildcards: sample=choSigmaUnstableD0Glutrep3.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:16 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaHostD60rep1.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaHostD60rep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaHostD60rep1.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 30
+    wildcards: sample=choSigmaHostD60rep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:16 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaUnstableD30NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaUnstableD30NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD30NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 5
+    wildcards: sample=choSigmaUnstableD30NoGlutrep1.chok1gshd_sigmaIgG
+
+[Mon Dec  3 02:11:16 2018]
+Error in rule get_methylation_frequency:
+    jobid: 8
+    output: mfreq/choSigmaStableD0NoGlutrep3.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD0NoGlutrep3.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaStableD0NoGlutrep3.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaStableD0NoGlutrep3.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaStableD0NoGlutrep3.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:16 2018]
+Error in rule get_methylation_frequency:
+    jobid: 26
+    output: mfreq/choSigmaHostD0rep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaHostD0rep1.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaHostD0rep1.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaHostD0rep1.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaHostD0rep1.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:16 2018]
+Error in rule get_methylation_frequency:
+    jobid: 19
+    output: mfreq/choSigmaUnstableD0NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD0NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaUnstableD0NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaUnstableD0NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaUnstableD0NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:16 2018]
+Error in rule get_methylation_frequency:
+    jobid: 30
+    output: mfreq/choSigmaHostD60rep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaHostD60rep1.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaHostD60rep1.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaHostD60rep1.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaHostD60rep1.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:16 2018]
+Error in rule get_methylation_frequency:
+    jobid: 2
+    output: mfreq/choSigmaUnstableD0NoGlutrep3.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD0NoGlutrep3.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaUnstableD0NoGlutrep3.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaUnstableD0NoGlutrep3.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaUnstableD0NoGlutrep3.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:16 2018]
+Error in rule get_methylation_frequency:
+    jobid: 25
+    output: mfreq/choSigmaStableD60Glutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD60Glutrep1.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaStableD60Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaStableD60Glutrep1.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaStableD60Glutrep1.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:16 2018]
+Error in rule get_methylation_frequency:
+    jobid: 11
+    output: mfreq/choSigmaUnstableD60NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD60NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaUnstableD60NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaUnstableD60NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaUnstableD60NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:16 2018]
+Error in rule get_methylation_frequency:
+    jobid: 13
+    output: mfreq/choSigmaUnstableD60Glutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD60Glutrep1.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaUnstableD60Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaUnstableD60Glutrep1.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaUnstableD60Glutrep1.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:16 2018]
+Error in rule get_methylation_frequency:
+    jobid: 24
+    output: mfreq/choSigmaUnstableD0Glutrep3.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD0Glutrep3.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaUnstableD0Glutrep3.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaUnstableD0Glutrep3.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaUnstableD0Glutrep3.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:16 2018]
+Error in rule get_methylation_frequency:
+    jobid: 5
+    output: mfreq/choSigmaUnstableD30NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD30NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaUnstableD30NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaUnstableD30NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaUnstableD30NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+
+[Mon Dec  3 02:11:17 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaStableD0NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaStableD0NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD0NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 7
+    wildcards: sample=choSigmaStableD0NoGlutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:17 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaHostD90rep1.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaHostD90rep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaHostD90rep1.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 22
+    wildcards: sample=choSigmaHostD90rep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:17 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaStableD30Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaStableD30Glutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD30Glutrep1.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 9
+    wildcards: sample=choSigmaStableD30Glutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:17 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaHostD0rep3.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaHostD0rep3.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaHostD0rep3.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 10
+    wildcards: sample=choSigmaHostD0rep3.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:17 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaHostD30rep2.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaHostD30rep2.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaHostD30rep2.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 18
+    wildcards: sample=choSigmaHostD30rep2.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:17 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaUnstableD90Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaUnstableD90Glutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD90Glutrep1.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 4
+    wildcards: sample=choSigmaUnstableD90Glutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:17 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaUnstableD30Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaUnstableD30Glutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD30Glutrep1.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 31
+    wildcards: sample=choSigmaUnstableD30Glutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:17 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaUnstableD0NoGlutrep2.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaUnstableD0NoGlutrep2.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD0NoGlutrep2.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 21
+    wildcards: sample=choSigmaUnstableD0NoGlutrep2.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:17 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaHostD0rep2.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaHostD0rep2.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaHostD0rep2.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 29
+    wildcards: sample=choSigmaHostD0rep2.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:17 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaStableD90NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaStableD90NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD90NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 17
+    wildcards: sample=choSigmaStableD90NoGlutrep1.chok1gshd_sigmaIgG
+
+[Mon Dec  3 02:11:17 2018]
+Error in rule get_methylation_frequency:
+    jobid: 22
+    output: mfreq/choSigmaHostD90rep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaHostD90rep1.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaHostD90rep1.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaHostD90rep1.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaHostD90rep1.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:17 2018]
+Error in rule get_methylation_frequency:
+    jobid: 7
+    output: mfreq/choSigmaStableD0NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD0NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaStableD0NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaStableD0NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaStableD0NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:17 2018]
+[Mon Dec  3 02:11:17 2018]
+Error in rule get_methylation_frequency:
+Error in rule get_methylation_frequency:
+    jobid: 29
+    jobid: 10
+    output: mfreq/choSigmaHostD0rep2.chok1gshd_sigmaIgG.methfreq.txt
+    output: mfreq/choSigmaHostD0rep3.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaHostD0rep2.chok1gshd_sigmaIgG.mfreq.log
+    log: log/mfreq/choSigmaHostD0rep3.chok1gshd_sigmaIgG.mfreq.log
+
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaHostD0rep2.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaHostD0rep2.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaHostD0rep2.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaHostD0rep3.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaHostD0rep3.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaHostD0rep3.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:17 2018]
+Error in rule get_methylation_frequency:
+    jobid: 4
+    output: mfreq/choSigmaUnstableD90Glutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD90Glutrep1.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaUnstableD90Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaUnstableD90Glutrep1.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaUnstableD90Glutrep1.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:17 2018]
+Error in rule get_methylation_frequency:
+    jobid: 18
+    output: mfreq/choSigmaHostD30rep2.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaHostD30rep2.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaHostD30rep2.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaHostD30rep2.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaHostD30rep2.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:17 2018]
+Error in rule get_methylation_frequency:
+[Mon Dec  3 02:11:17 2018]
+    jobid: 17
+Error in rule get_methylation_frequency:
+    output: mfreq/choSigmaStableD90NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    jobid: 9
+    log: log/mfreq/choSigmaStableD90NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log
+    output: mfreq/choSigmaStableD30Glutrep1.chok1gshd_sigmaIgG.methfreq.txt
+
+    log: log/mfreq/choSigmaStableD30Glutrep1.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaStableD90NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaStableD90NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaStableD90NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaStableD30Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaStableD30Glutrep1.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaStableD30Glutrep1.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:17 2018]
+Error in rule get_methylation_frequency:
+    jobid: 31
+    output: mfreq/choSigmaUnstableD30Glutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD30Glutrep1.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaUnstableD30Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaUnstableD30Glutrep1.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaUnstableD30Glutrep1.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:17 2018]
+Error in rule get_methylation_frequency:
+    jobid: 21
+    output: mfreq/choSigmaUnstableD0NoGlutrep2.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD0NoGlutrep2.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaUnstableD0NoGlutrep2.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaUnstableD0NoGlutrep2.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaUnstableD0NoGlutrep2.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+
+[Mon Dec  3 02:11:18 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaUnstableD0Glutrep2.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaUnstableD0Glutrep2.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD0Glutrep2.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 20
+    wildcards: sample=choSigmaUnstableD0Glutrep2.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:18 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaUnstableD0Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaUnstableD0Glutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD0Glutrep1.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 28
+    wildcards: sample=choSigmaUnstableD0Glutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:18 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaStableD0Glutrep2.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaStableD0Glutrep2.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD0Glutrep2.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 12
+    wildcards: sample=choSigmaStableD0Glutrep2.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:18 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaStableD90Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaStableD90Glutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD90Glutrep1.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 3
+    wildcards: sample=choSigmaStableD90Glutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:18 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaUnstableD90NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaUnstableD90NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD90NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 6
+    wildcards: sample=choSigmaUnstableD90NoGlutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:18 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaStableD30NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaStableD30NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD30NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 15
+    wildcards: sample=choSigmaStableD30NoGlutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:18 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaHostD30rep1.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaHostD30rep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaHostD30rep1.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 27
+    wildcards: sample=choSigmaHostD30rep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:18 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaStableD0Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaStableD0Glutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD0Glutrep1.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 14
+    wildcards: sample=choSigmaStableD0Glutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:18 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaStableD0Glutrep3.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaStableD0Glutrep3.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD0Glutrep3.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 1
+    wildcards: sample=choSigmaStableD0Glutrep3.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 02:11:18 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaStableD60NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaStableD60NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD60NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 23
+    wildcards: sample=choSigmaStableD60NoGlutrep1.chok1gshd_sigmaIgG
+
+[Mon Dec  3 02:11:18 2018]
+Error in rule get_methylation_frequency:
+    jobid: 6
+    output: mfreq/choSigmaUnstableD90NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD90NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaUnstableD90NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaUnstableD90NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaUnstableD90NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:18 2018]
+Error in rule get_methylation_frequency:
+    jobid: 20
+    output: mfreq/choSigmaUnstableD0Glutrep2.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD0Glutrep2.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaUnstableD0Glutrep2.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaUnstableD0Glutrep2.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaUnstableD0Glutrep2.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:18 2018]
+Error in rule get_methylation_frequency:
+    jobid: 15
+    output: mfreq/choSigmaStableD30NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD30NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaStableD30NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaStableD30NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaStableD30NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:18 2018]
+Error in rule get_methylation_frequency:
+    jobid: 12
+    output: mfreq/choSigmaStableD0Glutrep2.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD0Glutrep2.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaStableD0Glutrep2.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaStableD0Glutrep2.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaStableD0Glutrep2.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:18 2018]
+Error in rule get_methylation_frequency:
+    jobid: 27
+    output: mfreq/choSigmaHostD30rep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaHostD30rep1.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaHostD30rep1.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaHostD30rep1.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaHostD30rep1.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:18 2018]
+Error in rule get_methylation_frequency:
+    jobid: 3
+    output: mfreq/choSigmaStableD90Glutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD90Glutrep1.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaStableD90Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaStableD90Glutrep1.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaStableD90Glutrep1.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:18 2018]
+Error in rule get_methylation_frequency:
+    jobid: 1
+    output: mfreq/choSigmaStableD0Glutrep3.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD0Glutrep3.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaStableD0Glutrep3.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaStableD0Glutrep3.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaStableD0Glutrep3.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:18 2018]
+Error in rule get_methylation_frequency:
+    jobid: 14
+    output: mfreq/choSigmaStableD0Glutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD0Glutrep1.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaStableD0Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaStableD0Glutrep1.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaStableD0Glutrep1.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:18 2018]
+Error in rule get_methylation_frequency:
+    jobid: 23
+    output: mfreq/choSigmaStableD60NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD60NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaStableD60NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaStableD60NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaStableD60NoGlutrep1.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Mon Dec  3 02:11:18 2018]
+Error in rule get_methylation_frequency:
+    jobid: 28
+    output: mfreq/choSigmaUnstableD0Glutrep1.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaUnstableD0Glutrep1.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaUnstableD0Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaUnstableD0Glutrep1.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaUnstableD0Glutrep1.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+
+[Mon Dec  3 02:11:19 2018]
+rule get_methylation_frequency:
+    input: mbed/choSigmaStableD0NoGlutrep2.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq/choSigmaStableD0NoGlutrep2.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD0NoGlutrep2.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 16
+    wildcards: sample=choSigmaStableD0NoGlutrep2.chok1gshd_sigmaIgG
+
+[Mon Dec  3 02:11:19 2018]
+Error in rule get_methylation_frequency:
+    jobid: 16
+    output: mfreq/choSigmaStableD0NoGlutrep2.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD0NoGlutrep2.chok1gshd_sigmaIgG.mfreq.log
+
+RuleException:
+CalledProcessError in line 47 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  python /home/ubuntu/Code/ambic-epigenome/methylation/parseMethylbed.py frequency --verbose -i mbed/choSigmaStableD0NoGlutrep2.chok1gshd_sigmaIgG.meth.bed.gz  -o mfreq/choSigmaStableD0NoGlutrep2.chok1gshd_sigmaIgG.methfreq.txt 2> log/mfreq/choSigmaStableD0NoGlutrep2.chok1gshd_sigmaIgG.mfreq.log ' returned non-zero exit status 1.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 47, in __rule_get_methylation_frequency
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/ubuntu/Code/ambic-epigenome/snakemake/.snakemake/log/2018-12-03T021115.763569.snakemake.log

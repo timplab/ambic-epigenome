@@ -1,0 +1,30 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 72
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	merge_coverage
+	2
+
+[Mon Dec  3 01:36:21 2018]
+rule merge_coverage:
+    input: coverage/choSigmaHostD0.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaHostD30.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaHostD60.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaHostD90.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaStableD0Glut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaStableD30Glut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaStableD60Glut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaStableD90Glut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaUnstableD0Glut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaUnstableD90Glut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaStableD60NoGlut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaStableD90NoGlut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaUnstableD30NoGlut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.coverage.bed
+    output: coverage/181201_choSigmaAgingStudy.coverage.bed
+    jobid: 1
+
+Terminating processes on user request, this might take some time.
+[Mon Dec  3 01:36:24 2018]
+Error in rule merge_coverage:
+    jobid: 1
+    output: coverage/181201_choSigmaAgingStudy.coverage.bed
+
+RuleException:
+CalledProcessError in line 63 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/make_coverage_matrix_from_bedtools_coverage.sh coverage/choSigmaHostD0.chok1gshd_sigmaIgG.coverage.bed coverage/choSigmaHostD30.chok1gshd_sigmaIgG.coverage.bed coverage/choSigmaHostD60.chok1gshd_sigmaIgG.coverage.bed coverage/choSigmaHostD90.chok1gshd_sigmaIgG.coverage.bed coverage/choSigmaStableD0Glut.chok1gshd_sigmaIgG.coverage.bed coverage/choSigmaStableD30Glut.chok1gshd_sigmaIgG.coverage.bed coverage/choSigmaStableD60Glut.chok1gshd_sigmaIgG.coverage.bed coverage/choSigmaStableD90Glut.chok1gshd_sigmaIgG.coverage.bed coverage/choSigmaUnstableD0Glut.chok1gshd_sigmaIgG.coverage.bed coverage/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.coverage.bed coverage/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.coverage.bed coverage/choSigmaUnstableD90Glut.chok1gshd_sigmaIgG.coverage.bed coverage/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.coverage.bed coverage/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.coverage.bed coverage/choSigmaStableD60NoGlut.chok1gshd_sigmaIgG.coverage.bed coverage/choSigmaStableD90NoGlut.chok1gshd_sigmaIgG.coverage.bed coverage/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.coverage.bed coverage/choSigmaUnstableD30NoGlut.chok1gshd_sigmaIgG.coverage.bed coverage/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.coverage.bed coverage/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.coverage.bed > coverage/181201_choSigmaAgingStudy.coverage.bed ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py", line 63, in __rule_merge_coverage
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job merge_coverage since they might be corrupted:
+coverage/181201_choSigmaAgingStudy.coverage.bed
+Complete log: /home/ubuntu/Code/ambic-epigenome/snakemake/.snakemake/log/2018-12-03T013621.458438.snakemake.log

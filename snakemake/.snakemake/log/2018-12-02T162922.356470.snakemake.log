@@ -1,0 +1,63 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 72
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	3	calculate_coverage
+	1	merge_coverage
+	5
+
+[Sun Dec  2 16:29:22 2018]
+rule calculate_coverage:
+    input: bed/choSigmaHostD0.chok1gshd_sigmaIgG.bed, /dilithium/Data/NGS/Reference/cho/chok1/genome/Cricetulus_griseus_chok1gshd.sigmaIgG.fa.bins.bed
+    output: coverage/choSigmaHostD0.chok1gshd_sigmaIgG.coverage.bed
+    jobid: 8
+    wildcards: sample=choSigmaHostD0.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 16:29:22 2018]
+rule calculate_coverage:
+    input: bed/choSigmaUnstableD0Glut.chok1gshd_sigmaIgG.bed, /dilithium/Data/NGS/Reference/cho/chok1/genome/Cricetulus_griseus_chok1gshd.sigmaIgG.fa.bins.bed
+    output: coverage/choSigmaUnstableD0Glut.chok1gshd_sigmaIgG.coverage.bed
+    jobid: 20
+    wildcards: sample=choSigmaUnstableD0Glut.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 16:29:22 2018]
+rule calculate_coverage:
+    input: bed/choSigmaStableD0Glut.chok1gshd_sigmaIgG.bed, /dilithium/Data/NGS/Reference/cho/chok1/genome/Cricetulus_griseus_chok1gshd.sigmaIgG.fa.bins.bed
+    output: coverage/choSigmaStableD0Glut.chok1gshd_sigmaIgG.coverage.bed
+    jobid: 18
+    wildcards: sample=choSigmaStableD0Glut.chok1gshd_sigmaIgG
+
+[Sun Dec  2 16:29:58 2018]
+Finished job 20.
+1 of 5 steps (20%) done
+[Sun Dec  2 16:30:02 2018]
+Finished job 8.
+2 of 5 steps (40%) done
+[Sun Dec  2 16:30:08 2018]
+Finished job 18.
+3 of 5 steps (60%) done
+
+[Sun Dec  2 16:30:08 2018]
+rule merge_coverage:
+    input: coverage/choSigmaHostD0.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaHostD30.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaHostD60.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaHostD90.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaStableD0Glut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaStableD30Glut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaStableD60Glut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaStableD90Glut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaUnstableD0Glut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaUnstableD90Glut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaStableD60NoGlut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaStableD90NoGlut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaUnstableD30NoGlut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.coverage.bed, coverage/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.coverage.bed
+    output: coverage/181201_choSigmaAgingStudy.coverage.bed
+    jobid: 1
+
+[Sun Dec  2 16:30:11 2018]
+Finished job 1.
+4 of 5 steps (80%) done
+
+[Sun Dec  2 16:30:11 2018]
+localrule all:
+    input: coverage/181201_choSigmaAgingStudy.coverage.bed
+    jobid: 0
+
+[Sun Dec  2 16:30:11 2018]
+Finished job 0.
+5 of 5 steps (100%) done
+Complete log: /home/ubuntu/Code/ambic-epigenome/snakemake/.snakemake/log/2018-12-02T162922.356470.snakemake.log

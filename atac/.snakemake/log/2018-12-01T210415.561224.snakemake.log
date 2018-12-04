@@ -1,0 +1,32 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 72
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	get_feature_counts
+	2
+
+[Sat Dec  1 21:04:16 2018]
+rule get_feature_counts:
+    input: bam/choSigmaD0Host1.nodup.sorted.bam, bam/choSIgmaD0StableGlut4.nodup.sorted.bam, bam/choSIgmaD0StableNoglut7.nodup.sorted.bam, bam/choSigmaD0UnstableGlut10.nodup.sorted.bam, bam/choSigmaD0UnstableNoglut13.nodup.sorted.bam, bam/choSigmaD30Host1.nodup.sorted.bam, bam/choSigmaD30StableGlut4.nodup.sorted.bam, bam/choSIgmaD30StableNoglut7.nodup.sorted.bam, bam/choSigmaD30UnstableGlut10.nodup.sorted.bam, bam/choSigmaD30UnstableNoglut13.nodup.sorted.bam, bam/choSigmaD60Host1.nodup.sorted.bam, bam/choSIgmaD60StableGlut4.nodup.sorted.bam, bam/choSIgmaD60StableNoglut7.nodup.sorted.bam, bam/choSigmaD60UnstableGlut10.nodup.sorted.bam, bam/choSigmaD60UnstableNoglut13.nodup.sorted.bam, bam/choSigmaD90Host1.nodup.sorted.bam, bam/choSIgmaD90StableGlut4.nodup.sorted.bam, bam/choSIgmaD90StableNoglut7.nodup.sorted.bam, bam/choSigmaD90UnstableGlut10.nodup.sorted.bam, bam/choSigmaD90UnstableNoglut13.nodup.sorted.bam, peaks/choSigmaAgingStudy_rep1_peaks.saf
+    output: peaks/choSigmaAgingStudy_rep1_peaks_counts.txt
+    log: log/choSigmaAgingStudy_rep1.featurecounts.log
+    jobid: 1
+    threads: 64
+
+[Sat Dec  1 21:04:16 2018]
+Error in rule get_feature_counts:
+    jobid: 1
+    output: peaks/choSigmaAgingStudy_rep1_peaks_counts.txt
+    log: log/choSigmaAgingStudy_rep1.featurecounts.log
+
+RuleException:
+CalledProcessError in line 123 of /home/ubuntu/Code/ambic-epigenome/atac/181129_chosigma_snakemake.py:
+Command ' set -euo pipefail;  featureCounts --verbose -a peaks/choSigmaAgingStudy_rep1_peaks.saf-o peaks/choSigmaAgingStudy_rep1_peaks_counts.txt -F SAF -T 64 bam/choSigmaD0Host1.nodup.sorted.bam bam/choSIgmaD0StableGlut4.nodup.sorted.bam bam/choSIgmaD0StableNoglut7.nodup.sorted.bam bam/choSigmaD0UnstableGlut10.nodup.sorted.bam bam/choSigmaD0UnstableNoglut13.nodup.sorted.bam bam/choSigmaD30Host1.nodup.sorted.bam bam/choSigmaD30StableGlut4.nodup.sorted.bam bam/choSIgmaD30StableNoglut7.nodup.sorted.bam bam/choSigmaD30UnstableGlut10.nodup.sorted.bam bam/choSigmaD30UnstableNoglut13.nodup.sorted.bam bam/choSigmaD60Host1.nodup.sorted.bam bam/choSIgmaD60StableGlut4.nodup.sorted.bam bam/choSIgmaD60StableNoglut7.nodup.sorted.bam bam/choSigmaD60UnstableGlut10.nodup.sorted.bam bam/choSigmaD60UnstableNoglut13.nodup.sorted.bam bam/choSigmaD90Host1.nodup.sorted.bam bam/choSIgmaD90StableGlut4.nodup.sorted.bam bam/choSIgmaD90StableNoglut7.nodup.sorted.bam bam/choSigmaD90UnstableGlut10.nodup.sorted.bam bam/choSigmaD90UnstableNoglut13.nodup.sorted.bam &> log/choSigmaAgingStudy_rep1.featurecounts.log ' returned non-zero exit status 255.
+  File "/home/ubuntu/Code/ambic-epigenome/atac/181129_chosigma_snakemake.py", line 123, in __rule_get_feature_counts
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/ubuntu/Code/ambic-epigenome/atac/.snakemake/log/2018-12-01T210415.561224.snakemake.log

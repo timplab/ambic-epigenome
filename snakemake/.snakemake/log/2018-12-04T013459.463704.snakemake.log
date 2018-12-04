@@ -1,0 +1,43 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 72
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	convert_mtsv_to_mbed
+	1	get_methylation_frequency
+	3
+
+[Tue Dec  4 01:34:59 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_pooled/choSigmaStableD30Glut.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed_pooled/choSigmaStableD30Glut.chok1gshd_sigmaIgG.meth.bed.gz
+    jobid: 39
+    wildcards: sample=choSigmaStableD30Glut.chok1gshd_sigmaIgG
+
+[Tue Dec  4 01:37:12 2018]
+Finished job 39.
+1 of 3 steps (33%) done
+
+[Tue Dec  4 01:37:12 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaStableD30Glut.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaStableD30Glut.chok1gshd_sigmaIgG.methfreq.txt
+    log: log/mfreq/choSigmaStableD30Glut.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 19
+    wildcards: sample=choSigmaStableD30Glut.chok1gshd_sigmaIgG
+
+[Tue Dec  4 01:37:12 2018]
+Finished job 19.
+2 of 3 steps (67%) done
+
+[Tue Dec  4 01:37:12 2018]
+localrule all:
+    input: mfreq_pooled/choSigmaHostD0.chok1gshd_sigmaIgG.methfreq.txt, mfreq_pooled/choSigmaHostD30.chok1gshd_sigmaIgG.methfreq.txt, mfreq_pooled/choSigmaHostD60.chok1gshd_sigmaIgG.methfreq.txt, mfreq_pooled/choSigmaHostD90.chok1gshd_sigmaIgG.methfreq.txt, mfreq_pooled/choSigmaStableD0Glut.chok1gshd_sigmaIgG.methfreq.txt, mfreq_pooled/choSigmaStableD30Glut.chok1gshd_sigmaIgG.methfreq.txt, mfreq_pooled/choSigmaStableD60Glut.chok1gshd_sigmaIgG.methfreq.txt, mfreq_pooled/choSigmaStableD90Glut.chok1gshd_sigmaIgG.methfreq.txt, mfreq_pooled/choSigmaUnstableD0Glut.chok1gshd_sigmaIgG.methfreq.txt, mfreq_pooled/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.methfreq.txt, mfreq_pooled/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.methfreq.txt, mfreq_pooled/choSigmaUnstableD90Glut.chok1gshd_sigmaIgG.methfreq.txt, mfreq_pooled/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.methfreq.txt, mfreq_pooled/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.methfreq.txt, mfreq_pooled/choSigmaStableD60NoGlut.chok1gshd_sigmaIgG.methfreq.txt, mfreq_pooled/choSigmaStableD90NoGlut.chok1gshd_sigmaIgG.methfreq.txt, mfreq_pooled/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.methfreq.txt, mfreq_pooled/choSigmaUnstableD30NoGlut.chok1gshd_sigmaIgG.methfreq.txt, mfreq_pooled/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.methfreq.txt, mfreq_pooled/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.methfreq.txt
+    jobid: 0
+
+[Tue Dec  4 01:37:12 2018]
+Finished job 0.
+3 of 3 steps (100%) done
+Complete log: /home/ubuntu/Code/ambic-epigenome/snakemake/.snakemake/log/2018-12-04T013459.463704.snakemake.log

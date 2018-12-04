@@ -1,0 +1,239 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 72
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	20	bam_to_bed
+	21
+
+[Tue Dec  4 02:07:28 2018]
+rule bam_to_bed:
+    input: bam/choSigmaD30Host1.nodup.sorted.bam
+    output: bed/choSigmaD30Host1.bed.gz
+    jobid: 6
+    wildcards: sample=choSigmaD30Host1
+
+
+[Tue Dec  4 02:07:28 2018]
+rule bam_to_bed:
+    input: bam/choSigmaD60UnstableGlut10.nodup.sorted.bam
+    output: bed/choSigmaD60UnstableGlut10.bed.gz
+    jobid: 3
+    wildcards: sample=choSigmaD60UnstableGlut10
+
+
+[Tue Dec  4 02:07:28 2018]
+rule bam_to_bed:
+    input: bam/choSIgmaD0StableNoglut7.nodup.sorted.bam
+    output: bed/choSIgmaD0StableNoglut7.bed.gz
+    jobid: 7
+    wildcards: sample=choSIgmaD0StableNoglut7
+
+
+[Tue Dec  4 02:07:28 2018]
+rule bam_to_bed:
+    input: bam/choSigmaD30UnstableNoglut13.nodup.sorted.bam
+    output: bed/choSigmaD30UnstableNoglut13.bed.gz
+    jobid: 11
+    wildcards: sample=choSigmaD30UnstableNoglut13
+
+
+[Tue Dec  4 02:07:28 2018]
+rule bam_to_bed:
+    input: bam/choSigmaD30UnstableGlut10.nodup.sorted.bam
+    output: bed/choSigmaD30UnstableGlut10.bed.gz
+    jobid: 15
+    wildcards: sample=choSigmaD30UnstableGlut10
+
+
+[Tue Dec  4 02:07:28 2018]
+rule bam_to_bed:
+    input: bam/choSigmaD90Host1.nodup.sorted.bam
+    output: bed/choSigmaD90Host1.bed.gz
+    jobid: 17
+    wildcards: sample=choSigmaD90Host1
+
+
+[Tue Dec  4 02:07:28 2018]
+rule bam_to_bed:
+    input: bam/choSigmaD0Host1.nodup.sorted.bam
+    output: bed/choSigmaD0Host1.bed.gz
+    jobid: 20
+    wildcards: sample=choSigmaD0Host1
+
+
+[Tue Dec  4 02:07:28 2018]
+rule bam_to_bed:
+    input: bam/choSIgmaD0StableGlut4.nodup.sorted.bam
+    output: bed/choSIgmaD0StableGlut4.bed.gz
+    jobid: 13
+    wildcards: sample=choSIgmaD0StableGlut4
+
+
+[Tue Dec  4 02:07:28 2018]
+rule bam_to_bed:
+    input: bam/choSigmaD0UnstableNoglut13.nodup.sorted.bam
+    output: bed/choSigmaD0UnstableNoglut13.bed.gz
+    jobid: 4
+    wildcards: sample=choSigmaD0UnstableNoglut13
+
+
+[Tue Dec  4 02:07:28 2018]
+rule bam_to_bed:
+    input: bam/choSIgmaD60StableGlut4.nodup.sorted.bam
+    output: bed/choSIgmaD60StableGlut4.bed.gz
+    jobid: 16
+    wildcards: sample=choSIgmaD60StableGlut4
+
+
+[Tue Dec  4 02:07:29 2018]
+rule bam_to_bed:
+    input: bam/choSigmaD90UnstableGlut10.nodup.sorted.bam
+    output: bed/choSigmaD90UnstableGlut10.bed.gz
+    jobid: 5
+    wildcards: sample=choSigmaD90UnstableGlut10
+
+
+[Tue Dec  4 02:07:29 2018]
+rule bam_to_bed:
+    input: bam/choSigmaD30StableGlut4.nodup.sorted.bam
+    output: bed/choSigmaD30StableGlut4.bed.gz
+    jobid: 8
+    wildcards: sample=choSigmaD30StableGlut4
+
+
+[Tue Dec  4 02:07:29 2018]
+rule bam_to_bed:
+    input: bam/choSigmaD60Host1.nodup.sorted.bam
+    output: bed/choSigmaD60Host1.bed.gz
+    jobid: 9
+    wildcards: sample=choSigmaD60Host1
+
+
+[Tue Dec  4 02:07:29 2018]
+rule bam_to_bed:
+    input: bam/choSIgmaD90StableNoglut7.nodup.sorted.bam
+    output: bed/choSIgmaD90StableNoglut7.bed.gz
+    jobid: 1
+    wildcards: sample=choSIgmaD90StableNoglut7
+
+
+[Tue Dec  4 02:07:29 2018]
+rule bam_to_bed:
+    input: bam/choSigmaD90UnstableNoglut13.nodup.sorted.bam
+    output: bed/choSigmaD90UnstableNoglut13.bed.gz
+    jobid: 2
+    wildcards: sample=choSigmaD90UnstableNoglut13
+
+
+[Tue Dec  4 02:07:29 2018]
+rule bam_to_bed:
+    input: bam/choSigmaD0UnstableGlut10.nodup.sorted.bam
+    output: bed/choSigmaD0UnstableGlut10.bed.gz
+    jobid: 12
+    wildcards: sample=choSigmaD0UnstableGlut10
+
+
+[Tue Dec  4 02:07:29 2018]
+rule bam_to_bed:
+    input: bam/choSIgmaD30StableNoglut7.nodup.sorted.bam
+    output: bed/choSIgmaD30StableNoglut7.bed.gz
+    jobid: 14
+    wildcards: sample=choSIgmaD30StableNoglut7
+
+
+[Tue Dec  4 02:07:29 2018]
+rule bam_to_bed:
+    input: bam/choSigmaD60UnstableNoglut13.nodup.sorted.bam
+    output: bed/choSigmaD60UnstableNoglut13.bed.gz
+    jobid: 19
+    wildcards: sample=choSigmaD60UnstableNoglut13
+
+
+[Tue Dec  4 02:07:29 2018]
+rule bam_to_bed:
+    input: bam/choSIgmaD60StableNoglut7.nodup.sorted.bam
+    output: bed/choSIgmaD60StableNoglut7.bed.gz
+    jobid: 10
+    wildcards: sample=choSIgmaD60StableNoglut7
+
+
+[Tue Dec  4 02:07:29 2018]
+rule bam_to_bed:
+    input: bam/choSIgmaD90StableGlut4.nodup.sorted.bam
+    output: bed/choSIgmaD90StableGlut4.bed.gz
+    jobid: 18
+    wildcards: sample=choSIgmaD90StableGlut4
+
+[Tue Dec  4 02:08:15 2018]
+Finished job 3.
+1 of 21 steps (5%) done
+[Tue Dec  4 02:08:15 2018]
+Finished job 17.
+2 of 21 steps (10%) done
+[Tue Dec  4 02:08:17 2018]
+Finished job 4.
+3 of 21 steps (14%) done
+[Tue Dec  4 02:08:18 2018]
+Finished job 9.
+4 of 21 steps (19%) done
+[Tue Dec  4 02:08:19 2018]
+Finished job 19.
+5 of 21 steps (24%) done
+[Tue Dec  4 02:08:22 2018]
+Finished job 12.
+6 of 21 steps (29%) done
+[Tue Dec  4 02:08:22 2018]
+Finished job 6.
+7 of 21 steps (33%) done
+[Tue Dec  4 02:08:23 2018]
+Finished job 16.
+8 of 21 steps (38%) done
+[Tue Dec  4 02:08:25 2018]
+Finished job 11.
+9 of 21 steps (43%) done
+[Tue Dec  4 02:08:26 2018]
+Finished job 13.
+10 of 21 steps (48%) done
+[Tue Dec  4 02:08:27 2018]
+Finished job 10.
+11 of 21 steps (52%) done
+[Tue Dec  4 02:08:29 2018]
+Finished job 1.
+12 of 21 steps (57%) done
+[Tue Dec  4 02:08:32 2018]
+Finished job 18.
+13 of 21 steps (62%) done
+[Tue Dec  4 02:08:34 2018]
+Finished job 5.
+14 of 21 steps (67%) done
+[Tue Dec  4 02:08:35 2018]
+Finished job 7.
+15 of 21 steps (71%) done
+[Tue Dec  4 02:08:35 2018]
+Finished job 2.
+16 of 21 steps (76%) done
+[Tue Dec  4 02:08:36 2018]
+Finished job 15.
+17 of 21 steps (81%) done
+[Tue Dec  4 02:08:43 2018]
+Finished job 20.
+18 of 21 steps (86%) done
+[Tue Dec  4 02:08:51 2018]
+Finished job 8.
+19 of 21 steps (90%) done
+[Tue Dec  4 02:09:15 2018]
+Finished job 14.
+20 of 21 steps (95%) done
+
+[Tue Dec  4 02:09:16 2018]
+localrule all:
+    input: bed/choSigmaD0Host1.bed.gz, bed/choSIgmaD0StableGlut4.bed.gz, bed/choSIgmaD0StableNoglut7.bed.gz, bed/choSigmaD0UnstableGlut10.bed.gz, bed/choSigmaD0UnstableNoglut13.bed.gz, bed/choSigmaD30Host1.bed.gz, bed/choSigmaD30StableGlut4.bed.gz, bed/choSIgmaD30StableNoglut7.bed.gz, bed/choSigmaD30UnstableGlut10.bed.gz, bed/choSigmaD30UnstableNoglut13.bed.gz, bed/choSigmaD60Host1.bed.gz, bed/choSIgmaD60StableGlut4.bed.gz, bed/choSIgmaD60StableNoglut7.bed.gz, bed/choSigmaD60UnstableGlut10.bed.gz, bed/choSigmaD60UnstableNoglut13.bed.gz, bed/choSigmaD90Host1.bed.gz, bed/choSIgmaD90StableGlut4.bed.gz, bed/choSIgmaD90StableNoglut7.bed.gz, bed/choSigmaD90UnstableGlut10.bed.gz, bed/choSigmaD90UnstableNoglut13.bed.gz
+    jobid: 0
+
+[Tue Dec  4 02:09:16 2018]
+Finished job 0.
+21 of 21 steps (100%) done
+Complete log: /home/ubuntu/Code/ambic-epigenome/snakemake/.snakemake/log/2018-12-04T020727.918870.snakemake.log

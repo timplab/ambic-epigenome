@@ -1,0 +1,23 @@
+Building DAG of jobs...
+MissingInputException in line 11 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Missing input files for rule all:
+mfreq/choSigmaStableD30Glut.chok1gshd_sigmaIgG.methfreq.txt
+mfreq/choSigmaStableD60Glut.chok1gshd_sigmaIgG.methfreq.txt
+mfreq/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.methfreq.txt
+mfreq/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.methfreq.txt
+mfreq/choSigmaHostD90.chok1gshd_sigmaIgG.methfreq.txt
+mfreq/choSigmaStableD0Glut.chok1gshd_sigmaIgG.methfreq.txt
+mfreq/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.methfreq.txt
+mfreq/choSigmaStableD90NoGlut.chok1gshd_sigmaIgG.methfreq.txt
+mfreq/choSigmaStableD60NoGlut.chok1gshd_sigmaIgG.methfreq.txt
+mfreq/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.methfreq.txt
+mfreq/choSigmaHostD0.chok1gshd_sigmaIgG.methfreq.txt
+mfreq/choSigmaUnstableD90Glut.chok1gshd_sigmaIgG.methfreq.txt
+mfreq/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.methfreq.txt
+mfreq/choSigmaStableD90Glut.chok1gshd_sigmaIgG.methfreq.txt
+mfreq/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.methfreq.txt
+mfreq/choSigmaHostD60.chok1gshd_sigmaIgG.methfreq.txt
+mfreq/choSigmaUnstableD0Glut.chok1gshd_sigmaIgG.methfreq.txt
+mfreq/choSigmaHostD30.chok1gshd_sigmaIgG.methfreq.txt
+mfreq/choSigmaUnstableD30NoGlut.chok1gshd_sigmaIgG.methfreq.txt
+mfreq/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.methfreq.txt

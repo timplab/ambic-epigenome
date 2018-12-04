@@ -27,5 +27,5 @@ done
 bedtools bamtobed -i $in| \
   awk 'BEGIN{OFS="\t"}{$4="N";$5="1000";print $0}' | \
   sort -k1,1 -k2,2n |\
-  gzip -nc > $out
+  bgzip > $out
 

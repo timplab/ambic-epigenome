@@ -1,0 +1,391 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 72
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	31	convert_mtsv_to_mbed
+	32
+
+[Mon Dec  3 01:19:00 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaUnstableD60Glutrep1.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaUnstableD60Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaUnstableD60Glutrep1.chok1gshd_sigmaIgG.mbed.log
+    jobid: 21
+    wildcards: sample=choSigmaUnstableD60Glutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:00 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaStableD60NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaStableD60NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaStableD60NoGlutrep1.chok1gshd_sigmaIgG.mbed.log
+    jobid: 25
+    wildcards: sample=choSigmaStableD60NoGlutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:00 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaStableD30NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaStableD30NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaStableD30NoGlutrep1.chok1gshd_sigmaIgG.mbed.log
+    jobid: 29
+    wildcards: sample=choSigmaStableD30NoGlutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:00 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaUnstableD90Glutrep1.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaUnstableD90Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaUnstableD90Glutrep1.chok1gshd_sigmaIgG.mbed.log
+    jobid: 8
+    wildcards: sample=choSigmaUnstableD90Glutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:00 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaUnstableD30Glutrep1.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaUnstableD30Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaUnstableD30Glutrep1.chok1gshd_sigmaIgG.mbed.log
+    jobid: 13
+    wildcards: sample=choSigmaUnstableD30Glutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:00 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaUnstableD60NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaUnstableD60NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaUnstableD60NoGlutrep1.chok1gshd_sigmaIgG.mbed.log
+    jobid: 23
+    wildcards: sample=choSigmaUnstableD60NoGlutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:00 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaUnstableD0NoGlutrep2.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaUnstableD0NoGlutrep2.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaUnstableD0NoGlutrep2.chok1gshd_sigmaIgG.mbed.log
+    jobid: 14
+    wildcards: sample=choSigmaUnstableD0NoGlutrep2.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:00 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaUnstableD0Glutrep1.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaUnstableD0Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaUnstableD0Glutrep1.chok1gshd_sigmaIgG.mbed.log
+    jobid: 19
+    wildcards: sample=choSigmaUnstableD0Glutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:00 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaHostD60rep1.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaHostD60rep1.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaHostD60rep1.chok1gshd_sigmaIgG.mbed.log
+    jobid: 27
+    wildcards: sample=choSigmaHostD60rep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:00 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaStableD90NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaStableD90NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaStableD90NoGlutrep1.chok1gshd_sigmaIgG.mbed.log
+    jobid: 22
+    wildcards: sample=choSigmaStableD90NoGlutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:01 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaStableD0Glutrep1.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaStableD0Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaStableD0Glutrep1.chok1gshd_sigmaIgG.mbed.log
+    jobid: 15
+    wildcards: sample=choSigmaStableD0Glutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:01 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaStableD30Glutrep1.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaStableD30Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaStableD30Glutrep1.chok1gshd_sigmaIgG.mbed.log
+    jobid: 11
+    wildcards: sample=choSigmaStableD30Glutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:01 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaUnstableD0NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaUnstableD0NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaUnstableD0NoGlutrep1.chok1gshd_sigmaIgG.mbed.log
+    jobid: 30
+    wildcards: sample=choSigmaUnstableD0NoGlutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:01 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaStableD0NoGlutrep3.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaStableD0NoGlutrep3.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaStableD0NoGlutrep3.chok1gshd_sigmaIgG.mbed.log
+    jobid: 9
+    wildcards: sample=choSigmaStableD0NoGlutrep3.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:01 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaStableD0Glutrep3.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaStableD0Glutrep3.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaStableD0Glutrep3.chok1gshd_sigmaIgG.mbed.log
+    jobid: 5
+    wildcards: sample=choSigmaStableD0Glutrep3.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:01 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaHostD0rep3.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaHostD0rep3.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaHostD0rep3.chok1gshd_sigmaIgG.mbed.log
+    jobid: 17
+    wildcards: sample=choSigmaHostD0rep3.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:01 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaStableD0NoGlutrep2.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaStableD0NoGlutrep2.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaStableD0NoGlutrep2.chok1gshd_sigmaIgG.mbed.log
+    jobid: 7
+    wildcards: sample=choSigmaStableD0NoGlutrep2.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:01 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaUnstableD0NoGlutrep3.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaUnstableD0NoGlutrep3.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaUnstableD0NoGlutrep3.chok1gshd_sigmaIgG.mbed.log
+    jobid: 4
+    wildcards: sample=choSigmaUnstableD0NoGlutrep3.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:01 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaStableD90Glutrep1.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaStableD90Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaStableD90Glutrep1.chok1gshd_sigmaIgG.mbed.log
+    jobid: 12
+    wildcards: sample=choSigmaStableD90Glutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:01 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaStableD0Glutrep2.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaStableD0Glutrep2.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaStableD0Glutrep2.chok1gshd_sigmaIgG.mbed.log
+    jobid: 18
+    wildcards: sample=choSigmaStableD0Glutrep2.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:02 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaHostD0rep1.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaHostD0rep1.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaHostD0rep1.chok1gshd_sigmaIgG.mbed.log
+    jobid: 31
+    wildcards: sample=choSigmaHostD0rep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:02 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaUnstableD90NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaUnstableD90NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaUnstableD90NoGlutrep1.chok1gshd_sigmaIgG.mbed.log
+    jobid: 6
+    wildcards: sample=choSigmaUnstableD90NoGlutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:02 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaHostD90rep1.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaHostD90rep1.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaHostD90rep1.chok1gshd_sigmaIgG.mbed.log
+    jobid: 10
+    wildcards: sample=choSigmaHostD90rep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:02 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaUnstableD30NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaUnstableD30NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaUnstableD30NoGlutrep1.chok1gshd_sigmaIgG.mbed.log
+    jobid: 28
+    wildcards: sample=choSigmaUnstableD30NoGlutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:02 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaStableD0NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaStableD0NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaStableD0NoGlutrep1.chok1gshd_sigmaIgG.mbed.log
+    jobid: 3
+    wildcards: sample=choSigmaStableD0NoGlutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:02 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaUnstableD0Glutrep3.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaUnstableD0Glutrep3.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaUnstableD0Glutrep3.chok1gshd_sigmaIgG.mbed.log
+    jobid: 2
+    wildcards: sample=choSigmaUnstableD0Glutrep3.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:02 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaHostD30rep2.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaHostD30rep2.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaHostD30rep2.chok1gshd_sigmaIgG.mbed.log
+    jobid: 16
+    wildcards: sample=choSigmaHostD30rep2.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:02 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaStableD60Glutrep1.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaStableD60Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaStableD60Glutrep1.chok1gshd_sigmaIgG.mbed.log
+    jobid: 24
+    wildcards: sample=choSigmaStableD60Glutrep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:02 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaHostD30rep1.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaHostD30rep1.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaHostD30rep1.chok1gshd_sigmaIgG.mbed.log
+    jobid: 26
+    wildcards: sample=choSigmaHostD30rep1.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:02 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaHostD0rep2.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaHostD0rep2.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaHostD0rep2.chok1gshd_sigmaIgG.mbed.log
+    jobid: 20
+    wildcards: sample=choSigmaHostD0rep2.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 01:19:03 2018]
+rule convert_mtsv_to_mbed:
+    input: mcall_replicates/choSigmaUnstableD0Glutrep2.chok1gshd_sigmaIgG.meth.tsv
+    output: mbed/choSigmaUnstableD0Glutrep2.chok1gshd_sigmaIgG.meth.bed.gz
+    log: log/mbed/choSigmaUnstableD0Glutrep2.chok1gshd_sigmaIgG.mbed.log
+    jobid: 1
+    wildcards: sample=choSigmaUnstableD0Glutrep2.chok1gshd_sigmaIgG
+
+[Mon Dec  3 01:22:23 2018]
+Finished job 11.
+1 of 32 steps (3%) done
+[Mon Dec  3 01:25:35 2018]
+Finished job 18.
+2 of 32 steps (6%) done
+[Mon Dec  3 01:26:31 2018]
+Finished job 4.
+3 of 32 steps (9%) done
+[Mon Dec  3 01:26:58 2018]
+Finished job 9.
+4 of 32 steps (12%) done
+[Mon Dec  3 01:28:52 2018]
+Finished job 19.
+5 of 32 steps (16%) done
+[Mon Dec  3 01:28:57 2018]
+Finished job 8.
+6 of 32 steps (19%) done
+[Mon Dec  3 01:29:55 2018]
+Finished job 28.
+7 of 32 steps (22%) done
+[Mon Dec  3 01:30:02 2018]
+Finished job 7.
+8 of 32 steps (25%) done
+[Mon Dec  3 01:30:25 2018]
+Finished job 22.
+9 of 32 steps (28%) done
+[Mon Dec  3 01:30:50 2018]
+Finished job 14.
+10 of 32 steps (31%) done
+[Mon Dec  3 01:31:04 2018]
+Finished job 25.
+11 of 32 steps (34%) done
+[Mon Dec  3 01:31:31 2018]
+Finished job 20.
+12 of 32 steps (38%) done
+[Mon Dec  3 01:32:26 2018]
+Finished job 12.
+13 of 32 steps (41%) done
+[Mon Dec  3 01:32:42 2018]
+Finished job 3.
+14 of 32 steps (44%) done
+[Mon Dec  3 01:32:45 2018]
+Finished job 15.
+15 of 32 steps (47%) done
+[Mon Dec  3 01:33:39 2018]
+Finished job 31.
+16 of 32 steps (50%) done
+[Mon Dec  3 01:33:52 2018]
+Finished job 13.
+17 of 32 steps (53%) done
+[Mon Dec  3 01:33:52 2018]
+Finished job 1.
+18 of 32 steps (56%) done
+[Mon Dec  3 01:34:01 2018]
+Finished job 6.
+19 of 32 steps (59%) done
+[Mon Dec  3 01:34:08 2018]
+Finished job 29.
+20 of 32 steps (62%) done
+[Mon Dec  3 01:34:09 2018]
+Finished job 24.
+21 of 32 steps (66%) done
+[Mon Dec  3 01:34:32 2018]
+Finished job 30.
+22 of 32 steps (69%) done
+[Mon Dec  3 01:35:18 2018]
+Finished job 21.
+23 of 32 steps (72%) done
+[Mon Dec  3 01:35:26 2018]
+Finished job 26.
+24 of 32 steps (75%) done
+[Mon Dec  3 01:35:42 2018]
+Finished job 27.
+25 of 32 steps (78%) done
+[Mon Dec  3 01:36:05 2018]
+Finished job 10.
+26 of 32 steps (81%) done
+[Mon Dec  3 01:36:19 2018]
+Finished job 2.
+27 of 32 steps (84%) done
+[Mon Dec  3 01:36:59 2018]
+Finished job 17.
+28 of 32 steps (88%) done
+[Mon Dec  3 01:40:38 2018]
+Finished job 5.
+29 of 32 steps (91%) done
+[Mon Dec  3 01:43:30 2018]
+Finished job 23.
+30 of 32 steps (94%) done
+[Mon Dec  3 02:07:07 2018]
+Finished job 16.
+31 of 32 steps (97%) done
+
+[Mon Dec  3 02:07:07 2018]
+localrule all:
+    input: mbed/choSigmaHostD0rep1.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaHostD0rep2.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaHostD0rep3.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaStableD0Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaStableD0Glutrep2.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaStableD0Glutrep3.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaUnstableD0Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaUnstableD0Glutrep2.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaUnstableD0Glutrep3.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaStableD0NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaStableD0NoGlutrep2.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaStableD0NoGlutrep3.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaUnstableD0NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaUnstableD0NoGlutrep2.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaUnstableD0NoGlutrep3.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaHostD30rep1.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaHostD30rep2.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaHostD60rep1.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaHostD90rep1.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaStableD30Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaStableD60Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaStableD90Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaUnstableD30Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaUnstableD60Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaUnstableD90Glutrep1.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaStableD30NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaStableD60NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaStableD90NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaUnstableD30NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaUnstableD60NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz, mbed/choSigmaUnstableD90NoGlutrep1.chok1gshd_sigmaIgG.meth.bed.gz
+    jobid: 0
+
+[Mon Dec  3 02:07:07 2018]
+Finished job 0.
+32 of 32 steps (100%) done
+Complete log: /home/ubuntu/Code/ambic-epigenome/snakemake/.snakemake/log/2018-12-03T011859.093976.snakemake.log

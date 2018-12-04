@@ -1,0 +1,31 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 72
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	get_feature_counts
+	2
+
+[Sat Dec  1 21:05:42 2018]
+rule get_feature_counts:
+    input: bam/choSigmaD0Host1.nodup.sorted.bam, bam/choSIgmaD0StableGlut4.nodup.sorted.bam, bam/choSIgmaD0StableNoglut7.nodup.sorted.bam, bam/choSigmaD0UnstableGlut10.nodup.sorted.bam, bam/choSigmaD0UnstableNoglut13.nodup.sorted.bam, bam/choSigmaD30Host1.nodup.sorted.bam, bam/choSigmaD30StableGlut4.nodup.sorted.bam, bam/choSIgmaD30StableNoglut7.nodup.sorted.bam, bam/choSigmaD30UnstableGlut10.nodup.sorted.bam, bam/choSigmaD30UnstableNoglut13.nodup.sorted.bam, bam/choSigmaD60Host1.nodup.sorted.bam, bam/choSIgmaD60StableGlut4.nodup.sorted.bam, bam/choSIgmaD60StableNoglut7.nodup.sorted.bam, bam/choSigmaD60UnstableGlut10.nodup.sorted.bam, bam/choSigmaD60UnstableNoglut13.nodup.sorted.bam, bam/choSigmaD90Host1.nodup.sorted.bam, bam/choSIgmaD90StableGlut4.nodup.sorted.bam, bam/choSIgmaD90StableNoglut7.nodup.sorted.bam, bam/choSigmaD90UnstableGlut10.nodup.sorted.bam, bam/choSigmaD90UnstableNoglut13.nodup.sorted.bam, peaks/choSigmaAgingStudy_rep1_peaks.saf
+    output: peaks/choSigmaAgingStudy_rep1_peaks_counts.txt
+    log: log/choSigmaAgingStudy_rep1.featurecounts.log
+    jobid: 1
+    threads: 64
+
+[Sat Dec  1 21:06:20 2018]
+Finished job 1.
+1 of 2 steps (50%) done
+
+[Sat Dec  1 21:06:20 2018]
+localrule all:
+    input: peaks/choSigmaAgingStudy_rep1_peaks_counts.txt
+    jobid: 0
+
+[Sat Dec  1 21:06:20 2018]
+Finished job 0.
+2 of 2 steps (100%) done
+Complete log: /home/ubuntu/Code/ambic-epigenome/atac/.snakemake/log/2018-12-01T210541.970342.snakemake.log

@@ -1,0 +1,393 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 72
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	20	convert_mtsv_to_mbed
+	20	get_methylation_frequency
+	20	pool_to_replicates
+	61
+
+[Mon Dec  3 13:55:49 2018]
+rule pool_to_replicates:
+    output: mcall_pooled/choSigmaStableD30Glut.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 54
+    wildcards: sample=choSigmaStableD30Glut.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 13:55:49 2018]
+rule pool_to_replicates:
+    output: mcall_pooled/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 45
+    wildcards: sample=choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 13:55:49 2018]
+rule pool_to_replicates:
+    output: mcall_pooled/choSigmaUnstableD90Glut.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 41
+    wildcards: sample=choSigmaUnstableD90Glut.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 13:55:49 2018]
+rule pool_to_replicates:
+    output: mcall_pooled/choSigmaHostD60.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 49
+    wildcards: sample=choSigmaHostD60.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 13:55:49 2018]
+rule pool_to_replicates:
+    output: mcall_pooled/choSigmaStableD60NoGlut.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 47
+    wildcards: sample=choSigmaStableD60NoGlut.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 13:55:49 2018]
+rule pool_to_replicates:
+    output: mcall_pooled/choSigmaStableD90Glut.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 43
+    wildcards: sample=choSigmaStableD90Glut.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 13:55:49 2018]
+rule pool_to_replicates:
+    output: mcall_pooled/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 51
+    wildcards: sample=choSigmaStableD0NoGlut.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 13:55:49 2018]
+rule pool_to_replicates:
+    output: mcall_pooled/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 44
+    wildcards: sample=choSigmaUnstableD30Glut.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 13:55:49 2018]
+rule pool_to_replicates:
+    output: mcall_pooled/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 58
+    wildcards: sample=choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 13:55:49 2018]
+rule pool_to_replicates:
+    output: mcall_pooled/choSigmaUnstableD0Glut.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 50
+    wildcards: sample=choSigmaUnstableD0Glut.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 13:55:50 2018]
+rule pool_to_replicates:
+    output: mcall_pooled/choSigmaHostD30.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 59
+    wildcards: sample=choSigmaHostD30.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 13:55:50 2018]
+rule pool_to_replicates:
+    output: mcall_pooled/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 53
+    wildcards: sample=choSigmaStableD30NoGlut.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 13:55:50 2018]
+rule pool_to_replicates:
+    output: mcall_pooled/choSigmaHostD90.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 48
+    wildcards: sample=choSigmaHostD90.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 13:55:50 2018]
+rule pool_to_replicates:
+    output: mcall_pooled/choSigmaUnstableD30NoGlut.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 46
+    wildcards: sample=choSigmaUnstableD30NoGlut.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 13:55:50 2018]
+rule pool_to_replicates:
+    output: mcall_pooled/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 52
+    wildcards: sample=choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 13:55:50 2018]
+rule pool_to_replicates:
+    output: mcall_pooled/choSigmaStableD90NoGlut.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 57
+    wildcards: sample=choSigmaStableD90NoGlut.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 13:55:50 2018]
+rule pool_to_replicates:
+    output: mcall_pooled/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 42
+    wildcards: sample=choSigmaUnstableD60Glut.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 13:55:50 2018]
+rule pool_to_replicates:
+    output: mcall_pooled/choSigmaHostD0.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 55
+    wildcards: sample=choSigmaHostD0.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 13:55:50 2018]
+rule pool_to_replicates:
+    output: mcall_pooled/choSigmaStableD60Glut.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 56
+    wildcards: sample=choSigmaStableD60Glut.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 13:55:50 2018]
+rule pool_to_replicates:
+    output: mcall_pooled/choSigmaStableD0Glut.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 60
+    wildcards: sample=choSigmaStableD0Glut.chok1gshd_sigmaIgG
+
+[Mon Dec  3 13:56:18 2018]
+[Mon Dec  3 13:56:18 2018]
+[Mon Dec  3 13:56:18 2018]
+[Mon Dec  3 13:56:18 2018]
+[Mon Dec  3 13:56:18 2018]
+[Mon Dec  3 13:56:18 2018]
+[Mon Dec  3 13:56:18 2018]
+[Mon Dec  3 13:56:18 2018]
+Error in rule pool_to_replicates:
+[Mon Dec  3 13:56:18 2018]
+[Mon Dec  3 13:56:18 2018]
+Terminating processes on user request, this might take some time.
+[Mon Dec  3 13:56:18 2018]
+[Mon Dec  3 13:56:18 2018]
+[Mon Dec  3 13:56:18 2018]
+[Mon Dec  3 13:56:18 2018]
+[Mon Dec  3 13:56:18 2018]
+[Mon Dec  3 13:56:18 2018]
+[Mon Dec  3 13:56:18 2018]
+[Mon Dec  3 13:56:18 2018]
+Error in rule pool_to_replicates:
+[Mon Dec  3 13:56:18 2018]
+[Mon Dec  3 13:56:18 2018]
+Error in rule pool_to_replicates:
+Error in rule pool_to_replicates:
+Error in rule pool_to_replicates:
+Error in rule pool_to_replicates:
+Error in rule pool_to_replicates:
+Error in rule pool_to_replicates:
+    jobid: 51
+Error in rule pool_to_replicates:
+Error in rule pool_to_replicates:
+Error in rule pool_to_replicates:
+Error in rule pool_to_replicates:
+Error in rule pool_to_replicates:
+Error in rule pool_to_replicates:
+Error in rule pool_to_replicates:
+Error in rule pool_to_replicates:
+Error in rule pool_to_replicates:
+Error in rule pool_to_replicates:
+    jobid: 60
+Error in rule pool_to_replicates:
+Error in rule pool_to_replicates:
+    jobid: 52
+    jobid: 58
+    jobid: 43
+    jobid: 47
+    jobid: 42
+    jobid: 55
+    output: mcall_pooled/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 57
+    jobid: 41
+    jobid: 48
+    jobid: 53
+    jobid: 50
+    jobid: 56
+    jobid: 44
+    jobid: 54
+    jobid: 46
+    jobid: 59
+    output: mcall_pooled/choSigmaStableD0Glut.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 45
+    jobid: 49
+    output: mcall_pooled/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.meth.tsv
+    output: mcall_pooled/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.meth.tsv
+    output: mcall_pooled/choSigmaStableD90Glut.chok1gshd_sigmaIgG.meth.tsv
+    output: mcall_pooled/choSigmaStableD60NoGlut.chok1gshd_sigmaIgG.meth.tsv
+    output: mcall_pooled/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.meth.tsv
+    output: mcall_pooled/choSigmaHostD0.chok1gshd_sigmaIgG.meth.tsv
+
+    output: mcall_pooled/choSigmaStableD90NoGlut.chok1gshd_sigmaIgG.meth.tsv
+    output: mcall_pooled/choSigmaUnstableD90Glut.chok1gshd_sigmaIgG.meth.tsv
+    output: mcall_pooled/choSigmaHostD90.chok1gshd_sigmaIgG.meth.tsv
+    output: mcall_pooled/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.meth.tsv
+    output: mcall_pooled/choSigmaUnstableD0Glut.chok1gshd_sigmaIgG.meth.tsv
+    output: mcall_pooled/choSigmaStableD60Glut.chok1gshd_sigmaIgG.meth.tsv
+    output: mcall_pooled/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.meth.tsv
+    output: mcall_pooled/choSigmaStableD30Glut.chok1gshd_sigmaIgG.meth.tsv
+    output: mcall_pooled/choSigmaUnstableD30NoGlut.chok1gshd_sigmaIgG.meth.tsv
+    output: mcall_pooled/choSigmaHostD30.chok1gshd_sigmaIgG.meth.tsv
+
+    output: mcall_pooled/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.meth.tsv
+    output: mcall_pooled/choSigmaHostD60.chok1gshd_sigmaIgG.meth.tsv
+
+
+
+
+
+
+
+
+
+
+RuleException:
+CalledProcessError in line 23 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/merge_methylation_tsv.sh -d mcall_replicates -b choSigmaStableD0NoGlut.chok1gshd_sigmaIgG > mcall_pooled/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.meth.tsv ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 23, in __rule_pool_to_replicates
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+
+
+
+
+
+
+
+
+RuleException:
+CalledProcessError in line 23 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/merge_methylation_tsv.sh -d mcall_replicates -b choSigmaStableD0Glut.chok1gshd_sigmaIgG > mcall_pooled/choSigmaStableD0Glut.chok1gshd_sigmaIgG.meth.tsv ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 23, in __rule_pool_to_replicates
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 23 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/merge_methylation_tsv.sh -d mcall_replicates -b choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG > mcall_pooled/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.meth.tsv ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 23, in __rule_pool_to_replicates
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 23 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/merge_methylation_tsv.sh -d mcall_replicates -b choSigmaStableD90Glut.chok1gshd_sigmaIgG > mcall_pooled/choSigmaStableD90Glut.chok1gshd_sigmaIgG.meth.tsv ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 23, in __rule_pool_to_replicates
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 23 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/merge_methylation_tsv.sh -d mcall_replicates -b choSigmaHostD0.chok1gshd_sigmaIgG > mcall_pooled/choSigmaHostD0.chok1gshd_sigmaIgG.meth.tsv ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 23, in __rule_pool_to_replicates
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 23 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/merge_methylation_tsv.sh -d mcall_replicates -b choSigmaStableD60NoGlut.chok1gshd_sigmaIgG > mcall_pooled/choSigmaStableD60NoGlut.chok1gshd_sigmaIgG.meth.tsv ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 23, in __rule_pool_to_replicates
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 23 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/merge_methylation_tsv.sh -d mcall_replicates -b choSigmaUnstableD60Glut.chok1gshd_sigmaIgG > mcall_pooled/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.meth.tsv ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 23, in __rule_pool_to_replicates
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 23 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/merge_methylation_tsv.sh -d mcall_replicates -b choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG > mcall_pooled/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.meth.tsv ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 23, in __rule_pool_to_replicates
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 23 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/merge_methylation_tsv.sh -d mcall_replicates -b choSigmaUnstableD90Glut.chok1gshd_sigmaIgG > mcall_pooled/choSigmaUnstableD90Glut.chok1gshd_sigmaIgG.meth.tsv ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 23, in __rule_pool_to_replicates
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 23 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/merge_methylation_tsv.sh -d mcall_replicates -b choSigmaHostD90.chok1gshd_sigmaIgG > mcall_pooled/choSigmaHostD90.chok1gshd_sigmaIgG.meth.tsv ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 23, in __rule_pool_to_replicates
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 23 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/merge_methylation_tsv.sh -d mcall_replicates -b choSigmaStableD30NoGlut.chok1gshd_sigmaIgG > mcall_pooled/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.meth.tsv ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 23, in __rule_pool_to_replicates
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job pool_to_replicates since they might be corrupted:
+mcall_pooled/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.meth.tsv
+RuleException:
+CalledProcessError in line 23 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/merge_methylation_tsv.sh -d mcall_replicates -b choSigmaStableD60Glut.chok1gshd_sigmaIgG > mcall_pooled/choSigmaStableD60Glut.chok1gshd_sigmaIgG.meth.tsv ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 23, in __rule_pool_to_replicates
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 23 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/merge_methylation_tsv.sh -d mcall_replicates -b choSigmaUnstableD0Glut.chok1gshd_sigmaIgG > mcall_pooled/choSigmaUnstableD0Glut.chok1gshd_sigmaIgG.meth.tsv ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 23, in __rule_pool_to_replicates
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 23 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/merge_methylation_tsv.sh -d mcall_replicates -b choSigmaStableD90NoGlut.chok1gshd_sigmaIgG > mcall_pooled/choSigmaStableD90NoGlut.chok1gshd_sigmaIgG.meth.tsv ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 23, in __rule_pool_to_replicates
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 23 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/merge_methylation_tsv.sh -d mcall_replicates -b choSigmaUnstableD30Glut.chok1gshd_sigmaIgG > mcall_pooled/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.meth.tsv ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 23, in __rule_pool_to_replicates
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 23 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/merge_methylation_tsv.sh -d mcall_replicates -b choSigmaUnstableD30NoGlut.chok1gshd_sigmaIgG > mcall_pooled/choSigmaUnstableD30NoGlut.chok1gshd_sigmaIgG.meth.tsv ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 23, in __rule_pool_to_replicates
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 23 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/merge_methylation_tsv.sh -d mcall_replicates -b choSigmaStableD30Glut.chok1gshd_sigmaIgG > mcall_pooled/choSigmaStableD30Glut.chok1gshd_sigmaIgG.meth.tsv ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 23, in __rule_pool_to_replicates
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 23 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/merge_methylation_tsv.sh -d mcall_replicates -b choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG > mcall_pooled/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.meth.tsv ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 23, in __rule_pool_to_replicates
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 23 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/merge_methylation_tsv.sh -d mcall_replicates -b choSigmaHostD30.chok1gshd_sigmaIgG > mcall_pooled/choSigmaHostD30.chok1gshd_sigmaIgG.meth.tsv ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 23, in __rule_pool_to_replicates
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+RuleException:
+CalledProcessError in line 23 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
+Command ' set -euo pipefail;  /home/ubuntu/Code/ambic-epigenome/util/merge_methylation_tsv.sh -d mcall_replicates -b choSigmaHostD60.chok1gshd_sigmaIgG > mcall_pooled/choSigmaHostD60.chok1gshd_sigmaIgG.meth.tsv ' died with <Signals.SIGINT: 2>.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py", line 23, in __rule_pool_to_replicates
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job pool_to_replicates since they might be corrupted:
+mcall_pooled/choSigmaStableD0Glut.chok1gshd_sigmaIgG.meth.tsv
+Removing output files of failed job pool_to_replicates since they might be corrupted:
+mcall_pooled/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.meth.tsv
+Removing output files of failed job pool_to_replicates since they might be corrupted:
+mcall_pooled/choSigmaStableD90Glut.chok1gshd_sigmaIgG.meth.tsv
+Removing output files of failed job pool_to_replicates since they might be corrupted:
+mcall_pooled/choSigmaHostD0.chok1gshd_sigmaIgG.meth.tsv
+Removing output files of failed job pool_to_replicates since they might be corrupted:
+mcall_pooled/choSigmaStableD60NoGlut.chok1gshd_sigmaIgG.meth.tsv
+Removing output files of failed job pool_to_replicates since they might be corrupted:
+mcall_pooled/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.meth.tsv
+Removing output files of failed job pool_to_replicates since they might be corrupted:
+mcall_pooled/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.meth.tsv
+Removing output files of failed job pool_to_replicates since they might be corrupted:
+mcall_pooled/choSigmaUnstableD90Glut.chok1gshd_sigmaIgG.meth.tsv
+Removing output files of failed job pool_to_replicates since they might be corrupted:
+mcall_pooled/choSigmaHostD90.chok1gshd_sigmaIgG.meth.tsv
+Removing output files of failed job pool_to_replicates since they might be corrupted:
+mcall_pooled/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.meth.tsv
+Removing output files of failed job pool_to_replicates since they might be corrupted:
+mcall_pooled/choSigmaStableD60Glut.chok1gshd_sigmaIgG.meth.tsv
+Removing output files of failed job pool_to_replicates since they might be corrupted:
+mcall_pooled/choSigmaUnstableD0Glut.chok1gshd_sigmaIgG.meth.tsv
+Removing output files of failed job pool_to_replicates since they might be corrupted:
+mcall_pooled/choSigmaStableD90NoGlut.chok1gshd_sigmaIgG.meth.tsv
+Removing output files of failed job pool_to_replicates since they might be corrupted:
+mcall_pooled/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.meth.tsv
+Removing output files of failed job pool_to_replicates since they might be corrupted:
+mcall_pooled/choSigmaUnstableD30NoGlut.chok1gshd_sigmaIgG.meth.tsv
+Removing output files of failed job pool_to_replicates since they might be corrupted:
+mcall_pooled/choSigmaStableD30Glut.chok1gshd_sigmaIgG.meth.tsv
+Removing output files of failed job pool_to_replicates since they might be corrupted:
+mcall_pooled/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.meth.tsv
+Removing output files of failed job pool_to_replicates since they might be corrupted:
+mcall_pooled/choSigmaHostD30.chok1gshd_sigmaIgG.meth.tsv
+Removing output files of failed job pool_to_replicates since they might be corrupted:
+mcall_pooled/choSigmaHostD60.chok1gshd_sigmaIgG.meth.tsv
+Complete log: /home/ubuntu/Code/ambic-epigenome/snakemake/.snakemake/log/2018-12-03T135548.879529.snakemake.log

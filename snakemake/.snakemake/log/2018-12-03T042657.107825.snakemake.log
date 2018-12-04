@@ -1,0 +1,63 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 72
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	merge_sniffles_across_samples
+	3	sniffles_detect_svs
+	5
+
+[Mon Dec  3 04:26:57 2018]
+rule sniffles_detect_svs:
+    input: bam/choSigmaUnstableD0Glut.chok1gshd_sigmaIgG.bam
+    output: sv/choSigmaUnstableD0Glut.chok1gshd_sigmaIgG.sniffles.vcf
+    log: sv/choSigmaUnstableD0Glut.chok1gshd_sigmaIgG.sniffles.log
+    jobid: 8
+    wildcards: sample=choSigmaUnstableD0Glut.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 04:26:57 2018]
+rule sniffles_detect_svs:
+    input: bam/choSigmaHostD0.chok1gshd_sigmaIgG.bam
+    output: sv/choSigmaHostD0.chok1gshd_sigmaIgG.sniffles.vcf
+    log: sv/choSigmaHostD0.chok1gshd_sigmaIgG.sniffles.log
+    jobid: 18
+    wildcards: sample=choSigmaHostD0.chok1gshd_sigmaIgG
+
+
+[Mon Dec  3 04:26:57 2018]
+rule sniffles_detect_svs:
+    input: bam/choSigmaStableD0Glut.chok1gshd_sigmaIgG.bam
+    output: sv/choSigmaStableD0Glut.chok1gshd_sigmaIgG.sniffles.vcf
+    log: sv/choSigmaStableD0Glut.chok1gshd_sigmaIgG.sniffles.log
+    jobid: 3
+    wildcards: sample=choSigmaStableD0Glut.chok1gshd_sigmaIgG
+
+[Mon Dec  3 05:26:14 2018]
+Finished job 8.
+1 of 5 steps (20%) done
+[Mon Dec  3 05:41:42 2018]
+Finished job 18.
+2 of 5 steps (40%) done
+[Mon Dec  3 05:53:26 2018]
+Finished job 3.
+3 of 5 steps (60%) done
+
+[Mon Dec  3 05:53:26 2018]
+rule merge_sniffles_across_samples:
+    input: sv/choSigmaHostD0.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaHostD30.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaHostD60.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaHostD90.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaStableD0Glut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaStableD30Glut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaStableD60Glut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaStableD90Glut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaUnstableD0Glut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaUnstableD90Glut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaStableD60NoGlut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaStableD90NoGlut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaUnstableD30NoGlut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.sniffles.vcf
+    output: sv/181201_choSigmaAgingStudy.sniffles.fofn, sv/181201_choSigmaAgingStudy.merged.vcf
+    jobid: 1
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 28 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py:
+Missing files after 5 seconds:
+sv/181201_choSigmaAgingStudy.merged.vcf
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job merge_sniffles_across_samples since they might be corrupted:
+sv/181201_choSigmaAgingStudy.sniffles.fofn
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/ubuntu/Code/ambic-epigenome/snakemake/.snakemake/log/2018-12-03T042657.107825.snakemake.log

@@ -1,0 +1,29 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 72
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	calculate_coverage
+	2
+
+[Sun Dec  2 15:28:39 2018]
+rule calculate_coverage:
+    input: bed/choSigmaHostD30.chok1gshd_sigmaIgG.bed, bed/choSigmaHostD60.chok1gshd_sigmaIgG.bed, bed/choSigmaHostD90.chok1gshd_sigmaIgG.bed, bed/choSigmaStableD30Glut.chok1gshd_sigmaIgG.bed, bed/choSigmaStableD60Glut.chok1gshd_sigmaIgG.bed, bed/choSigmaStableD90Glut.chok1gshd_sigmaIgG.bed, bed/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.bed, bed/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.bed, bed/choSigmaUnstableD90Glut.chok1gshd_sigmaIgG.bed, bed/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.bed, bed/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.bed, bed/choSigmaStableD60NoGlut.chok1gshd_sigmaIgG.bed, bed/choSigmaStableD90NoGlut.chok1gshd_sigmaIgG.bed, bed/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.bed, bed/choSigmaUnstableD30NoGlut.chok1gshd_sigmaIgG.bed, bed/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.bed, bed/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.bed, /dilithium/Data/NGS/Reference/cho/chok1/genome/Cricetulus_griseus_chok1gshd.sigmaIgG.fa.bins.bed
+    output: coverage/181201_choSigmaAgingStudy.coverage.bed
+    jobid: 1
+
+[Sun Dec  2 15:33:25 2018]
+Finished job 1.
+1 of 2 steps (50%) done
+
+[Sun Dec  2 15:33:25 2018]
+localrule all:
+    input: coverage/181201_choSigmaAgingStudy.coverage.bed
+    jobid: 0
+
+[Sun Dec  2 15:33:25 2018]
+Finished job 0.
+2 of 2 steps (100%) done
+Complete log: /home/ubuntu/Code/ambic-epigenome/snakemake/.snakemake/log/2018-12-02T152839.063300.snakemake.log

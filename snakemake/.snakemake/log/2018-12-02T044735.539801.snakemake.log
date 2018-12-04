@@ -1,0 +1,252 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 72
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	12	bam_to_bed
+	13
+
+[Sun Dec  2 04:47:35 2018]
+rule bam_to_bed:
+    input: bam/choSigmaHostD90.chok1gshd_sigmaIgG.bam
+    output: bed/choSigmaHostD90.chok1gshd_sigmaIgG.bed.gz
+    jobid: 3
+    wildcards: sample=choSigmaHostD90.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 04:47:35 2018]
+rule bam_to_bed:
+    input: bam/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.bam
+    output: bed/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.bed.gz
+    jobid: 10
+    wildcards: sample=choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 04:47:35 2018]
+rule bam_to_bed:
+    input: bam/choSigmaHostD60.chok1gshd_sigmaIgG.bam
+    output: bed/choSigmaHostD60.chok1gshd_sigmaIgG.bed.gz
+    jobid: 12
+    wildcards: sample=choSigmaHostD60.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 04:47:35 2018]
+rule bam_to_bed:
+    input: bam/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.bam
+    output: bed/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.bed.gz
+    jobid: 4
+    wildcards: sample=choSigmaUnstableD30Glut.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 04:47:35 2018]
+rule bam_to_bed:
+    input: bam/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.bam
+    output: bed/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.bed.gz
+    jobid: 14
+    wildcards: sample=choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 04:47:35 2018]
+rule bam_to_bed:
+    input: bam/choSigmaStableD90Glut.chok1gshd_sigmaIgG.bam
+    output: bed/choSigmaStableD90Glut.chok1gshd_sigmaIgG.bed.gz
+    jobid: 6
+    wildcards: sample=choSigmaStableD90Glut.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 04:47:35 2018]
+rule bam_to_bed:
+    input: bam/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.bam
+    output: bed/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.bed.gz
+    jobid: 2
+    wildcards: sample=choSigmaStableD30NoGlut.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 04:47:35 2018]
+rule bam_to_bed:
+    input: bam/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.bam
+    output: bed/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.bed.gz
+    jobid: 15
+    wildcards: sample=choSigmaStableD0NoGlut.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 04:47:35 2018]
+rule bam_to_bed:
+    input: bam/choSigmaStableD60Glut.chok1gshd_sigmaIgG.bam
+    output: bed/choSigmaStableD60Glut.chok1gshd_sigmaIgG.bed.gz
+    jobid: 1
+    wildcards: sample=choSigmaStableD60Glut.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 04:47:35 2018]
+rule bam_to_bed:
+    input: bam/choSigmaHostD30.chok1gshd_sigmaIgG.bam
+    output: bed/choSigmaHostD30.chok1gshd_sigmaIgG.bed.gz
+    jobid: 11
+    wildcards: sample=choSigmaHostD30.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 04:47:36 2018]
+rule bam_to_bed:
+    input: bam/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.bam
+    output: bed/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.bed.gz
+    jobid: 13
+    wildcards: sample=choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 04:47:36 2018]
+rule bam_to_bed:
+    input: bam/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.bam
+    output: bed/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.bed.gz
+    jobid: 8
+    wildcards: sample=choSigmaUnstableD60Glut.chok1gshd_sigmaIgG
+
+[Sun Dec  2 04:48:00 2018]
+Error in rule bam_to_bed:
+    jobid: 8
+    output: bed/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.bed.gz
+
+RuleException:
+CalledProcessError in line 22 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py:
+Command ' set -euo pipefail;  bedtools bamtobed -i bam/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.bam | sort -k1,1 -k2,2n | bgzip > bed/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.bed.gz ' returned non-zero exit status 2.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py", line 22, in __rule_bam_to_bed
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job bam_to_bed since they might be corrupted:
+bed/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.bed.gz
+[Sun Dec  2 04:48:03 2018]
+Error in rule bam_to_bed:
+    jobid: 1
+    output: bed/choSigmaStableD60Glut.chok1gshd_sigmaIgG.bed.gz
+
+RuleException:
+CalledProcessError in line 22 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py:
+Command ' set -euo pipefail;  bedtools bamtobed -i bam/choSigmaStableD60Glut.chok1gshd_sigmaIgG.bam | sort -k1,1 -k2,2n | bgzip > bed/choSigmaStableD60Glut.chok1gshd_sigmaIgG.bed.gz ' returned non-zero exit status 2.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py", line 22, in __rule_bam_to_bed
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job bam_to_bed since they might be corrupted:
+bed/choSigmaStableD60Glut.chok1gshd_sigmaIgG.bed.gz
+[Sun Dec  2 04:48:04 2018]
+Error in rule bam_to_bed:
+    jobid: 2
+    output: bed/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.bed.gz
+
+RuleException:
+CalledProcessError in line 22 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py:
+Command ' set -euo pipefail;  bedtools bamtobed -i bam/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.bam | sort -k1,1 -k2,2n | bgzip > bed/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.bed.gz ' returned non-zero exit status 2.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py", line 22, in __rule_bam_to_bed
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job bam_to_bed since they might be corrupted:
+bed/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.bed.gz
+[Sun Dec  2 04:48:04 2018]
+Error in rule bam_to_bed:
+    jobid: 15
+    output: bed/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.bed.gz
+
+RuleException:
+CalledProcessError in line 22 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py:
+Command ' set -euo pipefail;  bedtools bamtobed -i bam/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.bam | sort -k1,1 -k2,2n | bgzip > bed/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.bed.gz ' returned non-zero exit status 2.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py", line 22, in __rule_bam_to_bed
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job bam_to_bed since they might be corrupted:
+bed/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.bed.gz
+[Sun Dec  2 04:48:04 2018]
+Error in rule bam_to_bed:
+    jobid: 13
+    output: bed/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.bed.gz
+
+RuleException:
+CalledProcessError in line 22 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py:
+Command ' set -euo pipefail;  bedtools bamtobed -i bam/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.bam | sort -k1,1 -k2,2n | bgzip > bed/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.bed.gz ' returned non-zero exit status 2.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py", line 22, in __rule_bam_to_bed
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job bam_to_bed since they might be corrupted:
+bed/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.bed.gz
+[Sun Dec  2 04:48:04 2018]
+Error in rule bam_to_bed:
+    jobid: 10
+    output: bed/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.bed.gz
+
+RuleException:
+CalledProcessError in line 22 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py:
+Command ' set -euo pipefail;  bedtools bamtobed -i bam/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.bam | sort -k1,1 -k2,2n | bgzip > bed/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.bed.gz ' returned non-zero exit status 2.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py", line 22, in __rule_bam_to_bed
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job bam_to_bed since they might be corrupted:
+bed/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.bed.gz
+[Sun Dec  2 04:48:04 2018]
+Error in rule bam_to_bed:
+    jobid: 4
+    output: bed/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.bed.gz
+
+RuleException:
+CalledProcessError in line 22 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py:
+Command ' set -euo pipefail;  bedtools bamtobed -i bam/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.bam | sort -k1,1 -k2,2n | bgzip > bed/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.bed.gz ' returned non-zero exit status 2.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py", line 22, in __rule_bam_to_bed
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job bam_to_bed since they might be corrupted:
+bed/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.bed.gz
+[Sun Dec  2 04:48:05 2018]
+Error in rule bam_to_bed:
+    jobid: 6
+    output: bed/choSigmaStableD90Glut.chok1gshd_sigmaIgG.bed.gz
+
+RuleException:
+CalledProcessError in line 22 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py:
+Command ' set -euo pipefail;  bedtools bamtobed -i bam/choSigmaStableD90Glut.chok1gshd_sigmaIgG.bam | sort -k1,1 -k2,2n | bgzip > bed/choSigmaStableD90Glut.chok1gshd_sigmaIgG.bed.gz ' returned non-zero exit status 2.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py", line 22, in __rule_bam_to_bed
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job bam_to_bed since they might be corrupted:
+bed/choSigmaStableD90Glut.chok1gshd_sigmaIgG.bed.gz
+[Sun Dec  2 04:48:06 2018]
+Error in rule bam_to_bed:
+    jobid: 11
+    output: bed/choSigmaHostD30.chok1gshd_sigmaIgG.bed.gz
+
+RuleException:
+CalledProcessError in line 22 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py:
+Command ' set -euo pipefail;  bedtools bamtobed -i bam/choSigmaHostD30.chok1gshd_sigmaIgG.bam | sort -k1,1 -k2,2n | bgzip > bed/choSigmaHostD30.chok1gshd_sigmaIgG.bed.gz ' returned non-zero exit status 2.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py", line 22, in __rule_bam_to_bed
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job bam_to_bed since they might be corrupted:
+bed/choSigmaHostD30.chok1gshd_sigmaIgG.bed.gz
+[Sun Dec  2 04:48:06 2018]
+Error in rule bam_to_bed:
+    jobid: 12
+    output: bed/choSigmaHostD60.chok1gshd_sigmaIgG.bed.gz
+
+RuleException:
+CalledProcessError in line 22 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py:
+Command ' set -euo pipefail;  bedtools bamtobed -i bam/choSigmaHostD60.chok1gshd_sigmaIgG.bam | sort -k1,1 -k2,2n | bgzip > bed/choSigmaHostD60.chok1gshd_sigmaIgG.bed.gz ' returned non-zero exit status 2.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py", line 22, in __rule_bam_to_bed
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job bam_to_bed since they might be corrupted:
+bed/choSigmaHostD60.chok1gshd_sigmaIgG.bed.gz
+[Sun Dec  2 04:48:06 2018]
+Error in rule bam_to_bed:
+    jobid: 3
+    output: bed/choSigmaHostD90.chok1gshd_sigmaIgG.bed.gz
+
+RuleException:
+CalledProcessError in line 22 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py:
+Command ' set -euo pipefail;  bedtools bamtobed -i bam/choSigmaHostD90.chok1gshd_sigmaIgG.bam | sort -k1,1 -k2,2n | bgzip > bed/choSigmaHostD90.chok1gshd_sigmaIgG.bed.gz ' returned non-zero exit status 2.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py", line 22, in __rule_bam_to_bed
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job bam_to_bed since they might be corrupted:
+bed/choSigmaHostD90.chok1gshd_sigmaIgG.bed.gz
+[Sun Dec  2 04:48:08 2018]
+Error in rule bam_to_bed:
+    jobid: 14
+    output: bed/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.bed.gz
+
+RuleException:
+CalledProcessError in line 22 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py:
+Command ' set -euo pipefail;  bedtools bamtobed -i bam/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.bam | sort -k1,1 -k2,2n | bgzip > bed/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.bed.gz ' returned non-zero exit status 2.
+  File "/home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py", line 22, in __rule_bam_to_bed
+  File "/home/ubuntu/Code/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job bam_to_bed since they might be corrupted:
+bed/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.bed.gz
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/ubuntu/Code/ambic-epigenome/snakemake/.snakemake/log/2018-12-02T044735.539801.snakemake.log

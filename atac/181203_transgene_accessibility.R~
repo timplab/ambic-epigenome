@@ -1,0 +1,43 @@
+#!/usr/bin/Rscript
+library(tidyverse)
+library(parallel)
+cores = ceiling(detectCores()/2)
+
+pdpath = "/shared/Data/chosigma_samples.txt"
+covdir = "/shared/Data/coverage"
+plotdir = "/dilithium/Data/plots"
+
+pd = read_tsv(pdpath)
+
+pd$filepath = file.path(covdir,paste0(pd$samples,".chok1gshd_sigmaIgG.coverage.bed"))
+cnames = c("contig","start","end","numreads")
+# add label column and extract igg only
+cov.list = mclapply(seq_along(pd$filepath),mc.cores=cores,function(i){
+    read_tsv(pd$filepath[i],cnames) %>%
+        mutate(sample = pd$samples[i])
+})
+norm.list = mclapply(cov.list,mc.cores=cores,function(x){
+    totreads = sum(x$numreads)
+    x %>% mutate(cov=numreads/totreads) %>%
+        filter(contig=="ambic_sigma_IgG_HC" | contig=="ambic_sigma_IgG_LC")    
+})
+
+cov = do.call(rbind,norm.list)
+cov.spread = cov %>% select(-start,-end,-numreads) %>%
+    spread(contig,cov)
+
+cov.tb = bind_cols(pd[match(cov.spread$sample,pd$samples),],cov.spread)%>%
+    mutate(totcov = ambic_sigma_IgG_LC+ambic_sigma_IgG_HC)
+
+# plot
+g = ggplot(cov.tb,aes(x=day,y=totcov,colour=paste(cell,glut),group=paste(cell,glut)))+
+    geom_point()+geom_line(size=0.5)+theme_bw()+
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          axis.text = element_text(color="black"))+
+    labs(x="Day",y="Transgene coverage fraction")
+    
+
+pdf(file.path(plotdir,"181203_transgene_copynumber.pdf"),useDingbats=F,width=5,height=3)
+print(g)
+dev.off()

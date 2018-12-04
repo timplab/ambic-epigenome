@@ -1,0 +1,57 @@
+#!/usr/bin/Rscript
+library(tidyverse)
+library(bsseq)
+library(optparse)
+library(getopt)
+dir=dirname(get_Rscript_filename())
+if (is.na(NA)) dir = "."
+source(file.path(dir,"methylation_plot_utils.R"))
+   
+
+parser = function(argsin){
+    arglist=list(
+        make_option(c("-p","--pdata"),dest="pdpath",type="character",default=NULL,
+                       help="pData dataframe path",metavar="/path/to/pdata"),
+        make_option(c("-o","--output"),dest="outpath",type="character",default=NULL,
+                       help="output rds file path",metavar="/path/to/rds")
+    )
+    argparser=OptionParser(option_list=arglist)
+    args=parse_args(argparser,argsin,positional_arguments = TRUE)
+    args
+}
+
+smooth = TRUE
+mfreq_to_bsmooth = function(fpaths,pdpath,smooth=FALSE,cores=1){
+    pd = read_tsv(pdpath)
+    mfreq.list = mclapply(fpaths,mc.cores=cores,function(x){
+        tabix_mfreq(x,cov=0,trinuc_exclude=NULL)
+    })
+    labels = sapply(strsplit(basename(fpaths),"[.]"),"[[",1)
+    pd.arrange = pd[match(labels,pd$samples),]
+    # add label column
+    for (i in seq_along(labels)){
+        mfreq.list[[i]]$samp = pd.arrange$samples[i]
+    }
+    mfreq.all = do.call(rbind,mfreq.list)
+    
+
+    
+}
+
+
+test = paste("-p /dilithium/Data/chosigma_meth_samples.txt",
+             "-o /dilithium/Data/tmp.rds",
+             "mfreq/choSigmaHostD0rep1.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaHostD0rep2.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaHostD0rep3.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaStableD0Glutrep1.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaStableD0Glutrep2.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaStableD0Glutrep3.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaUnstableD0Glutrep1.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaUnstableD0Glutrep2.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaUnstableD0Glutrep3.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaStableD0NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaStableD0NoGlutrep2.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaStableD0NoGlutrep3.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaUnstableD0NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaUnstableD0NoGlutrep2.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaUnstableD0NoGlutrep3.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaHostD30rep1.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaHostD30rep2.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaHostD60rep1.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaHostD90rep1.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaStableD30Glutrep1.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaStableD60Glutrep1.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaStableD90Glutrep1.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaUnstableD30Glutrep1.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaUnstableD60Glutrep1.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaUnstableD90Glutrep1.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaStableD30NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaStableD60NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaStableD90NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaUnstableD30NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaUnstableD60NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt mfreq/choSigmaUnstableD90NoGlutrep1.chok1gshd_sigmaIgG.methfreq.txt")
+argsin = strsplit(test," ")[[1]]
+argsin[5:length(argsin)] = paste0("/dilithium/Data/",argsin[5:length(argsin)])
+if (! interactive()){
+    argsin = commandArgs(trailingOnly = TRUE)
+    args = parser(argsin)
+    pdpath = args$options$pdpath
+    outpath = args$options$outpath
+    fpaths = args$args
+    cores = ceiling(detectCores()/2)
+    mfreq_to_bsmooth(fpaths,pdpath,smooth=TRUE,cores=cores)
+    # output to outpath
+}
+

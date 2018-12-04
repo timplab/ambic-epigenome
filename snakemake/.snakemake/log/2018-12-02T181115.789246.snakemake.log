@@ -1,0 +1,309 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 72
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	29	pool_to_replicates
+	30
+
+[Sun Dec  2 18:11:16 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaUnstableD30NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 26
+    wildcards: sample=choSigmaUnstableD30NoGlutrep1.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:16 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaHostD30rep2.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 20
+    wildcards: sample=choSigmaHostD30rep2.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:16 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaHostD0rep2.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 1
+    wildcards: sample=choSigmaHostD0rep2.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:16 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaStableD0Glutrep3.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 12
+    wildcards: sample=choSigmaStableD0Glutrep3.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:16 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaUnstableD30Glutrep1.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 16
+    wildcards: sample=choSigmaUnstableD30Glutrep1.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:16 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaHostD30rep1.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 24
+    wildcards: sample=choSigmaHostD30rep1.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:16 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaHostD90rep1.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 8
+    wildcards: sample=choSigmaHostD90rep1.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:16 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaUnstableD90NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 14
+    wildcards: sample=choSigmaUnstableD90NoGlutrep1.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:16 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaUnstableD0Glutrep3.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 17
+    wildcards: sample=choSigmaUnstableD0Glutrep3.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:16 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaUnstableD0NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 27
+    wildcards: sample=choSigmaUnstableD0NoGlutrep1.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:17 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaUnstableD0Glutrep1.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 11
+    wildcards: sample=choSigmaUnstableD0Glutrep1.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:17 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaStableD30Glutrep1.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 19
+    wildcards: sample=choSigmaStableD30Glutrep1.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:17 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaUnstableD0NoGlutrep3.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 3
+    wildcards: sample=choSigmaUnstableD0NoGlutrep3.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:17 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaUnstableD90Glutrep1.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 30
+    wildcards: sample=choSigmaUnstableD90Glutrep1.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:17 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaHostD0rep3.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 15
+    wildcards: sample=choSigmaHostD0rep3.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:17 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaUnstableD60NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 9
+    wildcards: sample=choSigmaUnstableD60NoGlutrep1.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:17 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaStableD30NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 7
+    wildcards: sample=choSigmaStableD30NoGlutrep1.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:17 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaStableD90NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 23
+    wildcards: sample=choSigmaStableD90NoGlutrep1.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:17 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaStableD0Glutrep2.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 4
+    wildcards: sample=choSigmaStableD0Glutrep2.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:17 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaUnstableD60Glutrep1.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 2
+    wildcards: sample=choSigmaUnstableD60Glutrep1.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:18 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaStableD0NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 6
+    wildcards: sample=choSigmaStableD0NoGlutrep1.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:18 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaStableD0NoGlutrep3.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 21
+    wildcards: sample=choSigmaStableD0NoGlutrep3.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:18 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaStableD60Glutrep1.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 18
+    wildcards: sample=choSigmaStableD60Glutrep1.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:18 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaStableD90Glutrep1.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 31
+    wildcards: sample=choSigmaStableD90Glutrep1.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:18 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaUnstableD0NoGlutrep2.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 28
+    wildcards: sample=choSigmaUnstableD0NoGlutrep2.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:18 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaStableD0Glutrep1.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 5
+    wildcards: sample=choSigmaStableD0Glutrep1.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:18 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaStableD0NoGlutrep2.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 13
+    wildcards: sample=choSigmaStableD0NoGlutrep2.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:18 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaUnstableD0Glutrep2.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 29
+    wildcards: sample=choSigmaUnstableD0Glutrep2.chok1gshd_sigmaIgG
+
+
+[Sun Dec  2 18:11:18 2018]
+rule pool_to_replicates:
+    output: mcall_replicates/choSigmaStableD60NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 10
+    wildcards: sample=choSigmaStableD60NoGlutrep1.chok1gshd_sigmaIgG
+
+[Sun Dec  2 18:11:52 2018]
+Finished job 19.
+1 of 30 steps (3%) done
+[Sun Dec  2 18:13:54 2018]
+Finished job 4.
+2 of 30 steps (7%) done
+[Sun Dec  2 18:14:04 2018]
+Finished job 3.
+3 of 30 steps (10%) done
+[Sun Dec  2 18:14:19 2018]
+Finished job 21.
+4 of 30 steps (13%) done
+[Sun Dec  2 18:14:35 2018]
+Finished job 8.
+5 of 30 steps (17%) done
+[Sun Dec  2 18:14:49 2018]
+Finished job 11.
+6 of 30 steps (20%) done
+[Sun Dec  2 18:15:03 2018]
+Finished job 30.
+7 of 30 steps (23%) done
+[Sun Dec  2 18:15:05 2018]
+Finished job 13.
+8 of 30 steps (27%) done
+[Sun Dec  2 18:15:13 2018]
+Finished job 26.
+9 of 30 steps (30%) done
+[Sun Dec  2 18:15:17 2018]
+Finished job 23.
+10 of 30 steps (33%) done
+[Sun Dec  2 18:15:26 2018]
+Finished job 28.
+11 of 30 steps (37%) done
+[Sun Dec  2 18:15:33 2018]
+Finished job 10.
+12 of 30 steps (40%) done
+[Sun Dec  2 18:15:35 2018]
+Finished job 1.
+13 of 30 steps (43%) done
+[Sun Dec  2 18:15:42 2018]
+Finished job 6.
+14 of 30 steps (47%) done
+[Sun Dec  2 18:15:44 2018]
+Finished job 16.
+15 of 30 steps (50%) done
+[Sun Dec  2 18:15:45 2018]
+Finished job 31.
+16 of 30 steps (53%) done
+[Sun Dec  2 18:15:48 2018]
+Finished job 5.
+17 of 30 steps (57%) done
+[Sun Dec  2 18:15:49 2018]
+Finished job 14.
+18 of 30 steps (60%) done
+[Sun Dec  2 18:15:54 2018]
+Finished job 27.
+19 of 30 steps (63%) done
+[Sun Dec  2 18:15:55 2018]
+Finished job 7.
+20 of 30 steps (67%) done
+[Sun Dec  2 18:15:57 2018]
+Finished job 29.
+21 of 30 steps (70%) done
+[Sun Dec  2 18:16:00 2018]
+Finished job 18.
+22 of 30 steps (73%) done
+[Sun Dec  2 18:16:04 2018]
+Finished job 24.
+23 of 30 steps (77%) done
+[Sun Dec  2 18:16:06 2018]
+Finished job 2.
+24 of 30 steps (80%) done
+[Sun Dec  2 18:16:12 2018]
+Finished job 17.
+25 of 30 steps (83%) done
+[Sun Dec  2 18:16:14 2018]
+Finished job 15.
+26 of 30 steps (87%) done
+[Sun Dec  2 18:16:29 2018]
+Finished job 12.
+27 of 30 steps (90%) done
+[Sun Dec  2 18:16:40 2018]
+Finished job 9.
+28 of 30 steps (93%) done
+[Sun Dec  2 18:17:59 2018]
+Finished job 20.
+29 of 30 steps (97%) done
+
+[Sun Dec  2 18:17:59 2018]
+localrule all:
+    input: mcall_replicates/choSigmaHostD0rep1.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaHostD0rep2.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaHostD0rep3.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaStableD0Glutrep1.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaStableD0Glutrep2.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaStableD0Glutrep3.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaUnstableD0Glutrep1.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaUnstableD0Glutrep2.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaUnstableD0Glutrep3.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaStableD0NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaStableD0NoGlutrep2.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaStableD0NoGlutrep3.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaUnstableD0NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaUnstableD0NoGlutrep2.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaUnstableD0NoGlutrep3.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaHostD30rep1.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaHostD30rep2.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaHostD60rep1.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaHostD90rep1.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaStableD30Glutrep1.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaStableD60Glutrep1.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaStableD90Glutrep1.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaUnstableD30Glutrep1.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaUnstableD60Glutrep1.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaUnstableD90Glutrep1.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaStableD30NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaStableD60NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaStableD90NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaUnstableD30NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaUnstableD60NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv, mcall_replicates/choSigmaUnstableD90NoGlutrep1.chok1gshd_sigmaIgG.meth.tsv
+    jobid: 0
+
+[Sun Dec  2 18:17:59 2018]
+Finished job 0.
+30 of 30 steps (100%) done
+Complete log: /home/ubuntu/Code/ambic-epigenome/snakemake/.snakemake/log/2018-12-02T181115.789246.snakemake.log

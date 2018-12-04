@@ -1,0 +1,259 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 72
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	20	get_methylation_frequency
+	21
+
+[Tue Dec  4 04:42:13 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaStableD90NoGlut.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaStableD90NoGlut.chok1gshd_sigmaIgG.methfreq.txt.gz
+    log: log/mfreq/choSigmaStableD90NoGlut.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 6
+    wildcards: sample=choSigmaStableD90NoGlut.chok1gshd_sigmaIgG
+
+
+[Tue Dec  4 04:42:13 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaHostD0.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaHostD0.chok1gshd_sigmaIgG.methfreq.txt.gz
+    log: log/mfreq/choSigmaHostD0.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 14
+    wildcards: sample=choSigmaHostD0.chok1gshd_sigmaIgG
+
+
+[Tue Dec  4 04:42:13 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaStableD60NoGlut.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaStableD60NoGlut.chok1gshd_sigmaIgG.methfreq.txt.gz
+    log: log/mfreq/choSigmaStableD60NoGlut.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 5
+    wildcards: sample=choSigmaStableD60NoGlut.chok1gshd_sigmaIgG
+
+
+[Tue Dec  4 04:42:13 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.methfreq.txt.gz
+    log: log/mfreq/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 16
+    wildcards: sample=choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG
+
+
+[Tue Dec  4 04:42:13 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaHostD60.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaHostD60.chok1gshd_sigmaIgG.methfreq.txt.gz
+    log: log/mfreq/choSigmaHostD60.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 7
+    wildcards: sample=choSigmaHostD60.chok1gshd_sigmaIgG
+
+
+[Tue Dec  4 04:42:13 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.methfreq.txt.gz
+    log: log/mfreq/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 12
+    wildcards: sample=choSigmaStableD30NoGlut.chok1gshd_sigmaIgG
+
+
+[Tue Dec  4 04:42:13 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaStableD0Glut.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaStableD0Glut.chok1gshd_sigmaIgG.methfreq.txt.gz
+    log: log/mfreq/choSigmaStableD0Glut.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 11
+    wildcards: sample=choSigmaStableD0Glut.chok1gshd_sigmaIgG
+
+
+[Tue Dec  4 04:42:13 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaHostD90.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaHostD90.chok1gshd_sigmaIgG.methfreq.txt.gz
+    log: log/mfreq/choSigmaHostD90.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 2
+    wildcards: sample=choSigmaHostD90.chok1gshd_sigmaIgG
+
+
+[Tue Dec  4 04:42:13 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.methfreq.txt.gz
+    log: log/mfreq/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 15
+    wildcards: sample=choSigmaUnstableD30Glut.chok1gshd_sigmaIgG
+
+
+[Tue Dec  4 04:42:13 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.methfreq.txt.gz
+    log: log/mfreq/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 13
+    wildcards: sample=choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG
+
+
+[Tue Dec  4 04:42:14 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaUnstableD90Glut.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaUnstableD90Glut.chok1gshd_sigmaIgG.methfreq.txt.gz
+    log: log/mfreq/choSigmaUnstableD90Glut.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 17
+    wildcards: sample=choSigmaUnstableD90Glut.chok1gshd_sigmaIgG
+
+
+[Tue Dec  4 04:42:14 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaUnstableD30NoGlut.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaUnstableD30NoGlut.chok1gshd_sigmaIgG.methfreq.txt.gz
+    log: log/mfreq/choSigmaUnstableD30NoGlut.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 18
+    wildcards: sample=choSigmaUnstableD30NoGlut.chok1gshd_sigmaIgG
+
+
+[Tue Dec  4 04:42:14 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.methfreq.txt.gz
+    log: log/mfreq/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 3
+    wildcards: sample=choSigmaUnstableD60Glut.chok1gshd_sigmaIgG
+
+
+[Tue Dec  4 04:42:14 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.methfreq.txt.gz
+    log: log/mfreq/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 20
+    wildcards: sample=choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG
+
+
+[Tue Dec  4 04:42:14 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaHostD30.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaHostD30.chok1gshd_sigmaIgG.methfreq.txt.gz
+    log: log/mfreq/choSigmaHostD30.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 1
+    wildcards: sample=choSigmaHostD30.chok1gshd_sigmaIgG
+
+
+[Tue Dec  4 04:42:14 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaUnstableD0Glut.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaUnstableD0Glut.chok1gshd_sigmaIgG.methfreq.txt.gz
+    log: log/mfreq/choSigmaUnstableD0Glut.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 19
+    wildcards: sample=choSigmaUnstableD0Glut.chok1gshd_sigmaIgG
+
+
+[Tue Dec  4 04:42:14 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.methfreq.txt.gz
+    log: log/mfreq/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 10
+    wildcards: sample=choSigmaStableD0NoGlut.chok1gshd_sigmaIgG
+
+
+[Tue Dec  4 04:42:14 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaStableD30Glut.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaStableD30Glut.chok1gshd_sigmaIgG.methfreq.txt.gz
+    log: log/mfreq/choSigmaStableD30Glut.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 8
+    wildcards: sample=choSigmaStableD30Glut.chok1gshd_sigmaIgG
+
+
+[Tue Dec  4 04:42:14 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaStableD90Glut.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaStableD90Glut.chok1gshd_sigmaIgG.methfreq.txt.gz
+    log: log/mfreq/choSigmaStableD90Glut.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 4
+    wildcards: sample=choSigmaStableD90Glut.chok1gshd_sigmaIgG
+
+
+[Tue Dec  4 04:42:14 2018]
+rule get_methylation_frequency:
+    input: mbed_pooled/choSigmaStableD60Glut.chok1gshd_sigmaIgG.meth.bed.gz
+    output: mfreq_pooled/choSigmaStableD60Glut.chok1gshd_sigmaIgG.methfreq.txt.gz
+    log: log/mfreq/choSigmaStableD60Glut.chok1gshd_sigmaIgG.mfreq.log
+    jobid: 9
+    wildcards: sample=choSigmaStableD60Glut.chok1gshd_sigmaIgG
+
+[Tue Dec  4 04:47:09 2018]
+Finished job 8.
+1 of 21 steps (5%) done
+[Tue Dec  4 04:47:17 2018]
+Finished job 17.
+2 of 21 steps (10%) done
+[Tue Dec  4 04:47:40 2018]
+Finished job 18.
+3 of 21 steps (14%) done
+[Tue Dec  4 04:47:47 2018]
+Finished job 6.
+4 of 21 steps (19%) done
+[Tue Dec  4 04:48:07 2018]
+Finished job 5.
+5 of 21 steps (24%) done
+[Tue Dec  4 04:48:33 2018]
+Finished job 4.
+6 of 21 steps (29%) done
+[Tue Dec  4 04:49:07 2018]
+Finished job 15.
+7 of 21 steps (33%) done
+[Tue Dec  4 04:49:13 2018]
+Finished job 13.
+8 of 21 steps (38%) done
+[Tue Dec  4 04:49:15 2018]
+Finished job 12.
+9 of 21 steps (43%) done
+[Tue Dec  4 04:49:21 2018]
+Finished job 9.
+10 of 21 steps (48%) done
+[Tue Dec  4 04:49:51 2018]
+Finished job 3.
+11 of 21 steps (52%) done
+[Tue Dec  4 04:49:58 2018]
+Finished job 7.
+12 of 21 steps (57%) done
+[Tue Dec  4 04:50:05 2018]
+Finished job 2.
+13 of 21 steps (62%) done
+[Tue Dec  4 04:53:02 2018]
+Finished job 20.
+14 of 21 steps (67%) done
+[Tue Dec  4 04:55:30 2018]
+Finished job 10.
+15 of 21 steps (71%) done
+[Tue Dec  4 04:56:29 2018]
+Finished job 16.
+16 of 21 steps (76%) done
+[Tue Dec  4 04:59:43 2018]
+Finished job 19.
+17 of 21 steps (81%) done
+[Tue Dec  4 05:00:07 2018]
+Finished job 11.
+18 of 21 steps (86%) done
+[Tue Dec  4 05:01:07 2018]
+Finished job 14.
+19 of 21 steps (90%) done
+[Tue Dec  4 05:07:53 2018]
+Finished job 1.
+20 of 21 steps (95%) done
+
+[Tue Dec  4 05:07:54 2018]
+localrule all:
+    input: mfreq_pooled/choSigmaHostD0.chok1gshd_sigmaIgG.methfreq.txt.gz, mfreq_pooled/choSigmaHostD30.chok1gshd_sigmaIgG.methfreq.txt.gz, mfreq_pooled/choSigmaHostD60.chok1gshd_sigmaIgG.methfreq.txt.gz, mfreq_pooled/choSigmaHostD90.chok1gshd_sigmaIgG.methfreq.txt.gz, mfreq_pooled/choSigmaStableD0Glut.chok1gshd_sigmaIgG.methfreq.txt.gz, mfreq_pooled/choSigmaStableD30Glut.chok1gshd_sigmaIgG.methfreq.txt.gz, mfreq_pooled/choSigmaStableD60Glut.chok1gshd_sigmaIgG.methfreq.txt.gz, mfreq_pooled/choSigmaStableD90Glut.chok1gshd_sigmaIgG.methfreq.txt.gz, mfreq_pooled/choSigmaUnstableD0Glut.chok1gshd_sigmaIgG.methfreq.txt.gz, mfreq_pooled/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.methfreq.txt.gz, mfreq_pooled/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.methfreq.txt.gz, mfreq_pooled/choSigmaUnstableD90Glut.chok1gshd_sigmaIgG.methfreq.txt.gz, mfreq_pooled/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.methfreq.txt.gz, mfreq_pooled/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.methfreq.txt.gz, mfreq_pooled/choSigmaStableD60NoGlut.chok1gshd_sigmaIgG.methfreq.txt.gz, mfreq_pooled/choSigmaStableD90NoGlut.chok1gshd_sigmaIgG.methfreq.txt.gz, mfreq_pooled/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.methfreq.txt.gz, mfreq_pooled/choSigmaUnstableD30NoGlut.chok1gshd_sigmaIgG.methfreq.txt.gz, mfreq_pooled/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.methfreq.txt.gz, mfreq_pooled/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.methfreq.txt.gz
+    jobid: 0
+
+[Tue Dec  4 05:07:54 2018]
+Finished job 0.
+21 of 21 steps (100%) done
+Complete log: /home/ubuntu/Code/ambic-epigenome/snakemake/.snakemake/log/2018-12-04T044212.752120.snakemake.log

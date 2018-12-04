@@ -1,0 +1,29 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 72
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	merge_sniffles_across_samples
+	2
+
+[Mon Dec  3 06:03:09 2018]
+rule merge_sniffles_across_samples:
+    input: sv/choSigmaHostD0.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaHostD30.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaHostD60.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaHostD90.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaStableD0Glut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaStableD30Glut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaStableD60Glut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaStableD90Glut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaUnstableD0Glut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaUnstableD30Glut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaUnstableD60Glut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaUnstableD90Glut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaStableD0NoGlut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaStableD30NoGlut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaStableD60NoGlut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaStableD90NoGlut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaUnstableD0NoGlut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaUnstableD30NoGlut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaUnstableD60NoGlut.chok1gshd_sigmaIgG.sniffles.vcf, sv/choSigmaUnstableD90NoGlut.chok1gshd_sigmaIgG.sniffles.vcf
+    output: sv/181201_choSigmaAgingStudy.sniffles.fofn
+    jobid: 1
+
+[Mon Dec  3 06:03:09 2018]
+Finished job 1.
+1 of 2 steps (50%) done
+
+[Mon Dec  3 06:03:09 2018]
+localrule all:
+    input: sv/181201_choSigmaAgingStudy.sniffles.fofn
+    jobid: 0
+
+[Mon Dec  3 06:03:09 2018]
+Finished job 0.
+2 of 2 steps (100%) done
+Complete log: /home/ubuntu/Code/ambic-epigenome/snakemake/.snakemake/log/2018-12-03T060308.995797.snakemake.log

@@ -1,4 +1,0 @@
-Building DAG of jobs...
-MissingInputException in line 17 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py:
-Missing input files for rule sniffles_detect_svs:
-bam/choSigmaHostD0.chok1gshd_sigmaIgG.bam

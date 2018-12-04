@@ -1,4 +1,0 @@
-Building DAG of jobs...
-MissingInputException in line 15 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_meth_snakemake.py:
-Missing input files for rule pool_to_replicates:
-choSigmaStableD0NoGlutrep3.chok1gshd_sigmaIgG

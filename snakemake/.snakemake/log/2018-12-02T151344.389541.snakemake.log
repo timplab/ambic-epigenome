@@ -1,4 +1,0 @@
-Building DAG of jobs...
-MissingInputException in line 11 of /home/ubuntu/Code/ambic-epigenome/snakemake/181129_chosigma_genome_snakemake.py:
-Missing input files for rule all:
-/dilithium/Data/NGS/Reference/cho/chok1/genome/Cricetulus_griseus_chok1gshd.sigmaIgG.fagins.bed

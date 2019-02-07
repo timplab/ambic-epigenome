@@ -2,8 +2,6 @@
 import pandas as pd
 from snakemake.utils import validate
 
-tb = pd.read_csv(config['codedir']+"/nanopore_sample_info.csv")
-
 rule ngmlr_align:
 	input:
 		"{dir}/fastq/{sample}.fastq.gz"

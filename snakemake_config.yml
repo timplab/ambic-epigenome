@@ -1,0 +1,4 @@
+workdir: /kyber/Data/Nanopore/project/merck # path to save the analysis outputs
+codedir: /home/isac/Code/projects/Merck-Epigenomics # path to this dir
+reference: /dilithium/Data/NGS/Reference/cho/chok1/genome/Cricetulus_griseus_chok1gshd.sigmaIgG.fa # path to reference genome
+threads: 36 # available cores

@@ -1,0 +1,16 @@
+sample,type,replicate
+choSigmaD0Host1,Host,1
+choSigmaD0Host2,Host,2
+choSigmaD0Host3,Host,3
+choSigmaD0StableGln1,StableGln,1
+choSigmaD0StableGln2,StableGln,2
+choSigmaD0StableGln3,StableGln,3
+choSigmaD0StableNogln1,StableNogln,1
+choSigmaD0StableNogln2,StableNogln,2
+choSigmaD0StableNogln3,StableNogln,3
+choSigmaD0UnstableGln1,UnstableGln,1
+choSigmaD0UnstableGln2,UnstableGln,2
+choSigmaD0UnstableGln3,UnstableGln,3
+choSigmaD0UnstableNogln1,UnstableNogln,1
+choSigmaD0UnstableNogln2,UnstableNogln,2
+choSigmaD0UnstableNogln3,UnstableNogln,3

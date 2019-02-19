@@ -32,6 +32,7 @@ htslib
 picard
 bedtools
 macs2
+subread
 ```
 
 ### Installing

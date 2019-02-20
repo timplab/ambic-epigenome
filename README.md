@@ -4,7 +4,7 @@ This is the git repository for AMBIC Epigenomics project with Betenbaugh and Tim
 
 This repo is still being put together, so it will only contain parts of the analysis.
 
-At the current stage, this should provide enough information for nanopore methylation data parsing
+At the current stage, this should provide enough information for data parsing.
 
 ## Getting Started
 

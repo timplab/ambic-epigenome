@@ -8,13 +8,10 @@ At the current stage, this should provide enough information for nanopore methyl
 
 ## Getting Started
 
-We are implementing the pipeline using the snakemake package.
-
 ### Prerequisites
 
 The list of packages necessary for nanopore analysis :
 ```
-snakemake
 ngmlr
 samtools
 htslib

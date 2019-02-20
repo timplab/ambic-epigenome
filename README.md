@@ -37,22 +37,39 @@ subread
 
 ### Installing
 
-## Analysis pipeline
+Most of these tools are available via conda or otherwise public source.
 
-### Preparing snakemake
+We will be uploading a script or command to download all dependencies in the near future.
 
-To use snakemake, first modify the snakemake_config.yml file as appropriate for your environment
+## Snakemake pipeline
 
-Secondly, modify the nanopore_sample_info.csv as necessary
+We are using [snakemake](https://snakemake.readthedocs.io/en/stable/) to generate reproducible and easy-to-follow pipelines.
 
-Then move data as follows (relative to "workdir") :
+You can either install snakemake and follow the steps to run the pipeline or directly look at the snakemake scripts to determine what commands to perform.
 
-* fastq and summary files in data/nanopore/reads
-* fast5 tarball in data/nanopore/tar or untarred into data/nanopore/reads/[sample_name]
+Note : The snakemake workflow may not work completely as we have tested the workflow in limited settings. You may have to make edits to the code to make it work.
+
+## Preparing snakemake
+
+To use snakemake, first modify the snakemake_config.yml file as appropriate for your environment.
+
+Secondly, modify the nanopore_sample_info.csv and atacseq_sample_info.csv as necessary.
+
+For nanopore sequencing data, we will start from basecalled data ; set up the data as follows :
+
+* fastq name : [sample].fastq.gz 
+* summary name : [sample].summary.txt
+* move fastq and summary files to [workdir]/data/nanopore/reads
+* fast5 in [workdir]/data/nanopore/reads/[sample_name]/
+
+For ATAC-seq data :
+
+* fastq name : [sample].fastq.gz
+* move fastq files into [workdir]/data/atacseq/fastq/
 
 ### Running snakemake
 
-To run snakemake, use the snakemake command in the root directory of the repo.
+To run snakemake, use the snakemake command in the root directory of this repo.
 ```
 snakemake --cores 16
 ```

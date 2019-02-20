@@ -46,7 +46,7 @@ You can either install snakemake and follow the steps to run the pipeline or dir
 
 Note : The snakemake workflow may not work completely as we have tested the workflow in limited settings. You may have to make edits to the code to make it work.
 
-## Preparing snakemake
+### Preparing snakemake
 
 To use snakemake, first modify the snakemake_config.yml file as appropriate for your environment.
 

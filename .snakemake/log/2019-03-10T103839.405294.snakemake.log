@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 5 of /home/isac/Code/projects/ambic-epigenome/snakemake/nanopore_data_parse.smk:
+Missing input files for rule ngmlr_align:
+data/nanopore/fastq/CHOZNStableNoglnDay0rep2.fastq.gz

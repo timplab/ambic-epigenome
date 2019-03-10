@@ -4,7 +4,7 @@ from snakemake.utils import validate
 
 rule ngmlr_align:
 	input:
-		"{dir}/fastq/{sample}.fastq.gz"
+		"{dir}/reads/{sample}.fastq.gz"
 	params:
 		config['reference']
 	threads: maxthreads
@@ -14,7 +14,7 @@ rule ngmlr_align:
 		"ngmlr -x ont --bam-fix "
 		"-t {threads} -r {params} -q {input} | "
 		"samtools view -q 20 -b - | "
-		"samtools sort -T {wildcards.dir}/bam/{sample}.sorting "
+		"samtools sort -T {wildcards.dir}/bam/{wildcards.sample}.sorting "
 		"-o {output} && "
 		"samtools index {output}"
 
@@ -25,13 +25,15 @@ rule nanopolish_index:
 		"{pre}.fastq.gz.index.readdb" 
 	shell:
 		"nanopolish index --verbose -d {wildcards.pre} "
-		"-s {wildcards.pre}.summary.txt {input} "
+#		"-s {wildcards.pre}.summary.txt "  # use this if summary provided
+		"{input} "
 		"&> {wildcards.pre}.index.log"
 
 rule call_cpg:
 	input:
-		fq="{dir}/fastq/{sample}.fastq.gz",
-		bam="{dir}/bam/{sample}.sorted.bam"
+		fq="{dir}/reads/{sample}.fastq.gz",
+		bam="{dir}/bam/{sample}.sorted.bam",
+		db="{dir}/reads/{sample}.fastq.gz.index.readdb"
 	params:
 		config['reference']
 	threads: maxthreads
@@ -65,7 +67,7 @@ rule mbed_to_mfreq:
 		mfreq="{dir}/mfreq/{sample}.{mod}.mfreq.txt.gz", 
 		log="{dir}/mfreq/{sample}.{mod}.mfreq.log" 
 	shell: 
-		"python -u {params}/script/parseMethylbed.py frequency -v " 
+		"python -u {params}/scripts/parseMethylbed.py frequency -v " 
 		"-i {input} -m {wildcards.mod} 2> {output.log} | " 
 		"bgzip > {output.mfreq} && " 
 		"tabix -b 2 -e 2 {output.mfreq}"

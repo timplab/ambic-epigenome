@@ -1,0 +1,3 @@
+SyntaxError in line 35 of /home/isac/Code/projects/ambic-epigenome/snakemake/nanopore_data_parse.smk:
+invalid syntax
+  File "/home/isac/Code/projects/ambic-epigenome/Snakefile", line 12, in <module>

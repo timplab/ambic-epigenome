@@ -1,0 +1,35 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	4	call_cpg
+	4	mbed_to_mfreq
+	4	mtsv_to_mbed
+	1	parse_nanopore
+	13
+
+[Sun Mar 10 11:03:33 2019]
+rule call_cpg:
+    input: data/nanopore/reads/CHOZNStableNoglnDay0rep3.fastq.gz, data/nanopore/bam/CHOZNStableNoglnDay0rep3.sorted.bam
+    output: data/nanopore/mcall/CHOZNStableNoglnDay0rep3.cpg.meth.tsv.gz
+    jobid: 11
+    wildcards: dir=data/nanopore, sample=CHOZNStableNoglnDay0rep3
+    threads: 16
+
+[Sun Mar 10 11:03:33 2019]
+Error in rule call_cpg:
+    jobid: 11
+    output: data/nanopore/mcall/CHOZNStableNoglnDay0rep3.cpg.meth.tsv.gz
+
+RuleException:
+CalledProcessError in line 43 of /home/isac/Code/projects/ambic-epigenome/snakemake/nanopore_data_parse.smk:
+Command ' set -euo pipefail;  nanopolish call-methylation -v -t 16 -q cpg -g /mithril/Data/NGS/Reference/cho/chok1/genome/Cricetulus_griseus_chok1gshd.sigmaIgG.fa -r data/nanopore/reads/CHOZNStableNoglnDay0rep3.fastq.gz -b data/nanopore/bam/CHOZNStableNoglnDay0rep3.sorted.bam | gzip > data/nanopore/mcall/CHOZNStableNoglnDay0rep3.cpg.meth.tsv.gz ' returned non-zero exit status 1.
+  File "/home/isac/Code/projects/ambic-epigenome/snakemake/nanopore_data_parse.smk", line 43, in __rule_call_cpg
+  File "/home/isac/.conda/envs/isacenv/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Removing output files of failed job call_cpg since they might be corrupted:
+data/nanopore/mcall/CHOZNStableNoglnDay0rep3.cpg.meth.tsv.gz
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/isac/Code/projects/ambic-epigenome/.snakemake/log/2019-03-10T110331.484523.snakemake.log

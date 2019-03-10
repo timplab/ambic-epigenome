@@ -18,7 +18,7 @@ atacseq_tb = pd.read_csv(config['codedir']+"/atacseq_sample_info.csv")
 
 rule parse_nanopore:
   input:
-    expand("data/nanopore/bam/{sample}.sorted.bam",
+    expand("data/nanopore/mfreq/{sample}.cpg.mfreq.txt.gz",
 			sample=nanopore_tb['sample'])
 
 rule parse_atacseq:

@@ -1,3 +1,0 @@
-WorkflowError in line 12 of /home/isac/Code/projects/ambic-epigenome/Snakefile:
-Failed to open /home/isac/Code/ambic-epigenome/snakemake/nanopore_data_parse.smk.
-  File "/home/isac/Code/projects/ambic-epigenome/Snakefile", line 12, in <module>

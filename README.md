@@ -18,6 +18,8 @@ htslib
 nanopolish
 bedtools
 wigToBigWig (from UCSC toolkit)
+[sniffles](https://github.com/fritzsedlazeck/Sniffles)
+[SURVIVOR](https://github.com/fritzsedlazeck/SURVIVOR)
 ```
 
 The list of packages necessary for ATAC-seq analysis :
@@ -73,6 +75,12 @@ snakemake --cores 16
 
 For running specific parts of the pipeline,
 ```
-snakemake --cores 16 parse_nanopore
+snakemake --cores 16 nanopore_methylation
+snakemake --cores 16 nanopore_sv
 snakemake --cores 16 parse_atacseq
+```
+
+For specific output,
+```
+snakemake --cores 16 path/to/output
 ```

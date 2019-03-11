@@ -11,26 +11,24 @@ At the current stage, this should provide enough information for data parsing.
 ### Prerequisites
 
 The list of packages necessary for nanopore analysis :
-ngmlr
-samtools
-htslib
-nanopolish
-bedtools
-wigToBigWig (from UCSC toolkit)
-+[sniffles](https://github.com/fritzsedlazeck/Sniffles)
-+[SURVIVOR](https://github.com/fritzsedlazeck/SURVIVOR)
++ ngmlr
++ samtools
++ htslib
++ nanopolish
++ bedtools
++ wigToBigWig (from UCSC toolkit)
++ [sniffles](https://github.com/fritzsedlazeck/Sniffles)
++ [SURVIVOR](https://github.com/fritzsedlazeck/SURVIVOR)
 
 The list of packages necessary for ATAC-seq analysis :
-```
-trim_galore
-bowtie2
-samtools
-htslib
-picard
-bedtools
-macs2
-subread
-```
++ trim_galore
++ bowtie2
++ samtools
++ htslib
++ picard
++ bedtools
++ macs2
++ subread
 
 ### Installing
 

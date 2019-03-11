@@ -1,7 +1,7 @@
 #!/usr/bin/snakemake --snakefile
 import pandas as pd
 from snakemake.utils import validate
-nanopore_tb = pd.read_csv(config['codedir']+"/nanopore_sample_info.csv")
+nanopore_tb = pd.read_csv(config['codedir']+"/nanopore_sample_info.csv",comment="#")
 
 ##################################################
 #
@@ -71,7 +71,7 @@ rule nanopolish_index:
 rule call_cpg:
 	input:
 		fq="{dir}/reads/{sample}.fastq.gz",
-		bam="{dir}/bam/{sample}.ngmlr.sorted.bam", # change "minimap2"/"ngmlr" to change aligner
+		bam="{dir}/bam/{sample}.minimap2.sorted.bam", # change "minimap2"/"ngmlr" to change aligner
 		db="{dir}/reads/{sample}.fastq.gz.index.readdb"
 	params:
 		config['reference']

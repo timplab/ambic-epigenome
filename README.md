@@ -35,8 +35,6 @@ The list of packages necessary for ATAC-seq analysis :
 
 Most of these tools are available via conda or otherwise public source.
 
-We will be uploading a script or command to download all dependencies in the near future.
-
 ## Snakemake pipeline
 
 We are using [snakemake](https://snakemake.readthedocs.io/en/stable/) to generate reproducible and easy-to-follow pipelines.

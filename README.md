@@ -11,12 +11,13 @@ At the current stage, this should provide enough information for data parsing.
 ### Prerequisites
 
 The list of packages necessary for nanopore analysis :
-+ ngmlr
-+ samtools
-+ htslib
-+ nanopolish
-+ bedtools
-+ wigToBigWig (from UCSC toolkit)
++ [ngmlr](https://github.com/philres/ngmlr)
++ [minimap2](https://github.com/lh3/minimap2)
++ [samtools](http://samtools.sourceforge.net/)
++ [htslib](http://www.htslib.org/)
++ [nanopolish](https://github.com/jts/nanopolish)
++ [bedtools](https://bedtools.readthedocs.io/en/latest/)
++ [wigToBigWig (from UCSC toolkit)](https://genome.ucsc.edu/util.html)
 + [sniffles](https://github.com/fritzsedlazeck/Sniffles)
 + [SURVIVOR](https://github.com/fritzsedlazeck/SURVIVOR)
 

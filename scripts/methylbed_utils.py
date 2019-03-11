@@ -11,6 +11,7 @@ import numpy as np
 methylCall = namedtuple('methylCall', ['pos','call','ratio','seq'])
 class MethRead :
     def __init__(self,string):
+        self.string=string
         self.fields=string.strip().split("\t")
         self.rname=self.fields[0]
         self.start=int(self.fields[1])
@@ -29,6 +30,12 @@ class MethRead :
         calldict=dict()
         pos=int(self.start)
         calls=re.findall('(\d+)([umx])?',self.methstring)
+#        # temporary fix for when first distance is not 0
+#        if int(calls[0][0]) != 0 :
+#            calls = [('0','x')] + calls
+#            self.ratios = ['0'] + self.ratios
+#            self.seqs = ['GCG'] + self.seqs
+#        ##
         for i,(dist,call) in enumerate(calls):
             pos+=int(dist)
             if call=="x" :
@@ -58,12 +65,19 @@ class SnifflesEntry :
         self.activate()
     def activate(self) :
         self.parseinfo()
+        self.checkcontig()
         self.parsegenotype()
+    def checkcontig(self) :
+        if "chr" not in self.chrom :
+            self.chrom = "chr" + self.chrom
+            self.info["CHR2"] = "chr" + self.info["CHR2"]
     def parseinfo(self) :
         self.infofields = [ x.split("=") for x in self.infostring.strip().split(";")]
         self.info = dict()
+        self.info["CONFIDENCE"] = self.infofields[0][0]
         for entry in self.infofields[1:] :
             self.info[entry[0]] = entry[1]
+        self.info["END"] = int(self.info["END"])
         self.info["RE"] = int(self.info["RE"])
         self.info["SVLEN"] = int(self.info["SVLEN"])
         self.rnames = self.info["RNAMES"].split(',')

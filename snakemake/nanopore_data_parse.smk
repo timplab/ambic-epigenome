@@ -1,6 +1,13 @@
 #!/usr/bin/snakemake --snakefile
 import pandas as pd
 from snakemake.utils import validate
+nanopore_tb = pd.read_csv(config['codedir']+"/nanopore_sample_info.csv")
+
+##################################################
+#
+# alignment
+#
+##################################################
 
 rule ngmlr_align:
 	input:
@@ -44,6 +51,12 @@ rule minimap2_align:
 		"-o {output} && "
 		"samtools index {output}"
 
+##################################################
+#
+# methylation calling
+#
+##################################################
+
 rule nanopolish_index:
 	input: 
 		"{pre}.fastq.gz" 
@@ -58,7 +71,7 @@ rule nanopolish_index:
 rule call_cpg:
 	input:
 		fq="{dir}/reads/{sample}.fastq.gz",
-		bam="{dir}/bam/{sample}.minimap2.sorted.bam", # you can change "minimap2" to "ngmlr" to change aligner
+		bam="{dir}/bam/{sample}.ngmlr.sorted.bam", # change "minimap2"/"ngmlr" to change aligner
 		db="{dir}/reads/{sample}.fastq.gz.index.readdb"
 	params:
 		config['reference']
@@ -119,3 +132,68 @@ rule wig_to_bigwig:
 		"{dir}/bigwig/{sample}.{mod}.{type}.bw" 
 	shell: 
 		"wigToBigWig {input} {output}"
+
+##################################################
+#
+# SV detection 
+#
+##################################################
+
+rule sniffles_sv:
+	input:
+		"{dir}/bam/{sample}.sorted.bam" 
+	threads: maxthreads
+	output:
+		temp("{dir}/sv/{sample}.sniffles.unsorted.vcf")
+	log:
+		"{dir}/sv/{sample}.sniffles.log"
+	shell: 
+		"sniffles -m {input} -v {output} -t {threads} "
+		"--tmp_file {wildcards.dir}/sv/{wildcards.sample}.sniffles.tmp " 
+		"-s 5 -n -1 --genotype --cluster &> {log}"
+
+rule sort_vcf:
+	input:
+		"{dir}/sv/{sample}.unsorted.vcf"
+	output:
+		"{dir}/sv/{sample}.sorted.vcf"
+	shell:
+		"awk '/#/ {{print;next}}{{ print | \"sort -k1,1 -k2,2n \" }}' "
+		"{input} > {output}"
+
+rule merge_sv_before_forcecall:
+	input:
+		expand("data/nanopore/sv/{sample}.minimap2.sniffles.sorted.vcf",
+			sample=nanopore_tb['sample']) # change "minimap2"/"ngmlr" to change aligner
+	output:
+		raw=temp("data/nanopore/sv/raw_calls.txt"),
+		vcf=temp("data/nanopore/sv/SURVIVOR_merged_1kbpdist_typesave.vcf")
+	shell:
+		"echo {input} | tr \" \" \"\\n\" > {output.raw} && "
+		"SURVIVOR merge {output.raw} 1000 1 1 -1 -1 -1 {output.vcf}"
+
+rule sniffles_sv_forcecall:
+	input:
+		bam="{dir}/bam/{sample}.sorted.bam",
+		candidates="data/nanopore/sv/SURVIVOR_merged_1kbpdist_typesave.vcf"
+	threads: maxthreads
+	output:
+		temp("{dir}/sv/{sample}.SURVIVOR.unsorted.vcf")
+	log:
+		"{dir}/sv/{sample}.SURVIVORsniffles.log"
+	shell:
+		"sniffles -m {input.bam} -v {output} -t {threads} "
+		"--Ivcf {input.candidates} --tmp_file "
+		"{wildcards.dir}/sv/{wildcards.sample}.SURVIVORsniffles.tmp " 
+		"-s 5 -n -1 --genotype --cluster &> {log}"
+
+rule merge_sv_final:
+	input:
+		expand("data/nanopore/sv/{sample}.minimap2.SURVIVOR.sorted.vcf",
+			sample=nanopore_tb['sample']) # change "minimap2"/"ngmlr" to change aligner
+	output:
+		raw="data/nanopore/sv/SURVIVORsniffles_calls.txt",
+		vcf="data/nanopore/sv/merged_final_SURVIVOR_1kbpdist_typesave.vcf"
+	shell:
+		"echo {input} | tr \" \" \"\\n\" > {output.raw} && "
+		"SURVIVOR merge {output.raw} 1000 -1 1 -1 -1 -1 {output.vcf}"

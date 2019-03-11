@@ -82,6 +82,7 @@ class SiteStats:
         self.num_reads+=1
         self.num_methylated+=methcall.call
     def printFreq(self,context,out):
+        if self.num_reads == 0 : return # all calls here were bad
         motifidx=self.seq.index(context)
         motifcontext=self.seq[motifidx:motifidx+2]
         if context == "CG" :
@@ -107,13 +108,19 @@ def getFreq(args,in_fh):
             pass
         n += 1
         read=MethRead(line)
+#        # debug
+#        print(line,file=sys.stdout)
+#        print(read.ratios)
+#        print(read.keys)
+#        #
         sitekeys=sorted(sites.keys())
 #        print(sitekeys)
         try : 
-        # print everything in sites if chromosome is different
+            # print everything in sites if chromosome is different
             if read.rname != sites[sitekeys[0]].rname :
                 printind=len(sitekeys)
             else : 
+                # get index of new position
                 printind=bisect.bisect_left(sitekeys,read.keys[0])
         except IndexError : 
             printind=0

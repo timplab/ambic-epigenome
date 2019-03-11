@@ -9,10 +9,36 @@ rule ngmlr_align:
 		config['reference']
 	threads: maxthreads
 	output:
-		"{dir}/bam/{sample}.sorted.bam"
+		"{dir}/bam/{sample}.ngmlr.sorted.bam"
+	log:
+		"{dir}/bam/{sample}.ngmlr.align.log"
 	shell:
 		"ngmlr -x ont --bam-fix "
-		"-t {threads} -r {params} -q {input} | "
+		"-t {threads} -r {params} -q {input} 2> {log} | "
+		"samtools view -q 20 -b - | "
+		"samtools sort -T {wildcards.dir}/bam/{wildcards.sample}.sorting "
+		"-o {output} && "
+		"samtools index {output}"
+	
+rule minimap2_makeindex:
+	input:
+		config['reference']
+	output:
+		os.path.splitext(config['reference'])[0] + ".mapont.mmi"
+	shell:
+		"minimap2 -x map-ont -d {output} {input}"
+
+rule minimap2_align:
+	input:
+		os.path.splitext(config['reference'])[0] + ".mapont.mmi",
+		"{dir}/reads/{sample}.fastq.gz"
+	threads: maxthreads
+	output:
+		"{dir}/bam/{sample}.minimap2.sorted.bam"
+	log:
+		"{dir}/bam/{sample}.minimap2.align.log"
+	shell:
+		"minimap2 --MD -L -t {threads} -a {input} 2> {log} | "
 		"samtools view -q 20 -b - | "
 		"samtools sort -T {wildcards.dir}/bam/{wildcards.sample}.sorting "
 		"-o {output} && "
@@ -32,7 +58,7 @@ rule nanopolish_index:
 rule call_cpg:
 	input:
 		fq="{dir}/reads/{sample}.fastq.gz",
-		bam="{dir}/bam/{sample}.sorted.bam",
+		bam="{dir}/bam/{sample}.minimap2.sorted.bam", # you can change "minimap2" to "ngmlr" to change aligner
 		db="{dir}/reads/{sample}.fastq.gz.index.readdb"
 	params:
 		config['reference']

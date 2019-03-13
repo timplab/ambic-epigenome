@@ -121,7 +121,7 @@ rule mfreq_to_wig:
 		covwig=temp("{dir}/bigwig/{sample}.{mod}.methcoverage.wig"), 
 		log="{dir}/bigwig/{sample}.{mod}.wig.log" 
 	shell: 
-		"python {params}/script/makeWig.py -v -i {input} " 
+		"python {params}/scripts/makeWig.py -v -i {input} " 
 		"-o {output.methwig} -c {output.covwig} &> {output.log}"
 
 rule wig_to_bigwig: 
@@ -167,11 +167,12 @@ rule merge_sv_before_forcecall:
 			sample=nanopore_tb['sample']) # change "minimap2"/"ngmlr" to change aligner
 	output:
 		raw=temp("data/nanopore/sv/raw_calls.txt"),
-		vcf=temp("data/nanopore/sv/SURVIVOR_merged_1kbpdist_typesave.vcf")
+		vcf="data/nanopore/sv/SURVIVOR_merged_1kbpdist_typesave.vcf"
 	shell:
 		"echo {input} | tr \" \" \"\\n\" > {output.raw} && "
 		"SURVIVOR merge {output.raw} 1000 1 1 -1 -1 -1 {output.vcf}"
 
+# https://github.com/fritzsedlazeck/Sniffles/wiki/SV-calling-for-a-population
 rule sniffles_sv_forcecall:
 	input:
 		bam="{dir}/bam/{sample}.sorted.bam",

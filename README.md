@@ -29,7 +29,7 @@ The list of packages necessary for ATAC-seq analysis :
 + picard
 + bedtools
 + macs2
-+ subread
++ [subread](http://bioinf.wehi.edu.au/subread-package/)
 
 ### Installing
 

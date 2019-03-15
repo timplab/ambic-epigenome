@@ -9,53 +9,53 @@ rule trim_fastq:
 	output: 
 		"{dir}/fastq_trimmed/{sample}_trimmed.fq.gz"
 	log: 
-		"{dir}/log/trim_fastq/{sample}.trim.log" 
+		"{dir}/fastq_trimmed/{sample}.trim.log" 
 	shell: 
 		"trim_galore {input} "
 		"-o {wildcards.dir}/fastq_trimmed &> {log}"
+	
+rule index_bowtie2:
+	input:
+		config['reference']
+	params:
+		config['reference'].split(".fa")[0]
+	threads:
+		maxthreads
+	output:
+		config['reference'].split(".fa")[0] + ".1.bt2"
+	log:
+		config['reference'].split(".fa")[0] + ".btidx.log"
+	shell:
+		"bowtie2-build {input} {params} --threads {threads} &> {log}"
 
+# todo : figure out multimapping
 rule atacseq_align: 
 	input: 
-		"{dir}/fastq_trimmed/{sample}_trimmed.fq.gz" 
-	params: 
-		config['reference'].split(".fa")[0] 
+		fq="{dir}/fastq_trimmed/{sample}_trimmed.fq.gz",
+		btidx=config['reference'].split(".fa")[0] + ".1.bt2"
+	params:
+		config['reference'].split(".fa")[0]
 	threads: 
 		maxthreads 
 	output: 
 		"{dir}/bam/{sample}.bowtiealign.bam"
 	log: 
-		"{dir}/log/align/{sample}.align.log" 
+		"{dir}/bam/{sample}.align.log" 
 	shell: 
-		"bowtie2 -k 4 -p {threads} -t --local " 
-		"-x {params} -U {input} 2> {log} | " 
-		"samtools view -Sb - > {output}"
-
-rule filter_multiple_alignments: 
-	input: 
-		"{dir}/bam/{sample}.bowtiealign.bam"
-	params:
-		config['codedir']
-	output:
-		"{dir}/bam/{sample}.multimapfiltered.bam"
-	shell:
-		"samtools sort -n -T "
-		"{wildcards.dir}/bam/{wildcards.sample}.qsorting {input} | "
-		"samtools view -h - | "
-		"python {params}/scripts/assign_multimappers.py -k 4 | "
-		"samtools view -F 1804 -Su - | "
-		"samtools sort -T "
-		"{wildcards.dir}/bam/{wildcards.sample}.mpsorting "
-		"-o {output}"
+		"bowtie2 --very-sensitive -p {threads} -t --local " 
+		"-x {params} -U {input.fq} 2> {log} | " 
+		"samtools view -Sb - | "
+		"samtools sort -o {output} -"
 
 rule mark_duplicates:
 	input:
-		"{dir}/bam/{sample}.multimapfiltered.bam"
+		"{dir}/bam/{sample}.bowtiealign.bam"
 	output:
 		temp("{dir}/bam/{sample}.dupmark.bam")
 	threads:
 		maxthreads
 	log:
-		"{dir}/log/removedup/{sample}.dupremoval.log"
+		"{dir}/bam/{sample}.dupremoval.log"
 	shell:
 		"picard -Xmx8G -Xms256M -XX:ParallelGCThreads={threads} "
 		"-Djava.io.tmpdir={wildcards.dir}/tmp "
@@ -103,7 +103,7 @@ rule find_peaks_from_pool:
 	output:
 		"{dir}/peaks/allsamples.peaks.saf"
 	log:
-		"{dir}/log/allsamples.peaks.log"
+		"{dir}/peaks/allsamples.peaks.log"
 	shell:
 		"macs2 callpeak -t {input} -f BED "
 		"-n {wildcards.dir}/peaks/allsamples "
@@ -122,7 +122,7 @@ rule get_feature_counts:
 	output:
 		"{dir}/peaks/individual_peaks_counts.txt"
 	log:
-		"{dir}/log/individual.featurecounts.log"
+		"{dir}/peaks/individual.featurecounts.log"
 	shell:
 		"featureCounts --verbose -a {input.peaks} "
 		"-o {output} -F SAF -T {threads} {input.reads} &> {log}"

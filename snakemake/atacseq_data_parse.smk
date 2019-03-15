@@ -15,9 +15,24 @@ rule trim_fastq:
 		"trim_galore {input} "
 		"-o {wildcards.dir}/fastq_trimmed &> {log}"
 
+rule index_bowtie2:
+  input:
+    config['reference']
+  params:
+    config['reference'].split(".fa")[0]
+  threads:
+    maxthreads
+  output:
+    config['reference'].split(".fa")[0] + ".1.bt2"
+  log:
+    config['reference'].split(".fa")[0] + ".btidx.log"
+  shell:
+    "bowtie2-build {input} {params} --threads {threads} &> {log}"
+
 rule atacseq_align: 
 	input: 
-		"{dir}/fastq_trimmed/{sample}_trimmed.fq.gz" 
+		fq="{dir}/fastq_trimmed/{sample}_trimmed.fq.gz",
+		btidx=config['reference'].split(".fa")[0] + ".1.bt2"
 	params: 
 		config['reference'].split(".fa")[0] 
 	threads: 
@@ -28,7 +43,7 @@ rule atacseq_align:
 		"{dir}/log/align/{sample}.align.log" 
 	shell: 
 		"bowtie2 -k 4 -p {threads} -t --local " 
-		"-x {params} -U {input} 2> {log} | " 
+		"-x {params} -U {input.fq} 2> {log} | " 
 		"samtools view -Sb - > {output}"
 
 rule filter_multiple_alignments: 

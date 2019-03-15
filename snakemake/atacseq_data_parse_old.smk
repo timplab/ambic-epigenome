@@ -14,7 +14,6 @@ rule trim_fastq:
 		"trim_galore {input} "
 		"-o {wildcards.dir}/fastq_trimmed &> {log}"
 
-# figure out multimapping
 rule atacseq_align: 
 	input: 
 		"{dir}/fastq_trimmed/{sample}_trimmed.fq.gz" 
@@ -27,13 +26,30 @@ rule atacseq_align:
 	log: 
 		"{dir}/log/align/{sample}.align.log" 
 	shell: 
-		"bowtie2 --very-sensitive -p {threads} -t --local " 
+		"bowtie2 -k 4 -p {threads} -t --local " 
 		"-x {params} -U {input} 2> {log} | " 
 		"samtools view -Sb - > {output}"
 
+rule filter_multiple_alignments: 
+	input: 
+		"{dir}/bam/{sample}.bowtiealign.bam"
+	params:
+		config['codedir']
+	output:
+		"{dir}/bam/{sample}.multimapfiltered.bam"
+	shell:
+		"samtools sort -n -T "
+		"{wildcards.dir}/bam/{wildcards.sample}.qsorting {input} | "
+		"samtools view -h - | "
+		"python {params}/scripts/assign_multimappers.py -k 4 | "
+		"samtools view -F 1804 -Su - | "
+		"samtools sort -T "
+		"{wildcards.dir}/bam/{wildcards.sample}.mpsorting "
+		"-o {output}"
+
 rule mark_duplicates:
 	input:
-		"{dir}/bam/{sample}.bowtiealign.bam"
+		"{dir}/bam/{sample}.multimapfiltered.bam"
 	output:
 		temp("{dir}/bam/{sample}.dupmark.bam")
 	threads:

@@ -2,9 +2,9 @@
 
 This is the git repository for AMBIC Epigenomics project with Betenbaugh and Timp lab at JHU.
 
-This repo is still being put together, so it will only contain parts of the analysis.
+Use this repository for processing the raw data prior to analysis.
 
-At the current stage, this should provide enough information for data parsing.
+We are working on uploading scripts that are being used for our analysis of the data.
 
 ## Getting Started
 
@@ -22,18 +22,18 @@ The list of packages necessary for nanopore analysis :
 + [SURVIVOR](https://github.com/fritzsedlazeck/SURVIVOR)
 
 The list of packages necessary for ATAC-seq analysis :
-+ trim_galore
-+ bowtie2
-+ samtools
-+ htslib
-+ picard
-+ bedtools
-+ macs2
++ [trim_galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/)
++ [bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml)
++ [samtools](http://www.htslib.org/doc/samtools.html)
++ [htslib](http://www.htslib.org/)
++ [picard](https://broadinstitute.github.io/picard/)
++ [bedtools](https://bedtools.readthedocs.io/en/latest/)
++ [macs2](https://github.com/taoliu/MACS)
 + [subread](http://bioinf.wehi.edu.au/subread-package/)
 
 ### Installing
 
-Most of these tools are available via conda or otherwise public source.
+All of these tools are available via conda or via the website links.
 
 ## Snakemake pipeline
 
@@ -68,8 +68,9 @@ To run snakemake, use the snakemake command in the root directory of this repo.
 snakemake --cores 16
 ```
 
-For running specific parts of the pipeline,
+For running specific parts of the pipeline, any of the following : 
 ```
+snakemake --cores 16 parse_nanopore
 snakemake --cores 16 nanopore_methylation
 snakemake --cores 16 nanopore_sv
 snakemake --cores 16 parse_atacseq

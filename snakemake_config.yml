@@ -1,4 +1,4 @@
-workdir: /kyber/Data/Nanopore/projects/ambic/sigma/190225_choSigma_plasmid_target_pipeline_test # path to save the analysis outputs
+workdir: /kyber/Data/NGS/projects/ambic/agingstudy/atacseq/190310_chosigmaday0_atacseq/ # path to save the analysis outputs
 codedir: /home/isac/Code/projects/ambic-epigenome # path to this dir
 reference: /mithril/Data/NGS/Reference/cho/chok1/genome/Cricetulus_griseus_chok1gshd.sigmaIgG.fa # path to reference genome
 threads: 10 # available cores

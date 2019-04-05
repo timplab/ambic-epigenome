@@ -92,23 +92,29 @@ rule remove_duplicates:
 rule atacseq_bam_to_bed:
 	input:
 		"{dir}/bam/{sample}.nodup.sorted.bam"
+	params:
+		"{dir}/tmp"
 	output:
 		"{dir}/bed/{sample}.bed.gz"
 	shell:
+		"[ -e {params} ]||mkdir {params} && "
 		"bedtools bamtobed -i {input} | "
 		"awk 'BEGIN{{OFS=\"\t\"}}{{$4=\"N\";$5=\"1000\";print $0 }}' | "
-		"sort -k1,1 -k2,2n -T {wildcards.dir}/tmp | "
+		"sort -k1,1 -k2,2n -T {params} | "
 		"bgzip > {output}"
 
 rule atacseq_merge_bed:
 	input:
 		expand("{dir}/bed/{sample}.bed.gz",
 			dir="{dir}",sample=atacseq_tb['sample'])
+	params:
+		"{dir}/tmp"
 	output:
 		"{dir}/bed/allsamples.bed.gz"
 	shell:
+		"[ -e {params} ]||mkdir {params} && "
 		"gunzip -c {input} | "
-		"sort -k1,1 -k2,2n -T {wildcards.dir}/tmp | "
+		"sort -k1,1 -k2,2n -T {params} | "
 		"bgzip > {output}"
 
 rule find_peaks_from_pool:

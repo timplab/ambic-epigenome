@@ -1,4 +1,5 @@
 Pipeline:
+
 {Script}  {Args}
 
 Scripts run on all matching filetypes in dir

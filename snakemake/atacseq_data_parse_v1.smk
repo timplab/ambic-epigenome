@@ -103,37 +103,36 @@ rule atacseq_bam_to_bed:
 		"sort -k1,1 -k2,2n -T {params} | "
 		"bgzip > {output}"
 
-rule find_peaks:
+rule atacseq_merge_bed:
 	input:
-		"{dir}/bed/{sample}.bed.gz"
-	output:
-		"{dir}/peaks/{sample}_peaks.narrowPeak"
-	log:
-		"{dir}/log/{sample}.peaks.log"
-	shell:
-		"macs2 callpeak -t {input} -f BED "
-		"-n {wildcards.dir}/peaks/{wildcards.sample} "
-		"-g mm -p 0.01 --shift -75 --extsize 150 "
-		"--nomodel -B --SPMR --keep-dup all --call-summits &> {log} && "
-		"touch {output}"
-
-rule atacseq_merge_peaks:
-	input:
-		expand("{dir}/peaks/{sample}_peaks.narrowPeak",
+		expand("{dir}/bed/{sample}.bed.gz",
 			dir="{dir}",sample=atacseq_tb['sample'])
 	params:
-		codedir=config['codedir'],
-		tmpdir="{dir}/tmp"
+		"{dir}/tmp"
 	output:
-		peaks="{dir}/peaks/allsamples.peaks.bed",
-		saf="{dir}/peaks/allsamples.peaks.saf"
+		"{dir}/bed/allsamples.bed.gz"
 	shell:
-		"[ -e {params.tmpdir} ]||mkdir {params.tmpdir} && cat {input} | "
-		"sort -u -k1,1 -k2,2n -k3,3n -T {params.tmpdir} | "
-		"bedtools merge -i stdin | "
-		"awk 'OFS=\"\t\"{{ print $0,\"peak\"NR }}' > {output.peaks} && "
-		"{params.codedir}/scripts/atacseq_bed_to_saf.sh "
-		"{output.peaks} > {output.saf}"
+		"[ -e {params} ]||mkdir {params} && "
+		"gunzip -c {input} | "
+		"sort -k1,1 -k2,2n -T {params} | "
+		"bgzip > {output}"
+
+rule find_peaks_from_pool:
+	input:
+		"{dir}/bed/allsamples.bed.gz"
+	params:
+		config['codedir']
+	output:
+		"{dir}/peaks/allsamples.peaks.saf"
+	log:
+		"{dir}/log/allsamples.peaks.log"
+	shell:
+		"macs2 callpeak -t {input} -f BED "
+		"-n {wildcards.dir}/peaks/allsamples "
+		"-g mm -p 0.01 --shift -75 --extsize 150 "
+		"--nomodel -B --SPMR --keep-dup all --call-summits &> {log} && "
+		"{params}/scripts/atacseq_bed_to_saf.sh "
+		"{wildcards.dir}/peaks/allsamples_peaks.narrowPeak > {output}"
 
 rule get_feature_counts:
 	input:

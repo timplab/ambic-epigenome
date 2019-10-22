@@ -1,9 +1,7 @@
 # AMBIC Epigenomics
 
-This is the git repository for AMBIC Epigenomics project with Betenbaugh and Timp lab at JHU.
-
-Use this repository for processing the raw data prior to analysis.
-
+This is the git repository for AMBIC Epigenomics project with Betenbaugh and Timp lab at JHU.  
+Use this repository for processing the raw data prior to analysis.  
 We are working on uploading scripts that are being used for our analysis of the data.
 
 ## Getting Started

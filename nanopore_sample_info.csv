@@ -1,16 +1,2 @@
 sample,type,replicate
-CHOZNHostDay0_1,CHOZNHostDay0,1
-CHOZNHostDay0_2,CHOZNHostDay0,2
-CHOZNHostDay0_3,CHOZNHostDay0,3
-CHOZNStableGlnDay0_1,CHOZNStableGlnDay0,1
-CHOZNStableGlnDay0_2,CHOZNStableGlnDay0,2
-CHOZNStableGlnDay0_3,CHOZNStableGlnDay0,3
-CHOZNStableNoglnDay0_1,CHOZNStableNoglnDay0,1
-CHOZNStableNoglnDay0_2,CHOZNStableNoglnDay0,2
-CHOZNStableNoglnDay0_3,CHOZNStableNoglnDay0,3
-CHOZNUnstableGlnDay0_1,CHOZNUnstableGlnDay0,1
-CHOZNUnstableGlnDay0_2,CHOZNUnstableGlnDay0,2
-CHOZNUnstableGlnDay0_3,CHOZNUnstableGlnDay0,3
-CHOZNUnstableNoglnDay0_1,CHOZNUnstableNoglnDay0,1
-CHOZNUnstableNoglnDay0_2,CHOZNUnstableNoglnDay0,2
-CHOZNUnstableNoglnDay0_3,CHOZNUnstableNoglnDay0,3
+CHOK1IgG,CHOK1IgG,1

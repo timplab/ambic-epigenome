@@ -51,8 +51,8 @@ For nanopore sequencing data, we will start from basecalled data ; set up the da
 
 * fastq name : [sample].fastq.gz 
 * summary name : [sample].summary.txt
-* move fastq and summary files to [workdir]/data/nanopore/reads
-* fast5 in [workdir]/data/nanopore/reads/[sample_name]/
+* move fastq and summary files to [workdir]/reads
+* fast5 in [workdir]/[sample_name]/
 
 For ATAC-seq data :
 

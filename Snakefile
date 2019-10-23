@@ -18,8 +18,8 @@ atacseq_tb = pd.read_csv(config['codedir']+"/atacseq_sample_info.csv",comment="#
 
 rule parse_nanopore:
 	input:
-	   vcf="data/nanopore/sv/merged_final_SURVIVOR_1kbpdist_typesave.vcf", 
-		 meth=expand("data/nanopore/mfreq/{sample}.cpg.mfreq.txt.gz", 
+	   vcf = "data/nanopore/sv/merged_final_SURVIVOR_1kbpdist_typesave.vcf", 
+		 meth = expand("data/nanopore/mfreq/{sample}.cpg.mfreq.txt.gz", 
 		 		sample=nanopore_tb['sample'])
 
 rule nanopore_sv:

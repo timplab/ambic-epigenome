@@ -31,13 +31,13 @@ rule minimap2_makeindex:
 	input:
 		config['reference']
 	output:
-		os.path.splitext(config['reference'])[0] + ".mapont.mmi"
+		os.path.splitext(config['reference'])[0] + ".map_ont.mmi"
 	shell:
 		"minimap2 -x map-ont -d {output} {input}"
 
 rule minimap2_align:
 	input:
-		os.path.splitext(config['reference'])[0] + ".mapont.mmi",
+		os.path.splitext(config['reference'])[0] + ".map_ont.mmi",
 		"{dir}/reads/{sample}.fastq.gz"
 	threads: maxthreads
 	output:

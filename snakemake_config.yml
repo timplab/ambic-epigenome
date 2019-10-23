@@ -1,5 +1,4 @@
-workdir: /kyber/Data/NGS/projects/ambic/combined # path to save the analysis outputs
-codedir: /home/isac/Code/ambic-epigenome # path to this dir
-#reference: /mnt/c/ref/Cricetulus_griseus_chok1gshd.sigmaIgG.fa # path to reference genome
-reference: /mithril/Data/NGS/Reference/cho/chok1/genome/Cricetulus_griseus_chok1gshd.nihIgG.fa
-threads: 10 # available cores
+workdir: /home/jupyter-isac/Data # data and analysis path/
+codedir: /home/jupyter-isac/ambic-epigenome-dev # path to this dir
+reference: /mnt/ref/Cricetulus_griseus_picr.CriGri-PICR.dna.toplevel.nihIgG.fa
+threads: 34 # available cores

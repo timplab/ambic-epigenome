@@ -1,4 +1,4 @@
-workdir: /home/jupyter-isac/Data # data and analysis path/
+workdir: /home/jupyter-isac/Data_tmp # data and analysis path/
 codedir: /home/jupyter-isac/ambic-epigenome-dev # path to this dir
 reference: /mnt/ref/Cricetulus_griseus_picr.CriGri-PICR.dna.toplevel.nihIgG.fa
 threads: 34 # available cores

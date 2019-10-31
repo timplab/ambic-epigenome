@@ -8,6 +8,7 @@ workdir:
   config['workdir']
 maxthreads = config['threads']
 smkdir = config['codedir'] + "/snakemake/"
+smkdir = "snakemake/"
 include:
   smkdir + "nanopore_data_parse.smk"
 include:

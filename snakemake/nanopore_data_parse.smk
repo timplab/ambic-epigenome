@@ -11,19 +11,19 @@ nanopore_tb = pd.read_csv(config['codedir']+"/nanopore_sample_info.csv",comment=
 
 rule ngmlr_align:
 	input:
-		"{dir}/reads/{sample}.fastq.gz"
+		"reads/{sample}.fastq.gz"
 	params:
 		config['reference']
 	threads: maxthreads
 	output:
-		"{dir}/bam/{sample}.ngmlr.sorted.bam"
+		"bam/{sample}.ngmlr.sorted.bam"
 	log:
-		"{dir}/bam/{sample}.ngmlr.align.log"
+		"bam/{sample}.ngmlr.align.log"
 	shell:
 		"ngmlr -x ont --bam-fix "
 		"-t {threads} -r {params} -q {input} 2> {log} | "
 		"samtools view -q 20 -b - | "
-		"samtools sort -T {wildcards.dir}/bam/{wildcards.sample}.sorting "
+		"samtools sort -T bam/{wildcards.sample}.sorting "
 		"-o {output} && "
 		"samtools index {output}"
 	

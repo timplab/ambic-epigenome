@@ -1,0 +1,246 @@
+---
+title: "ambic sigma aging study qc"
+author: Isac Lee
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  pdf_document:
+    citation_package: natbib
+    keep_tex: true
+    fig_caption: true
+    latex_engine: xelatex
+#bibliography: master.bib
+# set dir in the following function to the desired loc
+mainfont: "DejaVu Sans" # Try out some font options if xelatex
+titlefont: "DejaVu Sans" # Try out some font options if xelatex
+---
+
+```{r setup, eval=TRUE, include=FALSE, cache=F, message=F, warning=F, results="hide"}
+rm(list=ls());gc()
+knitr::opts_chunk$set(fig.path='figs/')
+knitr::opts_chunk$set(cache = FALSE, warning = FALSE, 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+```{r libs, eval=T, include=FALSE, cache=F, message=F, warning=F, results="hide"}
+#source("~/Code/ilee/plot/ilee_plot_utils.R")
+source("/home/isac/Code/ilee/plot/ilee_plot_utils.R")
+source("/home/isac/Code/nanopore-methylation-utilities/methylation_R_utils.R")
+library(tidyverse)
+library(umap)
+library(bsseq)
+```
+
+```{r functions, include = F}
+```
+
+
+```{r read_data, eval = T, include = FALSE, cache=F }
+plotdir <- "/home/isac/Dropbox (Timp Lab)/Data/ambic/aging_study/methylation"
+dir <- "/kyber/Data/Nanopore/projects/ambic/sigma/methylation/mfreq"
+rawpath <- file.path(dir,"CHOZN.BSseq.rds")
+bspath <- file.path(dir,"CHOZN.BSmooth.Rds")
+#fpaths <- system(paste("find",dir,"-name \"*txt.gz\""),intern=T)
+#labs <- sapply(strsplit(basename(fpaths),"[.]"),"[[",1)
+#samples <- sapply(strsplit(labs,"_"),"[[",1)
+#cells <- sapply(strsplit(labs,"Day"),"[[",1)
+#days <- as.factor(as.numeric(sapply(strsplit(samples,"Day"),"[[",2)))
+#pd <- tibble(fpath = fpaths, label = labs, sample = samples, cell = cells, day = days)
+
+# read data
+#bsobj <- read.bismark(pd$fpath,colData = pd)
+bsobj <- readRDS(bspath)
+pd <- pData(bsobj) %>% as_tibble()
+pd$rep <- as.factor(sapply(strsplit(pd$label,"_"),"[[",2))
+pd$day <- as.factor(sapply(strsplit(pd$sample,"Day"),"[[",2))
+```
+
+
+```{r pca, eval = T, include = FALSE, cache=F }
+# get methylation
+meth <- getMeth(bsobj,type = "smooth")
+meth <- as.matrix(meth)
+meth <- na.omit(meth)
+nrow(meth)
+
+# pca
+meth.t <- t(meth)
+pca.m <- prcomp(meth.t)
+pca.tb <- as_tibble(pca.m$x[,1:6]) %>%
+  bind_cols(pd)
+pca.stable <- prcomp(meth.t[pd$cell %in% c("CHOZNStableGln","CHOZNStableNogln"),])
+stablepca.tb <- as_tibble(pca.stable$x[,1:6]) %>%
+  bind_cols(pd %>% filter(cell %in% c("CHOZNStableGln","CHOZNStableNogln")))
+# umap
+config <- umap.defaults
+config$n_neighbors = 5
+config$n_epochs = 500
+meth.umap <- umap(meth.t,config)
+umap.tb <- as_tibble(meth.umap$layout) %>%
+  bind_cols(pd)
+
+# let's export the umap data?
+umap.out <- umap.tb %>%
+  dplyr::select(-fpath)
+outpath <- file.path(plotdir,"200514_methylation_umap.tsv")
+write_tsv(umap.out,outpath)
+```
+
+
+```{r plot_pca, eval = T, echo = F, fig.height=3, fig.width=6, message=F, warning = F,results = 'hide', fig.show = 'show'}
+# plot
+plotpath <- file.path(plotdir,"200514_methylation_pca.pdf")
+pdf(plotpath,width = 6, height = 3,useDingbats = F)
+ggplot(pca.tb,aes(x = PC1, y = PC2, color = cell)) + geom_point()
+ggplot(pca.tb,aes(x = PC1, y = PC2, color = cell, shape = day)) + geom_point()
+#ggplot(stablepca.tb,aes(x = PC1, y = PC2, color = cell, shape = day)) + geom_point()
+ggplot(umap.tb,aes(x = V1, y = V2, color = cell, shape = day)) + geom_point()
+dev.off()
+```
+# global methylation
+
+```{r global, eval = T, include = FALSE, cache=F }
+meth <- getMeth(bsobj,type = "smooth")
+meth <- as.matrix(meth)
+meth <- na.omit(meth)
+```
+
+# metaplot?
+
+```{r}
+genes <- read_tsv("/mithril/Data/NGS/Reference/cho/picr_ensembl/annotation/cho_picr_genes.bed",col_names = c("chrom","start","end","ensid","score","strand","symbol"))
+genes.gr <- GRanges(genes)
+# get global methylation - smoothed
+meth.tb <- as_tibble(getMeth(bsobj,type = "smooth")) %>%
+  bind_cols(as_tibble(granges(bsobj)))%>%
+  na.omit()
+names(meth.tb)[1:nrow(pd)] <- pd$label
+gr <- GRanges(meth.tb %>% dplyr::select(seqnames,start,end))
+```
+
+```{r}
+genes.reg <- promoters(genes.gr,upstream = 2.5e3, downstream  = 2.5e3 +1)
+ovl <- findOverlaps(gr,genes.reg)
+meth.dist <- meth.tb[queryHits(ovl),] %>%
+  mutate(geneidx = subjectHits(ovl),
+    genestrand = genes$strand[geneidx],
+    tss = ifelse(genestrand == "-",genes$end[geneidx],genes$start[geneidx]),
+    dist = ifelse(genestrand == "-",tss - start, start - tss)
+  )
+meth.gather <- meth.dist %>%
+  gather(sample,freq,-seqnames,-start,-end,-width,-strand,-geneidx,-genestrand,-tss,-dist) 
+meth.gather <- meth.gather %>%
+  group_by(sample)
+meth.list <- meth.gather %>%
+  group_split()
+agg.list <- lapply(meth.list,aggregate_methylation)
+names(agg.list) <- meth.gather %>% group_keys() %>% .$sample
+agg.tb <- bind_rows(agg.list,.id = "label")
+agg.tb <- agg.tb %>%
+  bind_cols(pd[match(agg.tb$label,pd$label),])
+# label day
+levels(agg.tb$day) <- paste("Day",levels(agg.tb$day))
+```
+
+```{r}
+plotpath <- file.path(plotdir,"200415_methylation_metaplot_per_sample.pdf")
+pdf(plotpath,width = 8, height = 4)
+ggplot(agg.tb,aes(x = dist, y = freq, color = cell)) +
+  facet_wrap(~day,scales = "free", nrow = 2) +
+  geom_smooth(se = F,size = 0.5) +
+  labs(x = "Distance to TSS", y = "Aggregated Methylation", title = "Split by day") + 
+  theme(legend.background = element_rect(fill = NA, color = "black", linetype = "solid")) +
+  scale_color_discrete(name = "Condition") +
+  lims(y = c(0.3,0.8))
+ggplot(agg.tb,aes(x = dist, y = freq, color = day)) +
+  facet_wrap(~cell,scales = "free", nrow = 2) +
+  geom_smooth(se = F,size = 0.5) +
+  labs(x = "Distance to TSS", y = "Aggregated Methylation", title = "Split by cell") + 
+  theme(legend.background = element_rect(fill = NA, color = "black", linetype = "solid")) +
+  scale_color_discrete(name = "Condition") +
+  lims(y = c(0.3,0.8))
+dev.off()
+
+plotpath <- file.path(plotdir,"200415_methylation_metaplot_day0.pdf")
+pdf(plotpath,width = 5, height = 2)
+ggplot(agg.tb %>% filter(day == "Day 0"),aes(x = dist, y = freq, color = cell)) +
+#  facet_wrap(~day,scales = "free", nrow = 2) +
+  geom_smooth(se = F,size = 0.5) +
+  labs(x = "Distance to TSS", y = "Aggregated Methylation", title = "Day 0") + 
+  theme(legend.background = element_rect(fill = NA, color = "black", linetype = "solid")) +
+  scale_color_discrete(name = "Condition") +
+  lims(y = c(0.3,0.8))
+ggplot(agg.tb %>% filter(day == "Day 90"),aes(x = dist, y = freq, color = cell)) +
+#  facet_wrap(~day,scales = "free", nrow = 2) +
+  geom_smooth(se = F,size = 0.5) +
+  labs(x = "Distance to TSS", y = "Aggregated Methylation", title = "Day 90") + 
+  theme(legend.background = element_rect(fill = NA, color = "black", linetype = "solid")) +
+  scale_color_discrete(name = "Condition") +
+  lims(y = c(0.3,0.8))
+dev.off()
+
+```
+
+# global methylation correlation
+
+```{r}
+# global methylation?
+meth.gather <- meth.tb %>%
+  sample_n(1e6) %>%
+  gather(label,freq,-seqnames,-start,-end,-width,-strand)
+meth.gather <- meth.gather %>%
+  bind_cols(pd[match(meth.gather$label,pd$label),])
+
+meth.avg <- meth.gather %>%
+  group_by(cell,day,seqnames,start,end) %>%
+  summarize(freq = median(freq))
+meth.cell <- meth.avg %>%
+  group_by(cell,seqnames,start,end) %>%
+  summarize(freq = median(freq)) %>%
+  ungroup() %>%
+  spread(cell,freq)
+```
+```{r}
+# plot
+plotpath <- file.path(plotdir,"200416_meth_correlation.pdf")
+pdf(plotpath)
+combos <- as_tibble(t(combn(5,2)))
+off <- 3
+for (i in seq(nrow(combos))){
+  print(i)
+  onei <- combos[i,]$V1
+  twoi <- combos[i,]$V2
+  onen <- names(meth.cell)[onei + off]
+  twon <- names(meth.cell)[twoi + off]
+  one <- meth.cell[[onei + off]]
+  two <- meth.cell[[twoi + off]]
+  comp.lm <- lm(one~two)
+  slope <- comp.lm$coefficients[2]
+  corcomp <- cor(one,two)
+  plt <- tibble(v1 = one,v2 = two)
+  g <- ggplot(plt,aes( x = v1, y = v2)) +
+    geom_bin2d() +
+#    geom_density_2d(bins = 20, color = "black", linetype = "dotted") +
+    scale_fill_gradientn(name = "Count" , trans = "log10", colors = heat_pal) +
+    lims(x = c(0,1), y = c(0,1)) + coord_fixed() + 
+    labs( x = onen, y = twon)
+  print(g)
+
+}
+dev.off()
+```
+
+# transgene?
+```{r }
+bs.igg <- bsobj[ grepl("ambic",seqnames(granges(bsobj))),]
+meth.igg <- as_tibble(getMeth(bs.igg))
+igg.tb <- as_tibble(granges(bs.igg)) %>%
+  dplyr::select(seqnames,start) %>%
+  bind_cols(meth.igg)
+igg.gather <- gather(igg.tb,sample,frequency,-seqnames,-start)
+
+```
+
+
+
+
+

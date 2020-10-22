@@ -1,0 +1,86 @@
+---
+title: "ambic sigma aging study bsmooth and qc"
+author: Isac Lee
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  pdf_document:
+    citation_package: natbib
+    keep_tex: true
+    fig_caption: true
+    latex_engine: xelatex
+#bibliography: master.bib
+# set dir in the following function to the desired loc
+mainfont: "DejaVu Sans" # Try out some font options if xelatex
+titlefont: "DejaVu Sans" # Try out some font options if xelatex
+---
+
+```{r setup, eval=TRUE, include=FALSE, cache=F, message=F, warning=F, results="hide"}
+rm(list=ls());gc()
+knitr::opts_chunk$set(fig.path='figs/')
+knitr::opts_chunk$set(cache = FALSE, warning = FALSE, 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+```{r libs, eval=T, include=FALSE, cache=F, message=F, warning=F, results="hide"}
+source("~/Code/ilee/plot/ilee_plot_utils.R")
+library(bsseq)
+```
+
+```{r functions, include = F}
+```
+
+
+```{r read_data, eval = T, include = FALSE, cache=F }
+dir <- "/kyber/Data/Nanopore/projects/ambic/sigma/methylation/mfreq"
+rawpath <- file.path(dir,"CHOZN.BSseq.rds")
+bspath <- file.path(dir,"CHOZN.BSmooth.Rds")
+chrompath <- "/mithril/Data/NGS/Reference/cho/picr_ensembl/Cricetulus_griseus_picr.CriGri-PICR.dna.toplevel.sigmaIgG.bigchroms.txt"
+
+fpaths <- system(paste("find",dir,"-name \"*txt.gz\""),intern=T)
+labs <- sapply(strsplit(basename(fpaths),"[.]"),"[[",1)
+samples <- sapply(strsplit(labs,"_"),"[[",1)
+cells <- sapply(strsplit(labs,"Day"),"[[",1)
+pd <- tibble(fpath = fpaths, label = labs, sample = samples, cell = cells)
+
+# read data
+if ( ! file.exists(rawpath)) {
+  bsobj <- read.bismark(pd$fpath,colData = pd)
+  saveRDS(bsobj,rawpath)
+} else {
+  bsobj <- readRDS(rawpath)
+}
+```
+```{r smooth, eval = T, include = FALSE, cache=F }
+## get rid of data in smaller chromosomes (< 1e6 bp )  
+#chromsizes <- read_tsv(chrompath, col_names = c("contig","length"))
+#bs.big <- bsobj[seqnames(bsobj) %in% chromsizes$contig,]
+
+# bsmooth
+bsobj <- realize(bsobj, "HDF5Array")
+if ( ! file.exists(bspath)) {
+  # smoothing
+  bp = MulticoreParam(workers = 4, progressbar = TRUE)
+  bs.fit <- BSmooth(bsobj,maxGap = 1e4, BPPARAM = bp, verbose=TRUE,ns=20,h=500)
+  bs.fit <- realize(bs.fit)
+  saveRDS(bs.fit,bspath)
+} else {
+  bs.fit <- readRDS(bspath)
+}
+```
+
+```{r methmat, eval = T, include = FALSE, cache=F }
+# get methylation matrix
+meth <- getMeth(bs.fit,type = "smooth",what = "perBase")
+# by cell/day
+for (samp in unique(pd$sample)){
+  m <- meth[,grepl(samp,pd$sample)]
+  keepi <- rowSums(is.na(m)) == 0
+  m.keep <- m[keepi,]
+  gr <- granges(bs.fit)[keepi]
+  m.avg <- rowMeans(m.keep)
+  m.tb <- tibble(chrom = as.character(seqnames(gr)),
+    pos = start(gr),
+    val = m.avg)
+}
+```
+

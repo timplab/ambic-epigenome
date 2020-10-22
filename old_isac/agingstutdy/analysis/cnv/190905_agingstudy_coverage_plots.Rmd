@@ -1,0 +1,73 @@
+---
+title: "ambic coverage"
+author: Isac Lee
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  pdf_document:
+    citation_package: natbib
+    keep_tex: true
+    fig_caption: true
+    latex_engine: xelatex
+#bibliography: master.bib
+# set dir in the following function to the desired loc
+mainfont: "DejaVu Sans" # Try out some font options if xelatex
+titlefont: "DejaVu Sans" # Try out some font options if xelatex
+---
+
+```{r setup, eval=TRUE, include=FALSE, cache=F, message=F, warning=F, results="hide"}
+rm(list=ls());gc()
+knitr::opts_chunk$set(fig.path='figs/')
+knitr::opts_chunk$set(cache = FALSE, warning = FALSE, 
+                      message = FALSE, cache.lazy = FALSE)
+
+knitr::opts_chunk$set(
+                  fig.process = function(x) {
+                      x2 = sub('-\\d+([.][a-z]+)$', '\\1', x)
+                      if (file.rename(x, x2)) x2 else x
+                      }
+                  )
+```
+
+```{r libs, eval=T, include=FALSE, cache=F, message=F, warning=F, results="hide"}
+source("/home/isac/Code/ilee/plot/ggplot_theme.R")
+```
+
+```{r functions, include = F}
+```
+
+```{r read_data, eval = T, include = FALSE, cache=F }
+fp="/kyber/Data/Nanopore/projects/ambic/sigma/coverage/CHOZN_coverage_matrix.bed"
+data <- read_tsv(fp) %>%
+  mutate(width = end - start)
+  
+# get cumulative width
+data$cumwidth <- cumsum(data$width)
+
+data.gather <- data %>%
+  gather(sample,coverage,-`#chromosome`,-start,-end,-width,-cumwidth)
+
+# further bin
+data.bin <- data.gather %>%
+  mutate(bin = round(cumwidth/1e5)*1e5) %>%
+  group_by(bin,sample) %>%
+  summarize(meancov = mean(coverage),
+            sumcov = sum(coverage)) 
+  
+# make a ceiling
+data.ceil <- data.bin %>%
+  mutate(meancov = ifelse(meancov>100,100,meancov))
+
+# normalize
+
+```
+# plots
+
+```{r plot, eval = T, echo = F, fig.height=3, fig.width=6, message=F, warning = F}
+ggplot(data.bin,aes(x = bin, y = meancov, fill = sample, group = sample)) +
+  geom_histogram(stat="identity")
+```
+
+
+```{r table, eval = T, echo = F, results = "asis", fig.height=3, fig.width=6, message=F, warning = F}
+knitr::kable(perf)
+```

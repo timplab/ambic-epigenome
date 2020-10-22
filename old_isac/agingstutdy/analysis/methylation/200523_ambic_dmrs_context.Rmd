@@ -1,0 +1,301 @@
+---
+title: "ambic sigma aging study qc"
+author: Isac Lee
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  pdf_document:
+    citation_package: natbib
+    keep_tex: true
+    fig_caption: true
+    latex_engine: xelatex
+#bibliography: master.bib
+# set dir in the following function to the desired loc
+mainfont: "DejaVu Sans" # Try out some font options if xelatex
+titlefont: "DejaVu Sans" # Try out some font options if xelatex
+---
+
+```{r setup, eval=TRUE, include=FALSE, cache=F, message=F, warning=F, results="hide"}
+rm(list=ls());gc()
+knitr::opts_chunk$set(fig.path='figs/')
+knitr::opts_chunk$set(cache = FALSE, warning = FALSE, 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+```{r libs, eval=T, include=FALSE, cache=F, message=F, warning=F, results="hide"}
+#source("~/Code/ilee/plot/ilee_plot_utils.R")
+source("/home/isac/Code/ilee/plot/ilee_plot_utils.R")
+source("/home/isac/Code/nanopore-methylation-utilities/methylation_R_utils.R")
+library(tidyverse)
+library(bsseq)
+
+```
+
+```{r functions, include = F}
+```
+
+
+```{r read_data, eval = T, include = FALSE, cache=F }
+plotdir <- "/home/isac/Dropbox (Timp Lab)/Data/ambic/aging_study/methylation"
+dir <- "/kyber/Data/Nanopore/projects/ambic/sigma/methylation/mfreq"
+rawpath <- file.path(dir,"CHOZN.BSseq.rds")
+bspath <- file.path(dir,"CHOZN.BSmooth.Rds")
+#fpaths <- system(paste("find",dir,"-name \"*txt.gz\""),intern=T)
+#labs <- sapply(strsplit(basename(fpaths),"[.]"),"[[",1)
+#samples <- sapply(strsplit(labs,"_"),"[[",1)
+#cells <- sapply(strsplit(labs,"Day"),"[[",1)
+#days <- as.factor(as.numeric(sapply(strsplit(samples,"Day"),"[[",2)))
+#pd <- tibble(fpath = fpaths, label = labs, sample = samples, cell = cells, day = days)
+
+# read data
+#bsobj <- read.bismark(pd$fpath,colData = pd)
+bsobj <- readRDS(bspath)
+pd <- pData(bsobj) %>% as_tibble()
+pd$rep <- as.factor(sapply(strsplit(pd$label,"_"),"[[",2))
+pd$day <- as.factor(sapply(strsplit(pd$sample,"Day"),"[[",2))
+pData(bsobj) <- pd
+```
+
+```{r preprocess, eval = T, include = FALSE, cache=F }
+# let's preprocess the data
+# filter out low coverage regions
+bscov <- getCoverage(bsobj,type="Cov")
+#cov.gather <- as_tibble(bscov) %>%
+#  mutate(idx = seq(nrow(bscov))) %>%
+#  gather(sampvid,cov,-idx)
+## add in sample info - takes forever
+#cov.gather$sampidx <- as.numeric(str_remove(cov.gather$sampvid,"V"))
+#cov.gather$sample <- pd[cov.gather$sampidx,]$sample
+#cov.sum <- cov.gather %>%
+#  group_by(idx,sample) %>%
+#  summarize(sum(cov))
+
+# let's just do it simple
+keepi <- which(rowSums(bscov == 0) == 0)
+bs.keep <- bsobj[keepi,]
+
+# remove na
+m <- getMeth(bs.keep)
+keepi <- which(DelayedMatrixStats::rowSums2(is.na(m)) == 0)
+bs.keep <- bs.keep[keepi,]
+
+# get total genome size
+chroms <- as.character(seqnames(bs.keep))
+pos <- start(bs.keep)
+cls <- bsseq:::clusterMaker(chroms,pos)
+meth.clusters <- tibble(idx = seq_along(cls), cid = cls ) %>%
+  group_by(cid) %>%
+  summarize(idxStart = min(idx),idxEnd = max(idx)) %>%
+  mutate(chr = chroms[idxStart],start = pos[idxStart],end = pos[idxEnd])
+totwidth <- sum(meth.clusters$end - meth.clusters$start)
+
+```
+
+```{r getDMR, eval = T, include = FALSE, cache=F }
+# let's output dmrs
+tsvpath <- file.path(plotdir,"CHO_aging_study_DMRs.tsv")
+dmrs.all <- read_tsv(tsvpath)
+
+dmrs.all <- dmrs.all %>%
+  mutate(one = as.factor(one))
+
+all.num <- dmrs.all %>%
+  group_by(cell,one) %>%
+  summarize(n = n(),w = sum(width)) %>%
+  mutate(lab = paste(cell,one),
+    ppm = w/totwidth * 1e6
+  ) 
+
+
+```
+
+```{r annotation}
+genepath <- "/atium/Data/Reference/cho/picr_ensembl/annotation/cho_picr_genes.bed"
+genes <- read_tsv(genepath,col_names = c("chrom","start","end","ensid","score","strand","symbol"))
+```
+
+```{r enrich}
+cl.gr <- GRanges(meth.clusters)
+dmrs.gr <- GRanges(dmrs.all)
+genes.gr <- GRanges(genes)
+proms.gr <- promoters(genes.gr,upstream = 1e3, downstream = 1e3)
+
+intersect(genes.gr,cl.gr)
+genes.width <- sum(width(genes.gr[overlapsAny(genes.gr,cl.gr)]))
+proms.width <- sum(width(proms.gr[overlapsAny(proms.gr,cl.gr)]))
+
+idx <- overlapsAny(dmrs.gr,proms.gr)
+dmrs.prom <- dmrs.all[idx,]
+
+idx <- overlapsAny(dmrs.gr,genes.gr)
+dmrs.body <- dmrs.all[idx,]
+
+prom.enrich <- dmrs.prom %>%
+  group_by(direction,cell,one) %>%
+  summarize(n = n(),w = sum(width)) %>%
+  mutate(
+    ppm = w/proms.width * 1e6,
+    lab = paste(cell,one),
+    totppm = all.num$ppm[match(lab,all.num$lab)],
+    enrich = ppm/totppm
+  ) 
+
+body.enrich <- dmrs.body %>%
+  group_by(direction,cell,one) %>%
+  summarize(n = n(),w = sum(width)) %>%
+  mutate(
+    ppm = w/genes.width * 1e6,
+    lab = paste(cell,one),
+    totppm = all.num$ppm[match(lab,all.num$lab)],
+    enrich = ppm/totppm
+  ) 
+
+
+plotpath <- file.path(plotdir,"200527_dmrs_prom.pdf")
+pdf(plotpath)
+ggplot(dmrs.prom,aes( x = cell, fill = one)) +
+  geom_bar(position= "dodge")  +
+  labs(x = "cell", y = "Count") +
+  theme(axis.text.x = element_text(angle = -45,hjust = 0))
+ggplot(dmrs.prom,aes( x = one, fill = cell)) +
+  geom_bar(position= "dodge")  +
+  labs(x = "Day", y = "Count")
+ggplot(dmrs.prom,aes( x = one, fill = direction)) +
+  facet_wrap(~cell) +
+  geom_bar(position= "dodge") 
+dev.off()
+
+prom.perbp <- dmrs.prom %>%
+  group_by(direction,cell,one) %>%
+  summarize(bp = sum(width))
+plotpath <- file.path(plotdir,"200527_dmrs_prom_perbp.pdf")
+pdf(plotpath)
+ggplot(prom.perbp,aes( x = cell, fill = one, y = bp)) +
+  geom_bar(position= "dodge",stat = "identity")  +
+  labs(x = "Cell", y = "Basepairs") +
+  theme(axis.text.x = element_text(angle = -45,hjust = 0))
+ggplot(prom.perbp,aes( x = one, fill = cell, y = bp)) +
+  geom_bar(position= "dodge", stat = "identity")  +
+  labs(x = "Day", y = "Basepairs")
+ggplot(prom.perbp,aes( x = one, fill = direction, y = bp)) +
+  facet_wrap(~cell) +
+  geom_bar(position= "dodge", stat = "identity")  +
+  labs(x = "Day", y = "Basepairs")
+dev.off()
+
+plotpath <- file.path(plotdir,"200527_dmrs_enrich.pdf")
+pdf(plotpath)
+ggplot(prom.enrich,aes( x = one, fill = direction, y = enrich)) +
+  facet_wrap(~cell) +
+  geom_bar(stat = "identity",position= "stack")  +
+  labs(x = "cell", y = "Enrichment") +
+  geom_hline(yintercept = 1, linetype = "dashed") +
+  theme(axis.text.x = element_text(angle = -45,hjust = 0))
+ggplot(body.enrich,aes( x = one, fill = direction, y = enrich)) +
+  facet_wrap(~cell) +
+  geom_bar(stat = "identity",position= "stack")  +
+  labs(x = "cell", y = "Enrichment") +
+  geom_hline(yintercept = 1, linetype = "dashed") +
+  theme(axis.text.x = element_text(angle = -45,hjust = 0))
+dev.off()
+```
+
+```{r by contig}
+contig.width <- meth.clusters %>%
+  group_by(chr) %>%
+  summarize(w = sum(end - start + 1)) 
+insert.contigs <- c("RAZU01001824.1","RAZU01000244.1","RAZU01000269.1")
+contig.width %>%
+  filter(chr %in% insert.contigs)
+dmrs.contig <- dmrs.all %>%
+  group_by(cell,one,direction,chr) %>%
+  summarize(w = sum(width)) %>%
+  mutate(contigw = contig.width$w[match(chr,contig.width$chr)],
+    ppm = w/contigw * 1e6
+  ) %>%
+  filter(contigw >= 1e5) %>% # only look at relatively large contigs
+  mutate(lab = ifelse(chr %in% insert.contigs, "cis","trans"))
+trans.dmrs <- dmrs.contig %>%
+  filter(lab == "cis")
+
+plotpath <- file.path(plotdir,"200527_dmrs_contig.pdf")
+pdf(plotpath)
+ggplot(dmrs.contig,aes( x = one, fill = direction,y = ppm)) +
+  facet_wrap(~cell) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_point(data = trans.dmrs, aes(color = direction)) +
+  labs(x = "Day", y = "Basepairs")
+dev.off()
+
+
+```
+
+```{r insertion}
+insert.fp <- "/kyber/Data/Nanopore/projects/ambic/sigma/insertion/insert_candidates_summarized.txt"
+inserts <- read_tsv(insert.fp)
+inserts.gr <- GRanges(inserts %>% mutate(start = coord, end = coord))
+dmrs.group <- dmrs.all %>%
+  group_by(cell,one,direction) 
+dmrs.list <- dmrs.group %>%
+  group_split()
+dmrs.keys <- dmrs.group %>% group_keys()
+gr.list <- lapply(dmrs.list,GRanges)
+dist.list <- lapply(gr.list,distanceToNearest,x = inserts.gr)
+# make into one tb
+dist.tb <- bind_rows(lapply(dist.list,as_tibble),.id = "idx")
+# add info
+dist.tb <- bind_cols(dist.tb,dmrs.keys[dist.tb$idx,]) %>% 
+  bind_cols(inserts[dist.tb$queryHits,])
+dist.tb <- dist.tb %>%
+  mutate(candidate = case_when(
+      Stable == 0 ~ "Unstable",
+      Unstable == 0 ~ "Stable",
+      TRUE ~ "Both"))
+dist.tb %>%
+  filter(distance < 1e3)
+
+plotpath <- file.path(plotdir,"200611_dmrs_insertion.pdf")
+pdf(plotpath)
+ggplot(dist.tb, aes( x = one,fill = direction, y = distance)) +
+  facet_wrap(~cell) +
+  scale_y_log10() +
+  geom_boxplot()
+dev.off()
+
+# Let's plot the methylation in the reigon
+pd <- as_tibble(pData(bs.keep))
+meth.insert <- tibble()
+for (i in seq_along(inserts.gr)){
+  insert <- inserts[i,]
+  reg <- resize(inserts.gr[i],width = 1e4, fix = "center")
+  bs.reg <- bs.keep[overlapsAny(bs.keep,reg),]
+  meth.tb <- as_tibble(getMeth(bs.reg))
+  colnames(meth.tb) <- pData(bs.keep)$label
+  meth.tb$pos <- start(bs.reg)
+  meth.gather  <- meth.tb %>%
+    gather(label,freq,-pos) 
+  meth.gather <- bind_cols(meth.gather,pd[match(meth.gather$label,pd$label),])
+  meth.gather <- meth.gather %>%
+    mutate(candidate = case_when(
+        insert$Stable == 0 ~ "Unstable",
+        insert$Unstable == 0 ~ "Stable",
+        TRUE ~ "Both"),
+      junction = insert$coord ,
+      candidx = i
+    )
+  meth.insert <- bind_rows(meth.insert,meth.gather)
+}
+
+
+plotpath <- file.path(plotdir,"200611_meth_insertion.pdf")
+pdf(plotpath, height = 8, width = 6)
+ggplot(meth.insert,aes(x = pos, y = freq, color = cell)) +
+  facet_wrap(~ candidx + day, scales = "free",ncol = 4) +
+  geom_smooth(span = 0.3, se = F) +
+  geom_rug(sides = "b", color = "black") +
+  geom_vline(aes(xintercept = junction)) +
+  theme(legend.position = "bottom")
+  
+dev.off()
+
+
+```

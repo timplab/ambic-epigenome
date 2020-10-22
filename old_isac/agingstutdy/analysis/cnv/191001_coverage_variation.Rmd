@@ -1,0 +1,162 @@
+---
+title: "ambic sigma aging study coverage analysis"
+author: Isac Lee
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  pdf_document:
+    citation_package: natbib
+    keep_tex: true
+    fig_caption: true
+    latex_engine: xelatex
+#bibliography: master.bib
+# set dir in the following function to the desired loc
+mainfont: "DejaVu Sans" # Try out some font options if xelatex
+titlefont: "DejaVu Sans" # Try out some font options if xelatex
+---
+
+```{r setup, eval=TRUE, include=FALSE, cache=F, message=F, warning=F, results="hide"}
+rm(list=ls());gc()
+knitr::opts_chunk$set(fig.path='figs/')
+knitr::opts_chunk$set(cache = FALSE, warning = FALSE, 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+```{r libs, eval=T, include=FALSE, cache=F, message=F, warning=F, results="hide"}
+source("~/Code/ilee/plot/ilee_plot_utils.R")
+library(DNAcopy)
+```
+
+```{r functions, include = F}
+```
+
+```{r read_data, eval = T, include = FALSE, cache=F }
+# data
+covpath <- "/kyber/Data/Nanopore/projects/ambic/sigma/coverage/CHOZN_coverage_matrix.1000.bed"
+cov.tb <- read_tsv(covpath) %>%
+  dplyr::rename(chrom = `#chromosome`)
+# filter out smaller chrom
+chrompath <- "/mithril/Data/NGS/Reference/cho/picr_ensembl/Cricetulus_griseus_picr.CriGri-PICR.dna.toplevel.sigmaIgG.bigchroms.txt"
+chromsizes <- read_tsv(chrompath, col_names = c("contig","length")) %>%
+  mutate(cumlen = cumsum(length))
+chromsizes$startidx <- chromsizes$cumlen - chromsizes$length[1]
+cov.tb <- cov.tb[cov.tb$chrom %in% chromsizes$contig,]
+# normalize
+cov.mat <- as.matrix(cov.tb[4:ncol(cov.tb)])
+meds <- apply(cov.mat,2,median)
+cov.norm <- sweep(cov.mat,2,meds,"/")
+cov.tb[,4:ncol(cov.tb)] <- cov.norm
+colSums(cov.tb[,4:ncol(cov.tb)])
+# get pd
+samples <- names(cov.tb)[4:ncol(cov.tb)]
+days <- factor(sapply(strsplit(samples,"Day"),"[[",2))
+cells <- factor(sapply(strsplit(sapply(strsplit(samples,"Day"),"[[",1),"CHOZN"),"[[",2))
+pd <- tibble(sample = samples, day = days, cell = cells)
+# compared to host
+cov.gather <- cov.tb %>%
+  gather(sample,cov,-chrom,-start,-end) %>%
+  mutate(cell = pd$cell[match(sample,pd$sample)], 
+    day = pd$day[match(sample,pd$sample)])
+cov.del <- cov.gather %>%
+  dplyr::select(-sample) %>%
+  spread(cell,cov) %>%
+  gather(cell, cov,-chrom,-start,-end,-day,-Host) %>%
+  mutate(
+    del = cov - Host,
+    ratio = log2(cov/Host))
+# bin data
+binwidth <- 1e5
+bins <- cov.tb %>%
+  dplyr::select(chrom,start,end) %>%
+  mutate(width = end - start, 
+    sumwidth = cumsum(width), 
+    bin = round(sumwidth/binwidth)*binwidth)
+cov.del$bin <- bins$bin[match(paste0(cov.del$chrom,cov.del$start),paste0(bins$chrom,bins$start))]
+
+cov.bin <- cov.del %>%
+  group_by(chrom,cell,day,bin) %>%
+  summarize(Host = sum(Host),
+    cov = sum(cov),
+    ratio = log2(cov/Host)) %>%
+  arrange(bin)
+```
+
+```{r del_boxplot, eval = T, echo = F, fig.height=3, fig.width=6, message=F, warning = F,results = 'hide', fig.show = 'show'}
+g <- ggplot(cov.del,aes(x = cell,fill = day, y = ratio)) +
+  geom_boxplot(position = 'dodge') +
+  coord_cartesian(ylim = c(-1,1))
+plotter(g)
+```
+
+```{r plot_pca, eval = T, echo = F, fig.height=3, fig.width=6, message=F, warning = F,results = 'hide', fig.show = 'show'}
+# pca
+pca.res <- prcomp(t(cov.norm))
+pca.tb <- as_tibble(pca.res$x[,1:6]) %>%
+  bind_cols(pd)
+# plot
+g <- ggplot(pca.tb,aes(x = PC1, y = PC2, color = cell, shape = day)) + geom_point()
+plotter(g,"cov_pca")
+```
+
+```{r plot_manhattan, eval = T, echo = F, fig.height=3, fig.width=6, message=F, warning = F,results = 'hide', fig.show = 'show'}
+
+g <- ggplot(cov.bin,aes(x = bin, y = ratio)) +
+  facet_wrap(~day + cell) +
+  geom_point(size = 0.5)
+plotter(g, "manhattan", w = 8, h = 6)
+```
+```{r cbs, eval = T, echo = F, fig.height=3, fig.width=6, message=F, warning = F,results = 'hide', fig.show = 'show'}
+cov.spread <- cov.bin %>%
+  ungroup() %>%
+  mutate(sample = paste0(cell,day)) %>%
+  dplyr::select(chrom,bin,sample,ratio) %>%
+  spread(sample,ratio) %>%
+  filter(!grepl("ambic",chrom))
+
+contigs <- cov.spread$chrom
+pos <- cov.spread$bin
+ratios <- cov.spread[,3:ncol(cov.spread)]
+ids <- names(ratios)
+
+cna.obj <- CNA(ratios,chrom = contigs, maploc = pos, data.type = "logratio", sampleid = ids)
+#cna.obj <- CNA(ratios[,1],chrom = contigs, maploc = pos, data.type = "logratio", sampleid = ids[1])
+cna.smooth <- smooth.CNA(cna.obj)
+segs <- segment(cna.smooth,min.width = 5, alpha = 1e-4, undo.splits = "sdundo")
+
+segs.tb <- as_tibble(segs$output) %>%
+  mutate(xmin = chromsizes$startidx[match(chrom,chromsizes$contig)] + loc.start,
+    xmax = xmin + (loc.end - loc.start)
+  )
+
+g <- ggplot(segs.tb,aes(x = xmin, xend = xmax, y = seg.mean, yend = seg.mean)) +
+  facet_wrap(~ID) +
+  geom_segment()
+plotter(plot(segs,plot.type = 'w',ylim = c(-1,1)),"cbs_individual")
+plotter(g,"cbs",h = 6, w = 8)
+
+# sum
+thr <- 0.2
+segs.sum <- segs.tb %>%
+  mutate(type = case_when(
+      seg.mean > thr ~ "increase",
+      seg.mean < -thr ~  "decrease",
+      TRUE ~ "insig")) %>%
+  group_by(ID,type) %>%
+  summarize(n = n()) %>%
+  spread(type,n)  %>%
+  replace_na(list(decrease = 0, increase = 0, insig = 0)) %>%
+  mutate(total = decrease + increase + insig,
+    decrease = decrease/total,
+    increase = increase/total,
+    insig = insig/total) %>%
+  gather(type,frac,-ID,-total)
+segs.sum$day = factor(sapply(strsplit(segs.sum$ID,"ln"),"[[",2))
+segs.sum$sample = factor(paste0(factor(sapply(strsplit(segs.sum$ID,"ln"),"[[",1)),"ln"))
+segs.sum
+g <- ggplot(segs.sum,aes(x = day, fill = type, y = frac)) +
+  facet_wrap(~sample) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = pal) +
+  labs(x = "Day", y = "Fraction of CNV")
+plotter(g,"cbs_box")
+```
+

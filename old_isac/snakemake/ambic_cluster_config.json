@@ -1,0 +1,8 @@
+{
+  "__default__" :
+  {
+    "cores" : 72,
+    "log" : "log/{rule}/{wildcards.sample}.{rule}.log",
+    "jobname" : "{wildcards.sample}.{rule}"
+  }
+}

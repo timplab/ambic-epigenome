@@ -1,0 +1,510 @@
+---
+title: "ambic sigma aging study coverage analysis TitanCNA"
+author: Isac Lee
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  pdf_document:
+    citation_package: natbib
+    keep_tex: true
+    fig_caption: true
+    latex_engine: xelatex
+#bibliography: master.bib
+# set dir in the following function to the desired loc
+mainfont: "DejaVu Sans" # Try out some font options if xelatex
+titlefont: "DejaVu Sans" # Try out some font options if xelatex
+---
+
+```{r setup, eval=TRUE, include=FALSE, cache=F, message=F, warning=F, results="hide"}
+rm(list=ls());gc()
+knitr::opts_chunk$set(fig.path='figs/')
+knitr::opts_chunk$set(cache = FALSE, warning = FALSE, 
+                      message = FALSE, cache.lazy = FALSE)
+my_plot_hook <- function(x, options)
+  paste("\n", knitr::hook_plot_tex(x, options), "\n")
+knitr::knit_hooks$set(plot = my_plot_hook)
+```
+
+```{r libs, eval=T, include=FALSE, cache=F, message=F, warning=F, results="hide"}
+source("~/Code/ilee/plot/ilee_plot_utils.R")
+library(DNAcopy)
+library(TitanCNA)
+library(limma)
+```
+
+```{r functions, include = F}
+```
+
+```{r read_data, eval = T, include = FALSE, cache=F }
+plotdir <- "/home/isac/Dropbox (Timp Lab)/Data/ambic/aging_study/plots"
+# data
+covdir <- "/kyber/Data/Nanopore/projects/ambic/sigma/coverage/pooled_rep"
+matpath <- file.path(covdir,"CHOZN_coverage_matrix.10000.bed")
+plotdir <- "/home/isac/Dropbox/Data/ambic/aging_study/cnv"
+methpath <- "/kyber/Data/Nanopore/projects/ambic/sigma/methylation/rds/CHOZN.BSmooth.rds"
+## samples depending on files
+#covpaths <- system(paste("find",covdir,"-type f -name \"*coverage.10000.bed\""),intern = T)
+#samples <- sapply(strsplit(basename(covpaths),"[.]"),"[[",1)
+#days <- as.numeric(sapply(strsplit(samples,"Day"),"[[",2))
+
+cov.tb <- read_tsv(matpath) %>%
+  dplyr::rename(chrom = `#chromosome`)
+```
+# Let's try cn.MOPs
+# cn.MOPs uses mixture of poisson distributions to estimate the copy numbers and compare them 
+# https://academic.oup.com/nar/article/40/9/e69/1136601
+
+```{r initial_processing, eval = T, echo = F, fig.height=3, fig.width=6, message=F, warning = F,results = 'hide', fig.show = 'show'}
+# get pd
+ids <- names(cov.tb)[-c(1,2,3)]
+cells <- c("Host","Stable","Unstable")
+medias <- c("Host","Gln","Nogln")
+days <- c(0,30,60,90)
+cells[which(sapply(cells,grepl,ids[8]))]
+pd.tb <- tibble( id = ids) %>%
+  rowwise() %>%
+  mutate(
+    cell = cells[which(sapply(cells,grepl,id))],
+    media = medias[which(sapply(medias,grepl,id))],
+    condition = ifelse(cell == media, cell, paste0(cell,media)),
+    day = sapply(strsplit(sapply(strsplit(id,"Day"),"[[",2),"_"),"[[",1),
+    rep = sapply(strsplit(id,"_"),"[[",2)
+    ) %>%
+  ungroup()
+# gather data
+cov.gather <- cov.tb %>%
+  gather(id,cov,-chrom,-start,-end)
+cov.gather <- bind_cols(cov.gather,pd.tb[match(cov.gather$id,pd.tb$id),])
+```
+
+```{r distribution_qc, eval = T, echo = F, fig.height=12, fig.width=12, message=F, warning = F,results = 'hide', fig.show = 'show'}
+ggplot(cov.tb,aes(x = CHOZNHostDay30_2)) +
+  geom_density() + lims(x = c(0,200))
+ggplot(cov.gather,aes( color = rep, x = cov)) +
+  facet_wrap(~condition + day) +
+  geom_density() + lims(x = c(0,200))
+```
+```{r normalize, eval = T, include = FALSE, cache=F }
+# filter out smaller chrom
+chrompath <- "/mithril/Data/NGS/Reference/cho/picr_ensembl/Cricetulus_griseus_picr.CriGri-PICR.dna.toplevel.sigmaIgG.bigchroms.txt"
+chromsizes <- read_tsv(chrompath, col_names = c("contig","length")) %>%
+  mutate(cumlen = cumsum(length))
+chromsizes$startidx <- chromsizes$cumlen - chromsizes$length[1]
+cov.tb <- cov.tb[cov.tb$chrom %in% chromsizes$contig,]
+# normalize to poisson distribution of minimum mean?
+covmeans <- colMeans(cov.tb[,-(1:3)])
+norm_mean <- min(covmeans)
+normcov.list <- lapply(pd.tb$id,function(x){
+  covx <- cov.tb[[x]]
+  meancov <- mean(covx)
+  probs <- ppois(covx,meancov)
+  keepi <- probs > 0.001 & probs < 0.999 # very low mapping and very high mapping are probably poorly mappable
+  normcov <- qpois(probs,norm_mean)
+  out <- tibble(chrom = cov.tb$chrom, start = cov.tb$start, end = cov.tb$end, id = x, cov = normcov)
+  out[which(keepi),]
+})
+norm.gather <- bind_rows(normcov.list) %>%
+  filter(!is.infinite(cov)) 
+cov.norm <- norm.gather %>%
+  spread(id,cov) 
+norm.gather <- bind_cols(norm.gather,pd.tb[match(norm.gather$id,pd.tb$id),])
+## normalize by median of each
+#cov.mat <- as.matrix(cov.tb[4:ncol(cov.tb)])
+#meds <- apply(cov.mat,2,median)
+#norm <- sweep(cov.mat,2,meds,"/")
+#cov.norm <- cov.tb
+#cov.norm[,4:ncol(cov.norm)] <- norm
+#colMeans(cov.norm[,4:ncol(cov.norm)])
+#norm.gather <- cov.norm %>%
+#  gather(id,cov,-chrom,-start,-end)
+#norm.gather <- bind_cols(norm.gather,pd.tb[match(norm.gather$id,pd.tb$id),])
+```
+
+```{r distribution_normalized, eval = T, echo = F, fig.height=12, fig.width=12, message=F, warning = F,results = 'hide', fig.show = 'show'}
+ggplot(norm.gather %>% filter(condition == "Host", day == "30"),aes(color= rep, x = cov)) +
+  geom_density()
+  
+ggplot(norm.gather %>% group_by(id) %>% sample_n(1e4),aes( color = rep, x = cov)) +
+  facet_wrap(~condition + day) +
+  geom_density()
+```
+
+```{r compare, eval = T, include = FALSE, cache=F }
+# rowdata 
+rowData <- cov.norm[,1:3]
+# data matrix
+dat.mat <- cov.norm[,-(1:3)]
+# coldata; make sure column order is the same as pd order
+colData <- pd.tb[match(colnames(dat.mat),pd.tb$id),] 
+if (! sum(colData$id == colnames(dat.mat)) == ncol(dat.mat)) { message("make sure colData order matches data matrix order")}
+
+#contrast.mat <- makeContrasts(
+#  contrasts = c("day30-day0","day60-day0","day90-day0"),
+#  levels = c("day0","day30","day60","day90"))
+#cont.pvals <- 
+#for ( condition in unique(colData$condition)){
+#  print(condition)
+#  dat.sub <- dat.mat[,colData$condition == condition]
+#  colData.sub <- colData[colData$condition == condition,]
+#  design <- model.matrix( ~ 0 +  day, data = colData.sub)
+#  for (rowi in seq(nrow(dat.sub))){
+#    datrow <- as.numeric(dat.sub[rowi,])
+#    pvals <- sapply(seq(ncol(contrast.mat)),function(coni){
+#      onei <- which(contrast.mat[,coni]==-1)
+#      twoi <- which(contrast.mat[,coni]==1)
+#      one <- datrow[which(design[,onei] == 1)]
+#      two <- datrow[which(design[,twoi] == 1)]
+#      t.test(one,two)$p.val
+#    })
+#    
+#  }
+#}
+#
+# get mean between reps
+norm.avg <- norm.gather %>%
+  na.omit() %>%
+  group_by(cell,condition,day,chrom,start,end) %>%
+  summarize(n = n(), totcov = sum(cov), cov = mean(cov))
+
+# compared to day 0
+cov.del <- norm.avg %>%
+  ungroup() %>%
+  dplyr::select(-n,-totcov,-cell) %>%
+  spread(day,cov) %>%
+  gather(day , cov,-chrom,-start,-end,-condition,-`0`) %>%
+  mutate(
+    del = cov - `0`,
+    ratio = log2(cov/`0`))
+# bin data
+binwidth <- 1e4
+bins <- cov.tb %>%
+  dplyr::select(chrom,start,end) %>%
+  mutate(width = end - start, 
+    sumwidth = cumsum(width), 
+    bin = round(sumwidth/binwidth)*binwidth)
+cov.del$bin <- bins$bin[match(paste0(cov.del$chrom,cov.del$start),paste0(bins$chrom,bins$start))]
+
+#cov.bin <- cov.del %>%
+#  group_by(chrom,cell,day,bin) %>%
+#  summarize(Host = sum(Host),
+
+#    cov = sum(cov),
+#    ratio = log2(cov/Host)) %>%
+#  arrange(bin)
+```
+
+```{r del_boxplot, eval = T, echo = F, fig.height=3, fig.width=6, message=F, warning = F,results = 'hide', fig.show = 'show'}
+g <- ggplot(cov.del,aes(x = condition,fill = day, y = ratio)) +
+  geom_boxplot(position = 'dodge') +
+  coord_cartesian(ylim = c(-1,1))
+print(g)
+```
+```{r cbs, eval = T, include = FALSE, cache=F }
+cov.spread <- cov.del  %>%
+  ungroup() %>%
+  mutate(sample = paste0(condition,day)) %>%
+  dplyr::select(chrom,bin,sample,ratio) %>%
+  spread(sample,ratio) %>%
+  filter(!grepl("ambic",chrom)) %>%
+  na.omit()
+
+contigs <- cov.spread$chrom
+pos <- cov.spread$bin
+ratios <- cov.spread[,3:ncol(cov.spread)]
+ids <- names(ratios)
+
+cna.obj <- CNA(ratios,chrom = contigs, maploc = pos, data.type = "logratio", sampleid = ids)
+#cna.obj <- CNA(ratios[,1],chrom = contigs, maploc = pos, data.type = "logratio", sampleid = ids[1])
+cna.smooth <- smooth.CNA(cna.obj)
+segs <- segment(cna.smooth,min.width = 5, alpha = 1e-4, undo.splits = "sdundo")
+
+# coordinates
+segs.tb <- as_tibble(segs$output) %>%
+  mutate(start = bins$start[match(loc.start,bins$bin)], 
+         end = bins$start[match(loc.end,bins$bin)])
+
+# assign labels
+pd.tb
+days <- c("30","60","90")
+labels.tb <- tibble(id= unique(segs.tb$ID)) %>%
+  rowwise() %>%
+  mutate(day = days[sapply(days,grepl,id)],
+         condition = sapply(strsplit(id,day ),"[[",1),
+         cell = cells[sapply(cells,grepl,condition)],
+         media = medias[sapply(medias,grepl,condition)]
+         ) %>%
+  ungroup()
+
+segs.tb <- segs.tb %>%
+  mutate(label.idx = match(ID,labels.tb$id),
+         cell = labels.tb$cell[label.idx],
+         day = labels.tb$day[label.idx],
+         media = labels.tb$media[label.idx])
+
+# divide segs into a list
+segs.tb <- segs.tb %>%
+  group_by(ID,cell,day,media)
+segs.ids <- group_keys(segs.tb) 
+segs.list <- group_split(segs.tb)
+names(segs.list) <- segs.ids$ID
+
+# based on bins
+cov.gr <- GRanges(cov.tb %>% dplyr::select(chrom,start,end))
+# asign based on bin
+segs.grlist <- lapply(segs.list,GRanges)
+cov.segs <- cov.tb %>%
+  dplyr::select(chrom,start,end) %>%
+  bind_cols(as_tibble(sapply(segs.grlist,function(gr){ 
+    ovl <- nearest(cov.gr,gr) 
+    gr$seg.mean[ovl] })))
+covsegs.gather <- cov.segs %>%
+  gather(sample,cov,-chrom,-start,-end)
+```
+
+First check distro 
+
+```{r cbs_distro, eval = T, echo = F, fig.height=8, fig.width=8, message=F, warning = F,results = 'hide', fig.show = 'show'}
+ggplot(segs.tb,aes(x = seg.mean)) +
+  geom_density() +
+  facet_wrap(~ID, scales = "free") +
+  lims( x = c(-0.5,0.5))
+
+ggplot(segs.tb,aes(x = seg.mean)) +
+  geom_density() +
+  lims( x = c(-0.5,0.5)) + 
+  geom_vline(xintercept = -0.12) +
+  geom_vline(xintercept = 0.12)
+```
+```{r cbs_progression, eval = T, echo = F, fig.height=6, fig.width=6, message=F, warning = F,results = 'hide', fig.show = 'show'}
+ggplot(covsegs.gather,aes( x = cov)) + 
+  facet_wrap(~sample, scales = "free") +
+  lims(x = c(-0.5,0.5)) +
+  geom_vline(xintercept = -0.11) +
+  geom_vline(xintercept = 0.11) +
+  geom_density()
+
+```
+
+```{r cbs_plot, eval = T, echo = F, fig.height=3, fig.width=6, message=F, warning = F,results = 'hide', fig.show = 'show'}
+#plotpath <- file.path(plotdir,"CHOZN_segmented_cov.pdf")
+#pdf(plotpath,height = 5, width = 6)
+plot(segs,plot.type = 'w',ylim = c(-2,2))
+#dev.off()
+
+
+```
+
+```{r cbs_summary, eval = T, include = FALSE, cache=F }
+segs.sum <- covsegs.sig %>%  
+  group_by(sample,type) %>%
+  summarize(n = n()) %>%
+  spread(type,n)  %>%
+  replace_na(list(decrease = 0, increase = 0, insig = 0)) %>%
+  mutate(total = decrease + increase + insig,
+    decrease = decrease/total,
+    increase = increase/total,
+    insig = insig/total) %>%
+  gather(type,frac,-sample,-total)
+segs.sum$day = factor(labels.tb$day[match(segs.sum$sample,labels.tb$id)])
+segs.sum$sample = factor(labels.tb$condition[match(segs.sum$sample,labels.tb$id)])
+segs.sum
+segs.sum <- segs.sum %>%
+  mutate(type = case_when(
+    type == "decrease" ~ "Decrease",
+    type == "increase" ~ "Increase",
+    TRUE ~ "Unchanged"
+  ))
+```
+
+```{r cbs_summary_plot, eval = T, echo = F, fig.height=2.5, fig.width=6, message=F, warning = F,results = 'hide', fig.show = 'show'}
+tri_pal <- wes_palette("FantasticFox1")
+tri_pal <- c(tri_pal[3],tri_pal[5],tri_pal[2])
+
+g <- ggplot(segs.sum,aes(x = day, fill = type, y = frac)) +
+  facet_wrap(~sample) +
+  geom_bar(stat = "identity") +
+  scale_y_continuous(name="Fraction of CNV", breaks =c(0,0.5,1)) +
+  scale_fill_manual(name = "CNV Direction", values = tri_pal) +
+  labs(x = "Day")
+g
+  
+plotpath <- file.path(plotdir,"CHOZN_cnv_summary.pdf")
+pdf(plotpath,width = 6, height = 2.5)
+print(g)
+dev.off()
+```
+
+```{r cbs_upset_all, eval = T, echo = F, fig.height=6, fig.width=5, message=F, warning = F,results = 'hide', fig.show = 'show'}
+# upset
+segs.compare <- covsegs.sig %>%
+  dplyr::select(-cov) %>%
+  spread(sample,sig) 
+segs.upset <- segs.compare %>%
+  dplyr::select(-chrom,-start,-end) %>%
+  as.data.frame()
+# all
+pal <- wes_palette("Darjeeling1")
+sets <- rev(names(segs.upset))
+set_cols <- ifelse(grepl("Stable",sets),pal[2],pal[4])
+main_cols <- c("black","gray23",pal[2],pal[4])
+inters <- list(
+  list(sets),
+  list(sets[grepl("Stable",sets)]),
+  list(sets[grepl("Unstable",sets)]),
+  list(sets[grepl("Host",sets)])
+)
+
+plt <- upset(segs.upset, text.scale = 1.5, sets.bar.color = set_cols, main.bar.color = main_cols,
+      intersections = inters,
+      sets = sets, point.size = 4, matrix.color = "gray30",
+      nsets = length(sets),
+      order.by = "degree",keep.order = T, mb.ratio = c(0.3,0.7))
+print(plt)
+
+plotpath <- file.path(plotdir,"CHOZN_stable_vs_unstable_upset.pdf")
+pdf(plotpath,height = 6, width =5, useDingbats = F)
+print(plt)
+dev.off()
+```
+
+```{r cbs_upset_stable, eval = T, echo = F, fig.height=6, fig.width=5, message=F, warning = F,results = 'hide', fig.show = 'show'}
+# Stable 
+sets <- rev(names(segs.upset)[grepl("Stable",names(segs.upset))])
+set_cols <- ifelse(grepl("Gln",sets),pal[5],pal[2])
+plt <- upset(segs.upset, mainbar.y.max = 50e3, text.scale = 1.5,
+      sets.bar.color = set_cols, 
+      nintersects = 10,
+      sets = sets,
+      nsets = length(sets), order.by = "freq",keep.order = TRUE,mb.ratio = c(0.5,0.5))
+print(plt)
+#plotpath <- file.path(plotdir,"CHOZN_stable_upset.pdf")
+#pdf(plotpath,height = 6, width =5, useDingbats = F)
+print(plt)
+#dev.off()
+```
+```{r cbs_upset_unstable, eval = T, echo = F, fig.height=6, fig.width=5, message=F, warning = F,results = 'hide', fig.show = 'show'}
+sets <- rev(names(segs.upset)[grepl("Unstable",names(segs.upset))])
+set_cols <- ifelse(grepl("Gln",sets),pal[3],pal[4])
+plt <- upset(segs.upset, mainbar.y.max = 50e3, text.scale = 1.5,
+      nintersects = 3,
+      sets.bar.color = set_cols, 
+      sets = sets,
+      nsets = length(sets), order.by = "freq",keep.order = T,mb.ratio = c(0.5,0.5))
+print(plt)
+plotpath <- file.path(plotdir,"CHOZN_unstable_upset.pdf")
+pdf(plotpath,height = 6, width =5, useDingbats = F)
+print(plt)
+dev.off()
+```
+```{r cbs_upset_stable_nogln, eval = T, echo = F, fig.height=6, fig.width=5, message=F, warning = F,results = 'hide', fig.show = 'show'}
+days_pal <- rev(wes_palette("IsleofDogs2")[1:4])
+# Stable noGln
+sets <- rev(names(segs.upset)[grepl("StableNogln",names(segs.upset))])
+inters <- list(
+  list(sets[grepl("30|60|90",sets)]),
+  list(sets[grepl("60|90",sets)]),
+  list(sets[grepl("90",sets)]),
+  list(sets)
+)
+plt <- upset(segs.upset, text.scale = 1.5,
+      sets.bar.color = days_pal, 
+      main.bar.color = rev(days_pal),
+      intersections = inters, 
+      sets = sets,
+      nsets = length(sets), order.by = "freq",keep.order = T,mb.ratio = c(0.5,0.5))
+plotpath <- file.path(plotdir,"CHOZN_stable_nogln_upset.pdf")
+pdf(plotpath,height = 6, width =5, useDingbats = F)
+print(plt)
+dev.off()
+```
+### look more closely at consistently stable regions 
+
+```{r segs_meth, eval = T, echo = F, fig.height=2.5, fig.width=6, message=F, warning = F,results = 'hide', fig.show = 'show'}
+# get mthylation
+comp.gr <- GRanges(segs.compare %>% dplyr::select(chrom,start,end))
+segs.meth <- getMeth(bsobj,comp.gr,what = "perRegion")
+
+# just look at stable nogln?
+coli <- which(pData(bsobj)$cell == "CHOZNStableNogln")
+  
+# label constant regions
+consti <- rowSums(segs.upset)== 0
+
+meth.select <- as_tibble(segs.meth[,coli])
+names(meth.select) <- pData(bsobj)[coli,]$label
+meth.comp <- meth.select %>%
+  mutate(const = ifelse(consti,"Constant","Variable"),
+         idx = seq(nrow(meth.select))) %>%
+  gather(sample,meth,-const, -idx)
+meth.comp$day <- factor(
+  sapply(strsplit(
+    sapply(strsplit(meth.comp$sample,"Day"),"[[",2),
+    "_"),"[[",1))
+
+# summarize by day, idx, and constant
+meth.avg <- meth.comp %>%
+  group_by(const,idx,day) %>%
+  summarize(meth = mean(meth))
+
+# wilcoxon rank sum test?
+ranksum.results <- sapply(c(0,30,60,90),function(day){
+  mc <- sample(meth.avg$meth[meth.avg$day == day & meth.avg$const == "Constant"],1e4)
+  mv <- sample(meth.avg$meth[meth.avg$day == day & meth.avg$const == "Variable"],1e4)
+  res <- wilcox.test(x = mc, y = mv, alternative = "less")
+  res$p.value
+})
+ranksum.tb <- tibble( day = factor(c(0,30,60,90)),
+                      result = "*",
+                      value= paste("p =",formatC(ranksum.results, format = "e", digits = 2)),
+                      meth  = 1 )
+
+# plot distros?
+pair_pal <- pal[2:3]
+dodge <- position_dodge(width = 0.5)
+plotpath <- file.path(plotdir,"cnv_methylation_global_boxplot.pdf")
+pdf(plotpath,height = 2.5, width = 6)
+ggplot(meth.avg, aes( x = day, y = meth, color = const)) +
+  geom_violin(alpha = 0, width = 0.5,position = dodge) +
+  geom_boxplot(width = 0.2, outlier.shape = NA, position = dodge) +
+  geom_text(data = ranksum.tb,inherit.aes = F, mapping = aes(x = day, y = meth,label = result)) +
+  scale_color_manual(name = "CNV", values = pair_pal) +
+  scale_y_continuous(breaks = c(0,0.25,0.5,0.75,1)) +
+  labs(x = "Day", y = "Methylation Frequency")
+dev.off()
+  
+```
+
+<!--
+### EM algorithm to estimate distros? 
+## not using
+
+```{r cbs_distro_em, eval = T, echo = F, fig.height=3, fig.width=6, message=F, warning = F,results = 'hide', fig.show = 'show'}
+get_mode <- function(numbers){
+  as.numeric(names(which.max(table(numbers))))
+}
+library(mixtools)
+x <- segs.tb[which(segs.tb$ID == "StableGln60"),] %>%
+  filter(abs(seg.mean) < 0.5)
+n = 200
+em.list <- lapply(seq(n),function(i){
+  r.mixEM = normalmixEM(x$seg.mean,  mu = c(-0.1,0,0.1))
+#  r.mixEM = normalmixEM(x$seg.mean)
+  tibble( mu = r.mixEM$mu, sigma = r.mixEM$sigma, lambda = r.mixEM$lambda, component = seq(length(r.mixEM$mu)))
+})
+em.tb <- bind_rows(em.list) %>%
+  group_by(component) %>%
+  summarize( mu = median(mu),
+             lambda = median(lambda),
+             sigma = median(sigma)) %>%
+  filter(mu == min(abs(mu)))
+distros.list <- lapply(seq(nrow(em.tb)), function(i){
+  x <- em.tb[i,]
+  tibble(
+    value = seq(-0.5,0.5,0.01),
+    density = dnorm(x = seq(-0.5,0.5,0.01),mean = x$mu, sd = x$sigma),
+    component = x$component)
+})
+distros.tb <- bind_rows(distros.list) %>% mutate(component = factor(component))
+ggplot(x,aes( x = seg.mean)) + geom_density() +
+  geom_line(data = distros.tb,mapping = aes(x = value, y = density, color = component)) 
+```
+

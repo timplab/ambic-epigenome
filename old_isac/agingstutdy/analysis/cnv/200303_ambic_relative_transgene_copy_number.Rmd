@@ -1,0 +1,127 @@
+---
+title: "ambic sigma aging study coverage analysis TitanCNA"
+author: Isac Lee
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  pdf_document:
+    citation_package: natbib
+    keep_tex: true
+    fig_caption: true
+    latex_engine: xelatex
+#bibliography: master.bib
+# set dir in the following function to the desired loc
+mainfont: "DejaVu Sans" # Try out some font options if xelatex
+titlefont: "DejaVu Sans" # Try out some font options if xelatex
+---
+
+```{r setup, eval=TRUE, include=FALSE, cache=F, message=F, warning=F, results="hide"}
+rm(list=ls());gc()
+knitr::opts_chunk$set(fig.path='figs/')
+knitr::opts_chunk$set(cache = FALSE, warning = FALSE, 
+                      message = FALSE, cache.lazy = FALSE)
+my_plot_hook <- function(x, options)
+  paste("\n", knitr::hook_plot_tex(x, options), "\n")
+knitr::knit_hooks$set(plot = my_plot_hook)
+```
+
+```{r libs, eval=T, include=FALSE, cache=F, message=F, warning=F, results="hide"}
+source("~/Code/ilee/plot/ilee_plot_utils.R")
+library(DNAcopy)
+library(TitanCNA)
+library(limma)
+```
+
+```{r functions, include = F}
+```
+
+```{r read_data, eval = T, include = FALSE, cache=F }
+# data
+covdir <- "/kyber/Data/Nanopore/projects/ambic/sigma/coverage/pooled_rep"
+matpath <- file.path(covdir,"CHOZN_coverage_matrix.10000.bed")
+plotdir <- "/home/isac/Dropbox/Data/ambic/aging_study/insertion"
+methpath <- "/kyber/Data/Nanopore/projects/ambic/sigma/methylation/rds/CHOZN.BSmooth.rds"
+## samples depending on files
+#covpaths <- system(paste("find",covdir,"-type f -name \"*coverage.10000.bed\""),intern = T)
+#samples <- sapply(strsplit(basename(covpaths),"[.]"),"[[",1)
+#days <- as.numeric(sapply(strsplit(samples,"Day"),"[[",2))
+
+cov.tb <- read_tsv(matpath) %>%
+  dplyr::rename(chrom = `#chromosome`)
+```
+
+```{r initial_processing, eval = T, echo = F, fig.height=3, fig.width=6, message=F, warning = F,results = 'hide', fig.show = 'show'}
+# get pd
+ids <- names(cov.tb)[-c(1,2,3)]
+cells <- c("Host","Stable","Unstable")
+medias <- c("Host","Gln","Nogln")
+days <- c(0,30,60,90)
+cells[which(sapply(cells,grepl,ids[8]))]
+pd.tb <- tibble( id = ids) %>%
+  rowwise() %>%
+  mutate(
+    cell = cells[which(sapply(cells,grepl,id))],
+    media = medias[which(sapply(medias,grepl,id))],
+    condition = ifelse(cell == media, cell, paste0(cell,media)),
+    day = sapply(strsplit(sapply(strsplit(id,"Day"),"[[",2),"_"),"[[",1),
+    rep = sapply(strsplit(id,"_"),"[[",2)
+    ) %>%
+  ungroup()
+# gather data
+cov.gather <- cov.tb %>%
+  gather(id,cov,-chrom,-start,-end)
+cov.gather <- bind_cols(cov.gather,pd.tb[match(cov.gather$id,pd.tb$id),])
+```
+
+```{r transgene, eval = T, echo = F, fig.height=12, fig.width=12, message=F, warning = F,results = 'hide', fig.show = 'show'}
+# relative transgene copy number?
+mean.cov <- cov.gather %>%
+  group_by(condition,day,rep) %>%
+  summarize( meancov = mean(cov))
+transgene.cov <- cov.gather %>%
+  filter(chrom == "ambic_sigma_IgG_HC") %>%
+  group_by(condition,day,rep) %>%
+  summarize( cov = mean(cov))
+# combine
+transgene.cov <- transgene.cov %>%
+  ungroup() %>%
+  mutate(meancov = mean.cov$meancov,
+    frac = cov/meancov
+  ) 
+
+# compare eerything to its day 0
+cov.norm <- transgene.cov %>%
+  dplyr::select(condition,day,rep,frac) %>%
+  spread(day,frac) %>%
+  gather(day,frac,`30`,`60`,`90`) %>%
+  mutate(fracnorm = frac / `0`,
+    `0` = ifelse(`0` == 0, 0, 1) # normalize to 1
+    )  %>%
+  replace(is.na(.),0) %>%
+  dplyr::select(-frac) %>%
+  spread(day,fracnorm) %>%
+  gather(day,frac,-condition,-rep)
+
+cov.norm %>%
+  group_by(condition,day) %>%
+  summarize( mean(frac))
+```
+
+
+```{r transgene_plot, eval = T, echo = F, fig.height=12, fig.width=12, message=F, warning = F,results = 'hide', fig.show = 'show'}
+#plot
+plt.tb <- cov.norm %>%
+  mutate(day = as.numeric(day),
+    Condition = condition
+  )
+plotpath <- file.path(plotdir,"200303_sigma_relative_transgene_copy_number.pdf")
+pdf(plotpath, width = 5, height = 2, useDingbats = F)
+ggplot(plt.tb,aes( x = day, y = frac, color = Condition)) +
+  geom_smooth(se = F) +
+  geom_jitter(size = 0.5, height = 0, width = 3, alpha = 0.6)  +
+  labs(x = "Day", y = "Normalized\nRead Fractions") +
+  theme(legend.background = element_rect(fill = NA, color = "black", linetype = "solid")) +
+  coord_cartesian(clip = "off")
+dev.off()
+
+
+```

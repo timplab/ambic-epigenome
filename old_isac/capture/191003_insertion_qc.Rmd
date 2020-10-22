@@ -1,0 +1,56 @@
+---
+title: "ambic nih insertion"
+author: Isac Lee
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  pdf_document:
+    citation_package: natbib
+    keep_tex: true
+    fig_caption: true
+    latex_engine: xelatex
+#bibliography: master.bib
+# set dir in the following function to the desired loc
+mainfont: "DejaVu Sans" # Try out some font options if xelatex
+titlefont: "DejaVu Sans" # Try out some font options if xelatex
+---
+
+```{r setup, eval=TRUE, include=FALSE, cache=F, message=F, warning=F, results="hide"}
+rm(list=ls());gc()
+knitr::opts_chunk$set(fig.path='figs/')
+knitr::opts_chunk$set(cache = FALSE, warning = FALSE, 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+```{r libs, eval=T, include=FALSE, cache=F, message=F, warning=F, results="hide"}
+source("~/Code/ilee/plot/ilee_plot_utils.R")
+library(GenomicRanges)
+```
+
+```{r functions, include = F}
+```
+
+
+```{r read_data, eval = T, include = FALSE, cache=F }
+fpath <- "/home/isac/Data/ambic/targeted/191001_CHO_NIH_IgG3_targeted/insert_loc.txt"
+genes.path <- "/mithril/Data/NGS/Reference/cho/picr_ensembl/annotation/cho_picr_genes.bed"
+
+genes <- read_tsv(genes.path,col_names = c("chrom","start","end","ensid","score","strand","id"))
+locs <- read_tsv(fpath,col_names = c("chrom","start"))
+
+genes.gr <- GRanges(genes)
+locs.gr <- GRanges(locs %>% mutate(end = start) )
+
+# distnace to nearest gene
+dists <- as.data.frame(distanceToNearest(locs.gr,genes.gr))
+locgenes <- bind_cols(locs[dists$queryHits,],genes[dists$subjectHits,]) %>%
+  mutate(distance = dists$distance)
+locgenes$id
+
+
+
+
+```
+
+
+```{r plot_pca, eval = T, echo = F, fig.height=3, fig.width=6, message=F, warning = F,results = 'hide', fig.show = 'show'}
+```

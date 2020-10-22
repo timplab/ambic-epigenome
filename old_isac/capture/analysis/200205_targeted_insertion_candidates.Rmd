@@ -1,0 +1,113 @@
+---
+title: "ambic"
+author: "Isac Lee"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_notebook: default
+  pdf_document: default
+mainfont: DejaVu Sans
+titlefont: DejaVu Sans
+---
+
+```{r setup, eval=TRUE, include=FALSE, cache=F, message=F, warning=F, results="hide"}
+rm(list=ls());gc()
+knitr::opts_chunk$set(fig.path='figs/')
+knitr::opts_chunk$set(cache = FALSE, warning = FALSE,
+                      message = FALSE, cache.lazy = FALSE)
+my_plot_hook <- function(x, options)
+  paste("\n", knitr::hook_plot_tex(x, options), "\n")
+knitr::knit_hooks$set(plot = my_plot_hook)
+```
+
+```{r libs, eval=T, include=FALSE, cache=F, message=F, warning=F, results="hide"}
+source("/home/isac/Code/ilee/plot/ilee_plot_utils.R")
+library("ggsci")
+source("~/Code/nanopore-methylation-utilities/methylation_R_utils.R")
+```
+
+```{r functions, include = F}
+```
+```{r paths, eval = T, include = FALSE, cache=F }
+dir <- "/kyber/Data/Nanopore/projects/ambic/capture/190225_choSigma_plasmid_target_pipeline_test/data/nanopore/align_plasmid"
+homology_fp <- "/kyber/Data/Nanopore/projects/ambic/sigma/plasmid_assembly/200205_homology_blastn.txt"
+bedfps <- system(paste("find",dir,"-name \"*bed\""),intern = T)
+samples <- sapply(strsplit(basename(bedfps),"[.]"),"[[",1)
+```
+```{r read_data, eval = T, include = FALSE, cache=F }
+# plasmid homology
+homo <- read_tsv(homology_fp,col_names = c("query","chrom","pmatch","length","mismatch","gapopen","qstart","qend","refstart","refend","eval","bitscore"))
+homo_coords <- homo %>%
+  mutate(start = ifelse(refstart <= refend, refstart, refend),
+         end = ifelse(refstart <= refend, refend, refstart)) %>%
+  dplyr::select(chrom,start,end) 
+homo.gr <- GRanges(homo_coords)
+
+# alignments
+align.list <- lapply(bedfps,read_tsv,col_names = c("chrom","start","end","qname","mapq","strand"))
+names(align.list) <- samples
+alignments <- bind_rows(align.list,.id = "sample") %>%
+  mutate(width = end - start)
+al.gr <- GRanges(alignments)
+```
+
+```{r widths, eval = T, echo = F, fig.height=6, fig.width=8, message=F, warning = F,results = 'hide', fig.show = 'show'}
+ggplot(alignments,aes( x = width)) +
+  geom_density() +
+  facet_wrap(~sample)
+alignments %>%
+  filter(width > 500) %>%
+  group_by(sample) %>%
+  summarize(n())
+```
+### removing alignments to homologous regiosn
+
+```{r filter, eval = T, echo = F, fig.height=6, fig.width=8, message=F, warning = F,results = 'hide', fig.show = 'show'}
+al.regs <- resize(al.gr,width = 20e3,fix = "center")
+keepi <- ! overlapsAny(al.regs,homo.gr)
+al.sig <- alignments[keepi,] %>%
+  filter(width > 500) %>%
+  group_by(sample)
+al.sig %>%
+  summarize(n())
+al.unique <- al.sig %>%
+  mutate(start = round(start/1e3)*1e3,
+         end = round(end/1e3)*1e3) %>%
+  gather(side,pos,start,end) %>%
+  group_by(chrom,pos,sample,side) %>%
+  summarize( n = n()) %>%
+  arrange(sample)
+al.unique 
+sig.list <- al.sig %>% group_split()
+names(sig.list) <- al.sig %>% group_keys() %>% .$sample
+# make gr
+gr.list <- lapply(sig.list,GRanges)
+stable_common <- gr.list$CHOZNStableNoglnDay0rep2[
+  overlapsAny(gr.list$CHOZNStableNoglnDay0rep2,
+                  gr.list$CHOZNStableNoglnDay0rep3)]
+length(stable_common)
+unstable_common <- gr.list$CHOZNUnstableNoglnDay0rep2[
+  overlapsAny(gr.list$CHOZNUnstableNoglnDay0rep2,
+                  gr.list$CHOZNUnstableNoglnDay0rep3)]
+length(unstable_common)
+
+# unique sites - 1kb bins
+stable_can <- as_tibble(stable_common) %>%
+  mutate(start = round(start/1e3)*1e3,
+         end = round(end/1e3)*1e3) %>%
+  distinct(seqnames,start,end)
+unstable_can <- as_tibble(unstable_common) %>%
+  mutate(start = round(start/1e3)*1e3,
+         end = round(end/1e3)*1e3) %>%
+  distinct(seqnames,start,end)
+  
+
+
+ovl <- findOverlaps(stable_common,unstable_common)
+
+
+
+
+
+  
+
+```

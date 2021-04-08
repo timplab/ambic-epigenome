@@ -1,5 +1,27 @@
-#!/usr/bin/Rscript
+#!Rscript
+
+## If a package is installed, it will be loaded. If any
+## are not, the missing package(s) will be installed
+## from CRAN and then loaded.
+
+## First specify the packages of interest
+# packages = c("tidyverse", "optparse",
+#              "cluster", "DNAcopy","parallel")
+#
+# ## Now load or install&load all
+# package.check <- lapply(
+#   packages,
+#   FUN = function(x) {
+#     if (!require(x, character.only = TRUE)) {
+#       install.packages(x, repos = "http://cran.us.r-project.org", dependencies = TRUE)
+#       library(x, character.only = TRUE)
+#     }
+#   }
+# )
 # plot average curves
+
+
+## FUNCTION : THIS SCRIPT TAKES PREVIOUSLY MADE COUNT FILES (binBedcounts.py) AND RUNS CNV ANALYSIS IN COMPARISON TO A GIVEN GENOME VIA .FAIDX FILE FOR A GIVEN WINDOW / BINWIDTH
 library(optparse)
 library(tidyverse)
 library(cluster)
@@ -49,12 +71,12 @@ trimCov <- function(dat,faidx,binwin){
     dat.filt
 }
 
-output="/home/isac/Dropbox/Data/ambic/plots/day_cnv.pdf"
-datpaths=c("/dilithium/Data/Nanopore/projects/choSigmaAgingStudy/analysis/D0/sv/HostD0.counts.10000.txt","/dilithium/Data/Nanopore/projects/choSigmaAgingStudy/analysis/D0/sv/StableGlutD0.counts.10000.txt","/dilithium/Data/Nanopore/projects/choSigmaAgingStudy/analysis/D0/sv/UnstableGlutD0.counts.10000.txt")
+output="/Users/kevin/Epigenomics/ambic-epigenome/data/day_cnv.pdf"
+datpaths=c("/Users/kevin/Epigenomics/ambic-epigenome/data/HostD0.counts.10000.txt","/Users/kevin/Epigenomics/ambic-epigenome/data/StableGlutD0.counts.10000.txt","/Users/kevin/Epigenomics/ambic-epigenome/data/UnstableGlutD0.counts.10000.txt")
 
 binwin=10000
 
-faidxpath="/mithril/Data/NGS/Reference/cho/picr_IgG2/picr_IgG2.fa.fai"
+faidxpath="/Users/kevin/Epigenomics/ambic-epigenome/data/picr_IgG2.fa.fai"
 binwin=10000
 processCNV <- function(datpaths,output,binwin,faidxpath){
     labels=sapply(strsplit(basename(datpaths),"[.]"),"[[",1)
@@ -100,7 +122,7 @@ processCNV <- function(datpaths,output,binwin,faidxpath){
         mutate(bin=floor(coordbin/multbin)*multbin)%>%
         group_by(lab,bin)%>%
         summarize(count=mean(count))
-    
+
     pdf(output,height=4,width=5,useDingbats=FALSE)
     combos=t(combn(labels,2))
     for (i in seq(dim(combos)[1])){
@@ -124,6 +146,8 @@ processCNV <- function(datpaths,output,binwin,faidxpath){
 
         print(g)
     }
+    # print(dim(dat.rect),count,lab)
+    # print(bin,bin+multbin)
     g = ggplot(dat.rect,aes(ymin=0,ymax=count,
                       xmin=bin,xmax=bin+multbin,
                       fill=lab,group=lab))+
@@ -132,14 +156,14 @@ processCNV <- function(datpaths,output,binwin,faidxpath){
                    linetype="dashed",size=0.2,alpha=0.5)+
         theme_bw()+theme(legend.position="bottom")
     print(g)
-    g = ggplot(dat.seg)+
-        geom_rect(aes(ymin=0,ymax=seg.mean,
-                      xmin=start,xmax=end,fill=lab,group=lab),
-                  alpha=0.6,color=NA)+
-        geom_vline(xintercept=faidx.inc$offset,
-                   linetype="dashed",size=0.2,alpha=0.5)+
-        theme_bw()+theme(legend.position="bottom")
-    print(g)
+    # g = ggplot(dat.seg)+
+    #     geom_rect(aes(ymin=0,ymax=seg.mean,
+    #                   xmin=start,xmax=end,fill=lab,group=lab),
+    #               alpha=0.6,color=NA)+
+    #     geom_vline(xintercept=faidx.inc$offset,
+    #                linetype="dashed",size=0.2,alpha=0.5)+
+    #     theme_bw()+theme(legend.position="bottom")
+    # print(g)
     dev.off()
 }
 

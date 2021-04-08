@@ -87,17 +87,18 @@ class SnifflesEntry :
             self.zygosity = "het"
         elif self.allele == "1/1" :
             self.zygosity = "hom"
-        else : self.zygosity = "none"
+        else :
+            self.zygosity = "none"
         self.num_against = int(self.genotype.split(":")[1])
         self.num_for = int(self.genotype.split(":")[2])
         self.coverage = self.num_against+self.num_for
 
-# functions 
+# functions
 def tabix(fpath,window) :
     with pysam.TabixFile(fpath,'r') as tabix :
         entries = [ x for x in tabix.fetch(window)]
     return entries
-    
+
 def make_coord(chrom,start,end) :
     if start < 1 : start = 1
     return chrom+":"+str(start)+"-"+str(end)
@@ -122,4 +123,3 @@ def read_bam(fpath,window) :
         except :
             bamdict[bam.query_name] = [bam]
     return bamdict
-

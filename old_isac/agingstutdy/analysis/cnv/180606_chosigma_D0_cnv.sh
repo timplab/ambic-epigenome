@@ -23,4 +23,3 @@ done
 counts=`find $svdir -name "*counts.$win.txt"`
 echo $count
 Rscript $cnv -w $win -o $plotdir/day${day}_cnv.pdf -f $faidx $counts
-

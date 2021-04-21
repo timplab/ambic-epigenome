@@ -2,6 +2,8 @@ library(tidyverse)
 library(umap)
 library(bsseq)
 
+## Create a methylation umap from the BSseq and BSmooth R objects - updated for Kevin's use
+
 plotdir <- "/home/kmcfarland/methylation_umap"
 dir <- "/kyber/Data/Nanopore/projects/ambic/sigma/methylation/mfreq"
 rawpath <- file.path(dir,"CHOZN.BSseq.rds")

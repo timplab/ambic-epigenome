@@ -1,5 +1,7 @@
 #! /usr/bin/env python
 
+## Create a binned coverage matrix using a bed file. 
+
 import math
 import sys
 import csv

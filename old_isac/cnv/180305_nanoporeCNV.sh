@@ -49,4 +49,3 @@ if [ "$1" == "plot" ];then
     Rscript $plotscript genomeCoverage -i $bincov -o $out
   done
 fi
-
